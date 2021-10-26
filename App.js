@@ -5,6 +5,7 @@ import { posts, users } from './components/WPAPI';
 
 export default function App() {
   posts();
+  users();
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
