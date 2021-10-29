@@ -1,24 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { posts, users } from './components/WPAPI';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet,View } from "react-native";
+import { posts, users } from "./components/WPAPI";
+import Home from "./components/Home";
+import SignUpPage from "./components/SignUpPage";
+import LogInPage from "./components/LogInPage";
+
+
 
 export default function App() {
-  posts();
-  users();
-  return (
+	posts();
+	users();
+	return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      
+      <Home />
+      {/* <LogInPage/> */}
+      
+			<StatusBar style="auto" />
+		</View>
+	);
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+	
+	},
 });
