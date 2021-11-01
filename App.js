@@ -1,22 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet,View } from "react-native";
-import { posts, users } from "./components/WPAPI";
-import Home from "./components/Home";
-import SignUpPage from "./components/SignUpPage";
-import LogInPage from "./components/LogInPage";
-
+import { StyleSheet, View } from "react-native";
+import { Home, LogInPage, Profile, Footer } from "./components";
 
 
 export default function App() {
-	posts();
-	users();
 	return (
     <View style={styles.container}>
       
-      <Home />
+      {/* <Home /> */}
       {/* <LogInPage/> */}
-      
+      <Profile />
 			<StatusBar style="auto" />
 		</View>
 	);
