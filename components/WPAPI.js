@@ -4,6 +4,10 @@ export const WPAPI_PATHS = {
   posts: `${BASE_URL}/wp/v2/posts`,
   users: `${BASE_URL}/wp/v2/users`,
   media: `${BASE_URL}/wp/v2/media`,
+  comments: `${BASE_URL}/wp/v2/comments`,
+  categories: `${BASE_URL}/wp/v2/catergories`,
+  blockTypes: `${BASE_URL}/wp/v2/block-types`,
+  blocks: `${BASE_URL}/wp/v2/blocks`,
 }
 
 /**
