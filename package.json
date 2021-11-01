@@ -21,14 +21,10 @@
     "react-native-router-flux": "^4.3.1",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
-    "react-navigation": "^4.4.4",
-    "react-router-native": "^5.2.1"
+    "react-navigation": "^4.4.4"
   },
-
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
-  
   "private": true
-
 }
