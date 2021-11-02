@@ -1,21 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
 
-function Friends({ navigation }) {
+function ThemeLoggedIn({ children, navigation }) {
 	return (
 		<View style={styles.container} navigation={navigation}>
 			<ScrollView>
 				<View>
-					<Header />
+					<Header navigation={navigation} />
 				</View>
 
-				<View style={styles.body}>
-					<Text style={styles.text}>
-						Friends!
-					</Text>
-				</View>
+				<View style={styles.body}>{children}</View>
 
 				<View>
 					<Footer />
@@ -31,7 +27,7 @@ const styles = StyleSheet.create({
 	},
 	body: {
 		backgroundColor: "#fff",
-		height: "80%",
+		height: "70%",
 		width: "100%",
 		textAlign: "center",
 		justifyContent: "center",
@@ -44,5 +40,5 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Friends;
 
+export default ThemeLoggedIn;
