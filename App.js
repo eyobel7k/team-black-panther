@@ -14,6 +14,10 @@ import Images from "./components/Images";
 import Message from "./components/Message";
 import RestPasswordPage from "./components/RestPasswordPage";
 import EditProfile from "./components/EditProfile";
+import Terms from "./components/Terms";
+import Rule from "./components/Rule";
+import About from "./components/About";
+import Contact from "./components/Contact";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -43,6 +47,10 @@ export default function App() {
 					<Stack.Screen name="Message" component={Message} />
 					<Stack.Screen name="RestPasswordPage" component={RestPasswordPage} />
 					<Stack.Screen name="EditProfile" component={EditProfile} />
+					<Stack.Screen name="Terms" component={Terms} />
+					<Stack.Screen name="Contract" component={Contact} />
+					<Stack.Screen name="About" component={About} />
+					<Stack.Screen name="Rule" component={Rule} />
 				</Stack.Navigator>
 			</NavigationContainer>
 			<StatusBar style="auto" />
