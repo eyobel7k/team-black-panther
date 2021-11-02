@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
 import { wpApiFetch, WPAPI_PATHS } from './WPAPI';
 
 const Profile = () => {
   const [profileInfo, setProfileInfo] = useState({});
+  const { height, width } = useWindowDimensions();
+
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.users })
       .then(response => {
@@ -19,10 +21,15 @@ const Profile = () => {
       <View style={styles.profileInfoContainer}>
         <Image 
           source={profileInfo.avatar_urls?.["96"]} 
-          style={{ height: '50%', width: '100%', borderRadius: 10 }}
+          style={{
+            minWidth: 200,
+            height: '50%',
+            width: '50%',
+            borderRadius: '100%'
+          }}
         />
-        <Text>{profileInfo.name}</Text>
-        <Text>Avengers Tower, New York City</Text>
+        <Text style={styles.h2}>{profileInfo.name}</Text>
+        <Text style={styles.h3}>Avengers Tower, New York City</Text>
         <TouchableOpacity
           style={styles.pillButton}
           onPress={() => console.log('pressed edit profile!')}
@@ -32,7 +39,7 @@ const Profile = () => {
         
       </View>
       <View style={styles.profileAboutContainer}>
-        <Text>About</Text>
+        <Text style={styles.h3}>About</Text>
         <View style={styles.profileAbout}>
           <Text>{profileInfo.description}</Text>
         </View>
@@ -57,14 +64,13 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     flex: 1,
-    width: '100%',
     padding: 10,
   },
   profileInfoContainer: {
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
+    height: '50%', 
     margin: 10,
     minWidth: 300,
   },
@@ -99,6 +105,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 4,
   },
+  h2: {
+    fontSize: 'xx-large',
+    fontWeight: 'bold',
+    color: 'blue',
+    paddingTop: 20, 
+    paddingHorizontal: '10%',
+  },
+  h3: {
+    fontSize: 'large',
+    fontWeight: 'bold',
+    color: 'gray', 
+    padding: 10,
+  }
 });
 
 export default Profile;
