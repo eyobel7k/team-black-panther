@@ -3,18 +3,16 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
 
-function Images() {
+function Images({ navigation }) {
 	return (
-		<View style={styles.container}>
+		<View style={styles.container} navigation={navigation}>
 			<ScrollView>
 				<View>
-					<Header />
+					<Header navigation={navigation} />
 				</View>
 
 				<View style={styles.body}>
-					<Text style={styles.text}>
-						Open up App.js to start working on your app!
-					</Text>
+					<Text style={styles.text}>Images!</Text>
 				</View>
 
 				<View>
@@ -43,5 +41,4 @@ const styles = StyleSheet.create({
 		fontFamily: "Serif",
 	},
 });
-
 export default Images;

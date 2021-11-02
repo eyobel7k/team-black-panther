@@ -1,18 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-
+import { StyleSheet,  View, TouchableHighlight } from "react-native";
+import { Text } from "react-native-elements";
 function HeaderLogPage() {
 	return (
 		<View style={styles.Header}>
 			<TouchableHighlight style={styles.headerTouchableHighlight}>
 				<View style={styles.HeaderTitle}>
-					<Text style={styles.headerText}>Marvelspace a space</Text>
-					<Text style={styles.headerText}>for super friends</Text>
+					<Text h5 style={styles.headerText}>Marvelspace a space</Text>
+					<Text h5 style={styles.headerText}>for super friends</Text>
 				</View>
 			</TouchableHighlight>
-			<TouchableHighlight style={styles.headerTouchableHighlight}>
-				<View></View>
-			</TouchableHighlight>
+		
 		</View>
 	);
 }
@@ -24,6 +22,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		top: 0,
 		backgroundColor: "blue",
+	
 		height: "4em",
 		width: "100%",
 	},
@@ -33,8 +32,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		justifyContent: "flex-start",
 		alignItems: "start",
-		padding: 15,
-		paddingBottom: 20,
+		paddingHorizontal: 5,
 	},
 
 	headerTouchableHighlight: {
