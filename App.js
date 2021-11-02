@@ -5,6 +5,7 @@ import { posts, users } from "./components/WPAPI";
 import Home from "./components/Home";
 import SignUpPage from "./components/SignUpPage";
 import LogInPage from "./components/LogInPage";
+import Chat from "./components/Chat";
 
 
 
@@ -15,7 +16,9 @@ export default function App() {
     <View style={styles.container}>
       
       <Home />
-      {/* <LogInPage/> */}
+	  
+       <Chat/> 
+	  
       
 			<StatusBar style="auto" />
 		</View>
