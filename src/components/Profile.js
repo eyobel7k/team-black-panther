@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
-import { wpApiFetch, WPAPI_PATHS } from './WPAPI';
+import { wpApiFetch, WPAPI_PATHS } from '../services/WPAPI';
 
 const Profile = () => {
   const [profileInfo, setProfileInfo] = useState({});
