@@ -1,28 +1,66 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 
-
-
-function Header() {
-	
+function Header({ navigation }) {
 	return (
-		<View style={styles.Header}>
+		<View style={styles.Header} navigation={navigation}>
 			<TouchableHighlight style={styles.headerTouchableHighlight}>
 				<View style={styles.HeaderTitle}>
 					<Text style={styles.headerText}>Marvelspace a space</Text>
 					<Text style={styles.headerText}>for super friends</Text>
 				</View>
 			</TouchableHighlight>
-			<TouchableHighlight style={styles.headerTouchableHighlight}>
-				<View style={styles.HeaderBar}>  
-					 <Text style={styles.headerText}>Newsfeed</Text>
-					<Text style={styles.headerText}>Friends</Text>
-					<Text style={styles.headerText}>Profile</Text>
-					<Text style={styles.headerText}>Images</Text>
-					<Text style={styles.headerText}>Messages</Text>
+			<TouchableHighlight
+				style={styles.headerTouchableHighlight}
+				navigation={navigation}
+			>
+				<View style={styles.HeaderBar} navigation={navigation}>
+					
+					<View>
+						<Text
+							style={styles.headerText}
+							name="Newsfeed"
+							onPress={() => navigation.navigate("Newsfeed")}
+						>
+							Newsfeed
+						</Text>
+					</View>
+					
+						<Text
+							style={styles.headerText}
+							name="Friends"
+							onPress={() => navigation.navigate("Friends")}
+						>
+							Friends
+						</Text>
+					
+					
+						<Text
+							style={styles.headerText}
+							name="Profile"
+							onPress={() => navigation.navigate("Profile")}
+						>
+							Profile
+						</Text>
+					
+						<Text
+							style={styles.headerText}
+							name="Image"
+							onPress={() => navigation.navigate("Images")}
+						>
+							Images
+						</Text>
+					
+						<Text
+							style={styles.headerText}
+							name="Message"
+							onPress={() => navigation.navigate("Message")}
+						>
+							Messages
+						</Text>
+					
 				</View>
-			</TouchableHighlight> 
-				
+			</TouchableHighlight>
 		</View>
 	);
 }

@@ -1,110 +1,110 @@
-import React from "react";
-import { StyleSheet, Image,View ,TextInput, TouchableOpacity} from "react-native";
-import ThemeLoggedOut from "./ThemeLoggedOut";
-import { Text } from "react-native-elements"
+import React, { useEffect, useState } from "react";
+import { Text } from "react-native-elements";
+import {
+	StyleSheet,
+	View,
+	Image,
+	TextInput,
+	TouchableOpacity,
+	ScrollView,
+} from "react-native";
+import { wpApiFetch, WPAPI_PATHS } from "./WPAPI";
+import Footer from "./Footer";
+import Header from "./Header";
 
+const EditProfile = ({ navigation }) => {
+	const [profileInfo, setProfileInfo] = useState([]);
 
-
-function LogInPage({ navigation }) {
-
+	useEffect(() => {
+		wpApiFetch({ path: WPAPI_PATHS.posts }).then((response) => {
+			setProfileInfo(response.at(0).content.rendered);
+		});
+	});
 	return (
-		<ThemeLoggedOut navigation={navigation}>
+		<View style={styles.container} navigation={navigation}>
+			
+				<ScrollView>
+					<View style={styles.header}>
+				<Header />
+			</View>
 			<View style={styles.body}>
 				<View style={styles.ImageBorder}>
-					<Text h2 style={styles.bodyText}>
-						Join the fun ..
-					</Text>
-					<View style={styles.imageContainer}>
-						<Image
-							source={"https://i.pravatar.cc/300"}
-							style={{ height: "10%", width: "100%" }}
-						/>
+					<Image
+						source={"https://i.pravatar.cc/300"}
+						style={{ height: "60%", width: "50%", borderRadius: 10 }}
+					/>
+					<Text>MarvelSpace Tom!</Text>
+					<Text>Avengers Tower, New York City</Text>
+					<View style={styles.pillButton}>
+						<Text>edit profile</Text>
 					</View>
 				</View>
 				<View style={styles.LogInBorder}>
-					<Text h3 style={styles.bodyText}>
-						Login
-					</Text>
+					<View>
+						<Text h3 style={styles.bodyText}>
+							Edit Profile
+						</Text>
+					</View>
 					<View style={styles.inputView}>
+						<Text style={styles.bodyText}>Edit Name</Text>
 						<TextInput
 							style={styles.TextInput}
-							placeholder="Email."
+							placeholder=""
 							placeholderTextColor="#1722e8"
-							// onChangeText={(email) => setEmail(email)}
 						/>
 					</View>
 
 					<View style={styles.inputView}>
+						<Text style={styles.bodyText}>Edit City</Text>
 						<TextInput
 							style={styles.TextInput}
-							placeholder="Password."
+							placeholder=""
 							placeholderTextColor="#1722e8"
-							secureTextEntry={true}
-							// onChangeText={(password) => setPassword(password)}
+						/>
+					</View>
+					<View style={styles.inputView}>
+						<Text style={styles.bodyText}>Edit About</Text>
+						<TextInput
+							style={styles.TextInput}
+							placeholder=""
+							placeholderTextColor="#1722e8"
 						/>
 					</View>
 					<TouchableOpacity style={styles.loginBtn}>
 						<Text style={styles.bodyText}>Submit</Text>
 					</TouchableOpacity>
-					<TouchableOpacity>
-						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Forgot Password?{" "}
-							<Text
-								name="RestPasswordPage"
-								onPress={() => navigation.navigate("RestPasswordPage")}
-							>
-							
-							Click here.
-							</Text>
-						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Don't have an account?
-							<Text
-								name="SignUpPage"
-								onPress={() => navigation.navigate("SignUpPage")}
-							>
-								Sign Up
-							</Text>
-							here.
-						</Text>
-					</TouchableOpacity>
 				</View>
-				<Text
-					style={styles.headerText}
-					name="Newsfeed"
-					onPress={() => navigation.navigate("Newsfeed")}
-				>
-					Newsfeed
-				</Text>
 			</View>
-		</ThemeLoggedOut>
+			<View style={styles.footer}>
+				<Footer />
+			</View>
+			<View />
+			</ScrollView>
+		</View>
 	);
-}
-
+};
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
+		// backgroundColor: "#fff",
+		// alignItems: "center",
+		// justifyContent: "center",
 	},
 	body: {
 		backgroundColor: "#fff",
-		height: "70%%",
+		height: "100%",
 		width: "100%",
 		textAlign: "center",
 		justifyContent: "center",
 		flexDirection: "row",
-		margin: 20,
-		padding: 40,
+		// margin: 20,
+		// padding: 40,
 	},
 	bodyText: {
 		color: "#1722e8",
 	},
 	LogInBorder: {
-		border: "solid",
+		// border: "solid",
 		borderRadius: 50,
 		backgroundColor: "white",
 		width: "50%",
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 	},
 	ImageBorder: {
-		// border: "solid",
+		border: "solid",
 		borderRadius: 50,
 		backgroundColor: "white",
 		width: "40%",
@@ -143,9 +143,9 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 	},
 	inputView: {
-		width: "60%",
+		width: "70%",
 		borderRadius: 10,
-		height: 50,
+		height: 20,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 40,
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 40,
+		marginTop: 30,
 		backgroundColor: "lightskyblue",
 	},
 	imageContainer: {
@@ -181,4 +181,5 @@ const styles = StyleSheet.create({
 		margin: 10,
 	},
 });
-export default LogInPage;
+
+export default EditProfile;
