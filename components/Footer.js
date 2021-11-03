@@ -8,11 +8,13 @@ import {
 	Linking,
 } from "react-native";
 
-function Footer() {
+function Footer({ navigation }) {
 	return (
-		<TouchableHighlight style={styles.bottomTouchableHighlight}>
+		<TouchableHighlight
+			style={styles.bottomTouchableHighlight}
+			navigation={navigation}
+		>
 			<View style={styles.footer}>
-				
 				<Text
 					style={styles.footerTextSelect}
 					style={styles.footerText}
@@ -21,19 +23,35 @@ function Footer() {
 					Brought to you by Team Black Panther.
 				</Text>
 
-				<Text style={styles.footerText} onPress={() => Linking.openURL("#")}>
-					About{" "}
+				<Text
+					style={styles.footerText}
+					name="About"
+					onPress={() => navigation.navigate("About")}
+				>
+					About
 				</Text>
 
-				<Text style={styles.footerText} onPress={() => Linking.openURL("#")}>
+				<Text
+					style={styles.footerText}
+					name="Rule"
+					onPress={() => navigation.navigate("Rule")}
+				>
 					Rule
 				</Text>
 
-				<Text style={styles.footerText} onPress={() => Linking.openURL("#")}>
+				<Text
+					style={styles.footerText}
+					name="Contact"
+					onPress={() => navigation.navigate("Contact")}
+				>
 					Contact
 				</Text>
 
-				<Text style={styles.footerText} onPress={() => Linking.openURL("#")}>
+				<Text
+					style={styles.footerText}
+					name="Terms"
+					onPress={() => navigation.navigate("Terms")}
+				>
 					Terms
 				</Text>
 
