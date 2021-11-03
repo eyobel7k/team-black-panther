@@ -1,13 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { useFonts, BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 
 function Header({ navigation }) {
+	const [fontLoaded] = useFonts({ BebasNeue_400Regular });
+
 	return (
 		<View style={styles.Header}>
 			<TouchableHighlight>
 				<View style={styles.HeaderTitle}>
-					<Text style={styles.headerText}>Marvelspace a space</Text>
-					<Text style={styles.headerText}>for super friends</Text>
+					<Text style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>MarvelSpace</Text>
+					<Text style={styles.headerText}>a space for super friends</Text>
 				</View>
 			</TouchableHighlight>
 			<TouchableHighlight>
