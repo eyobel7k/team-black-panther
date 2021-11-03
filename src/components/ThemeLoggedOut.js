@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
-import HeaderLogPage from "./HeaderLogPage";
-import Footer from "./Footer";
+import { HeaderLogPage, Footer } from './';
 
 function ThemeLoggedOut({ children, navigation }) {
 	return (
