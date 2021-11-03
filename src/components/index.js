@@ -10,7 +10,7 @@ import Message from './Message';
 import Newsfeed from './Newsfeed';
 import PasswordReset from './PasswordReset';
 import Profile from './Profile';
-import RestPasswordPage from './RestPasswordPage';
+import ResetPasswordPage from './ResetPasswordPage';
 import SignUpPage from './SignUpPage';
 import ThemeLoggedIn from './ThemeLoggedIn';
 import ThemeLoggedOut from './ThemeLoggedOut';
@@ -33,7 +33,7 @@ export {
   Newsfeed,
   PasswordReset,
   Profile,
-  RestPasswordPage,
+  ResetPasswordPage,
   SignUpPage,
   ThemeLoggedIn,
   ThemeLoggedOut,
