@@ -4,6 +4,7 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
+import Chat from "./Chat";
 
 function Messages({ navigation }) {
 	return (
@@ -12,10 +13,10 @@ function Messages({ navigation }) {
 				<View>
 					<Header navigation={navigation} />
 				</View>
-
+					
 				<View style={styles.body}>
 					<Text style={styles.text}>
-						Message!
+					<Chat />
 					</Text>
 				</View>
 
