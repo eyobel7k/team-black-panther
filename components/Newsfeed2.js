@@ -4,8 +4,9 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { posts } from "./WPAPI";
 import Post from "./Post";
+import ThemeLoggedIn from "./ThemeLoggedIn";
 
-function Newsfeed() {
+function Newsfeed({ navigation }) {
   const [postsArr, setPostsArr] = useState([]);
   useEffect(() => {
     posts().then((data) => setPostsArr(data));
@@ -19,9 +20,19 @@ function Newsfeed() {
   });
 
   return (
-    <View style={styles.body}>
-      <Text>Newsfeed</Text>
-      <ScrollView>{generatePosts}</ScrollView>
+    <View style={styles.container} navigation={navigation}>
+      <View>
+        <Header navigation={navigation} />
+      </View>
+      <ScrollView>
+        <View style={styles.body}>
+          <Text>Newsfeed</Text>
+          <ScrollView>{generatePosts}</ScrollView>
+        </View>
+      </ScrollView>
+      <View>
+        <Footer />
+      </View>
     </View>
   );
 }
@@ -38,6 +49,7 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
+    marginTop: "1rem",
   },
   text: {
     margin: 5,
