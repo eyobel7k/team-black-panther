@@ -24,7 +24,11 @@ export default function Chat() {
     if (cleanedInput.length > 0) {
       setTaskItems([...taskItems, task.trim()]);
       setTask("");
-    }
+    }else {console.log('Entry cannot be blank');
+    setTask("");
+  }
+
+    
   };
   const completeTask = (index) => {
     let itemsCopy = [...taskItems];
@@ -55,7 +59,7 @@ export default function Chat() {
           <View style={styles.writeTask}>
             <TextInput
               style={styles.input}
-              placeholder={"Search Space characters ..."}
+              placeholder={"Type message ..."}
               value={task}
               onChangeText={(text) => setTask(text)}
               onKeyPress={handleKeypress}
@@ -64,11 +68,11 @@ export default function Chat() {
             />
             <TouchableOpacity onPress={() => handleAddTask()}>
               <View style={styles.addWrapper}>
-                <Text style={styles.addText}>Search</Text>
+                <Text style={styles.addText}>Send</Text>
               </View>
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ height: "40vh", width: "80vw" }}>
+          <ScrollView style={{ height: "40vh", width: "60vw" }}>
             <View style={styles.items}>
               {/* This is where the tasks will go! */}
               {taskItems.map((item, index) => {
@@ -83,9 +87,12 @@ export default function Chat() {
                       <View style={styles.itemLeft}>
                         <View style={styles.square}></View>
 
-                        <Text style={styles.itemText}>{item}</Text>
-                        <Text>
-                          posted on {}
+                        <Text style={styles.itemText}>
+                          {item}
+                          {"   "}
+                        </Text>
+                        <Text style={styles.date}>
+                          posted on {"     "}
                           {new Date().toLocaleTimeString()} on{" "}
                           {new Date().toLocaleDateString()}{" "}
                         </Text>
@@ -99,25 +106,6 @@ export default function Chat() {
           </ScrollView>
         </View>
       </View>
-
-      {/* Write a task */}
-      {/* Uses a keyboard avoiding view which ensures the keyboard does not cover the items on screen */}
-      <View style={styles.writeTaskWrapper}>
-        <TextInput
-          style={styles.input}
-          placeholder={"Type a message ..."}
-          value={task}
-          onChangeText={(text) => setTask(text)}
-          onKeyPress={handleKeypress}
-          autoFocus={true}
-          onSubmitEditing={handleAddTask}
-        />
-        <TouchableOpacity onPress={() => handleAddTask()}>
-          <View style={styles.addWrapper}>
-            <Text style={styles.addText}>Send</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -125,7 +113,9 @@ export default function Chat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E8EAED",
+    backgroundColor: "white",
+    marginTop: 15,
+    height: "100%",
   },
   tasksWrapper: {
     paddingTop: 40,
@@ -137,11 +127,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   items: {
-    marginTop: 30,
+    marginTop: 50,
   },
   writeTaskWrapper: {
     position: "absolute",
-    bottom: 60,
+    bottom: 80,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -162,9 +152,10 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: "15px",
   },
+
   addWrapper: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     backgroundColor: "#FFF",
     borderRadius: 60,
     justifyContent: "center",
@@ -188,16 +179,12 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   square: {
-    // width: 24,
-    // height: 24,
-    // backgroundColor: '#55BCF6',
-    // opacity: 0.4,
-    // borderRadius: 5,
     marginRight: 15,
   },
   itemText: {
     maxWidth: "80%",
-    fontSize: "15px",
+    fontSize: "25px",
+    marginLeft: "90px",
   },
   circular: {
     width: 12,
@@ -205,5 +192,10 @@ const styles = StyleSheet.create({
     borderColor: "#55BCF6",
     borderWidth: 2,
     borderRadius: 5,
+  },
+  date: {
+    fontSize: "15px",
+    fontStyle: "italic",
+    color: "purple",
   },
 });
