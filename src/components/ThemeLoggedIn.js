@@ -5,32 +5,35 @@ import Footer from "./Footer";
 
 function ThemeLoggedIn({ children, navigation }) {
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<ScrollView>
+		<View style={styles.container}>
 				<View>
 					<Header navigation={navigation} />
 				</View>
-
-				<View style={styles.body}>{children}</View>
-
+				<ScrollView
+					style={styles.scrollView}
+					contentContainerStyle={styles.scrollContentContainer}
+				>
+					{children}
+				</ScrollView>
 				<View>
 					<Footer />
 				</View>
-			</ScrollView>
 		</View>
 	);
 }
 const styles = StyleSheet.create({
+	scrollView: {
+		paddingTop: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'lightgray',
+	},
+	scrollContentContainer: {
+    flexWrap: "wrap",
+  },
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
-	},
-	body: {
-		backgroundColor: "#fff",
-		height: "70%",
-		width: "100%",
-		textAlign: "center",
-		justifyContent: "center",
 	},
 	text: {
 		margin: 5,
