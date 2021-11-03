@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ThemeLoggedIn } from './';
+import { ThemeLoggedIn, Chat } from './';
 
 function Messages({ navigation }) {
 	return (
@@ -8,7 +8,7 @@ function Messages({ navigation }) {
 			<View style={styles.container}>
 					<View style={styles.body}>
 						<Text style={styles.text}>
-							Message!
+							<Chat />
 						</Text>
 					</View>
 			</View>
