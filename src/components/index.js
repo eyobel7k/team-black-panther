@@ -14,6 +14,11 @@ import RestPasswordPage from './RestPasswordPage';
 import SignUpPage from './SignUpPage';
 import ThemeLoggedIn from './ThemeLoggedIn';
 import ThemeLoggedOut from './ThemeLoggedOut';
+import Terms from './Terms';
+import Rule from './Rule';
+import About from './About';
+import Contact from './Contact';
+import Chat from './Chat';
 
 export {
   EditProfile,
@@ -32,4 +37,9 @@ export {
   SignUpPage,
   ThemeLoggedIn,
   ThemeLoggedOut,
+  Terms,
+	Rule,
+	About,
+	Contact,
+	Chat,
 };

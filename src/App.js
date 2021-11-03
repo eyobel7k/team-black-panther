@@ -12,11 +12,17 @@ import { Home,
 	Profile,
 	Images,
 	Message,
-	RestPasswordPage,
+	ResetPasswordPage,
 	EditProfile,
+	Terms,
+	Rule,
+	About,
+	Contact,
+	Chat,
 } from "./components";
 
 const Stack = createNativeStackNavigator();
+
 
 export default function App() {
 	return (
@@ -27,34 +33,40 @@ export default function App() {
 						headerShown: false,
 					}}
 				> */}
-				<Stack.Navigator
-					initialRouteName="LogInPage"
-					screenOptions={{
-						headerShown: false,
-					}}
-				>
-					<Stack.Screen name="LogInPage" component={LogInPage} />
-					<Stack.Screen name="Home" component={Home} />
-					<Stack.Screen name="Newsfeed" component={Newsfeed} />
-					<Stack.Screen name="SignUpPage" component={SignUpPage} />
-					<Stack.Screen name="Friends" component={Friends} />
-					<Stack.Screen name="Profile" component={Profile} />
-					<Stack.Screen name="Images" component={Images} />
-					<Stack.Screen name="Message" component={Message} />
-					<Stack.Screen name="RestPasswordPage" component={RestPasswordPage} />
-					<Stack.Screen name="EditProfile" component={EditProfile} />
-				</Stack.Navigator>
-			</NavigationContainer>
-			<StatusBar style="auto" />
-		</View>
-	);
+        <Stack.Navigator
+          initialRouteName="LogInPage"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="LogInPage" component={LogInPage} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Newsfeed" component={Newsfeed} />
+          <Stack.Screen name="SignUpPage" component={SignUpPage} />
+          <Stack.Screen name="Friends" component={Friends} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Images" component={Images} />
+          <Stack.Screen name="Message" component={Message} />
+          <Stack.Screen
+            name="ResetPasswordPage"
+            component={ResetPasswordPage}
+          />
+          <Stack.Screen name="EditProfile" component={EditProfile} />
+          <Stack.Screen name="Terms" component={Terms} />
+          <Stack.Screen name="Contract" component={Contact} />
+          <Stack.Screen name="About" component={About} />
+          <Stack.Screen name="Rule" component={Rule} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-	
-	},
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
 });
 
 /**
