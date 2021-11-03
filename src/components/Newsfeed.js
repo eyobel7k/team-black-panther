@@ -1,27 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
-import ThemeLoggedIn from "./ThemeLoggedIn";
+import { StyleSheet, Text, View } from "react-native";
+import { ThemeLoggedIn } from './';
 
 function Newsfeed({ navigation }) {
-return (
-	<View style={styles.container} navigation={navigation}>
-		<ScrollView>
-			<View>
-				<Header navigation={navigation} />
+	return (
+		<ThemeLoggedIn navigation={navigation} >
+			<View style={styles.container}>
+					<View style={styles.body}>
+						<Text style={styles.text}>NewsFeed!</Text>
+					</View>
 			</View>
-
-			<View style={styles.body}>
-				<Text style={styles.text}>NewsFeed!</Text>
-			</View>
-
-			<View>
-				<Footer />
-			</View>
-		</ScrollView>
-	</View>
-);
+		</ThemeLoggedIn>
+	);
 }
 const styles = StyleSheet.create({
 	container: {

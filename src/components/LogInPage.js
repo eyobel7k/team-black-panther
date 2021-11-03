@@ -1,9 +1,7 @@
 import React from "react";
 import { StyleSheet, Image,View ,TextInput, TouchableOpacity} from "react-native";
-import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements"
-
-
+import { ThemeLoggedOut } from "./";
 
 function LogInPage({ navigation }) {
 

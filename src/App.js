@@ -2,16 +2,49 @@ import { StatusBar } from "expo-status-bar";
 import { registerRootComponent } from 'expo';
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Home, LogInPage, Profile, Footer } from "./components";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Home, 
+	Newsfeed,
+	SignUpPage,
+	LogInPage,
+	Friends,
+	Profile,
+	Images,
+	Message,
+	RestPasswordPage,
+	EditProfile,
+} from "./components";
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
-    <View style={styles.container}>
-      
-      {/* <Home /> */}
-      {/* <LogInPage/> */}
-      <Profile />
+		<View style={styles.container}>
+			<NavigationContainer>
+				{/* <Stack.Navigator
+					screenOptions={{
+						headerShown: false,
+					}}
+				> */}
+				<Stack.Navigator
+					initialRouteName="LogInPage"
+					screenOptions={{
+						headerShown: false,
+					}}
+				>
+					<Stack.Screen name="LogInPage" component={LogInPage} />
+					<Stack.Screen name="Home" component={Home} />
+					<Stack.Screen name="Newsfeed" component={Newsfeed} />
+					<Stack.Screen name="SignUpPage" component={SignUpPage} />
+					<Stack.Screen name="Friends" component={Friends} />
+					<Stack.Screen name="Profile" component={Profile} />
+					<Stack.Screen name="Images" component={Images} />
+					<Stack.Screen name="Message" component={Message} />
+					<Stack.Screen name="RestPasswordPage" component={RestPasswordPage} />
+					<Stack.Screen name="EditProfile" component={EditProfile} />
+				</Stack.Navigator>
+			</NavigationContainer>
 			<StatusBar style="auto" />
 		</View>
 	);

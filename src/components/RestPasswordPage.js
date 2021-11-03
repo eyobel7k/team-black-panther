@@ -8,60 +8,62 @@ import {
 	Button,
 	TouchableOpacity,
 } from "react-native";
-import Footer from "./Footer";
-import HeaderLogPage from "./HeaderLogPage";
+import { ThemeLoggedIn, HeaderLogPage } from './';
+
 function RestPasswordPage({ navigation }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<View style={styles.header}>
-				<HeaderLogPage />
-			</View>
-			<View style={styles.body}>
-				<View style={styles.LogInBorder}>
-					<Text h4 style={styles.bodyText}>
-						Password Reset
-					</Text>
-					<Text style={styles.bodyText}>Create your new password:</Text>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="UserName"
-							placeholderTextColor="#1722e8"
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="New Password."
-							placeholderTextColor="#1722e8"
-							secureTextEntry={true}
-							onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Confirm New Password."
-							placeholderTextColor="#1722e8"
-							secureTextEntry={true}
-							onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText}>Submit</Text>
-					</TouchableOpacity>
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.container}>
+				<View style={styles.header}>
+					<HeaderLogPage />
 				</View>
-				<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+				<View style={styles.body}>
+					<View style={styles.LogInBorder}>
+						<Text h4 style={styles.bodyText}>
+							Password Reset
+						</Text>
+						<Text style={styles.bodyText}>Create your new password:</Text>
+						<View style={styles.inputView}>
+							<TextInput
+								style={styles.TextInput}
+								placeholder="UserName"
+								placeholderTextColor="#1722e8"
+							/>
+						</View>
+						<View style={styles.inputView}>
+							<TextInput
+								style={styles.TextInput}
+								placeholder="New Password."
+								placeholderTextColor="#1722e8"
+								secureTextEntry={true}
+								onChangeText={(password) => setPassword(password)}
+							/>
+						</View>
+						<View style={styles.inputView}>
+							<TextInput
+								style={styles.TextInput}
+								placeholder="Confirm New Password."
+								placeholderTextColor="#1722e8"
+								secureTextEntry={true}
+								onChangeText={(password) => setPassword(password)}
+							/>
+						</View>
+
+						<TouchableOpacity style={styles.loginBtn}>
+							<Text style={styles.bodyText}>Submit</Text>
+						</TouchableOpacity>
+					</View>
+					<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+				</View>
+				<View style={styles.footer}>
+					<Footer />
+				</View>
+				<View />
 			</View>
-			<View style={styles.footer}>
-				<Footer />
-			</View>
-			<View />
-		</View>
+		</ThemeLoggedIn>
 	);
 }
 

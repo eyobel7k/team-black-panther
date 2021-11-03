@@ -1,70 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
 import { wpApiFetch, WPAPI_PATHS } from '../services/WPAPI';
+import { ThemeLoggedIn } from './';
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const [profileInfo, setProfileInfo] = useState({});
   const { height, width } = useWindowDimensions();
 
   useEffect(() => {
-    wpApiFetch({ path: WPAPI_PATHS.users })
+    wpApiFetch({ path: WPAPI_PATHS.wp.users })
       .then(response => {
+        console.log(response);
         setProfileInfo(response.at(0));
       });
-  });
+  }, []); // runs onMount only
 
   return (
-    <ScrollView
-      style={styles.profileContainer}
-      contentContainerStyle={styles.scrollContentContainer}
-    >
-      <View style={styles.profileInfoContainer}>
-        <Image 
-          source={profileInfo.avatar_urls?.["96"]} 
-          style={{
-            minWidth: 200,
-            height: '50%',
-            width: '50%',
-            borderRadius: '100%'
-          }}
-        />
-        <Text style={styles.h2}>{profileInfo.name}</Text>
-        <Text style={styles.h3}>Avengers Tower, New York City</Text>
-        <TouchableOpacity
-          style={styles.pillButton}
-          onPress={() => console.log('pressed edit profile!')}
-        >
-          <Text>edit profile</Text>
-        </TouchableOpacity>
-        
-      </View>
-      <View style={styles.profileAboutContainer}>
-        <Text style={styles.h3}>About</Text>
-        <View style={styles.profileAbout}>
-          <Text>{profileInfo.description}</Text>
+    <ThemeLoggedIn navigation={navigation}>
+      <View
+        style={styles.profileContainer}
+        contentContainerStyle={styles.scrollContentContainer}
+      >
+        <View style={styles.profileInfoContainer}>
+          <Image 
+            source={profileInfo.avatar_urls?.["96"]} 
+            style={{
+              minWidth: width > 300 ? 200 : 250,
+              minHeight: width > 300 ? 200: 250,
+              height: '50%',
+              width: '50%',
+              borderRadius: '100%'
+            }}
+          />
+          <Text style={styles.h2}>{profileInfo.name}</Text>
+          <Text style={styles.h3}>Avengers Tower, New York City</Text>
+          <TouchableOpacity
+            style={styles.pillButton}
+            onPress={() => console.log('pressed edit profile!')}
+          >
+            <Text>edit profile</Text>
+          </TouchableOpacity>
+          
+        </View>
+        <View style={styles.profileAboutContainer}>
+          <Text style={styles.h3}>About</Text>
+          <View style={styles.profileAbout}>
+            <Text>{profileInfo.description}</Text>
+          </View>
         </View>
       </View>
-    </ScrollView>   
+    </ThemeLoggedIn>
   )
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 20,
-    backgroundColor: '#ED1D24',
-  },
-  scrollContentContainer: {
+  profileContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
     flexWrap: "wrap",
-  },
-  profileContainer: {
-    flex: 1,
-    padding: 10,
   },
   profileInfoContainer: {
     flex: 1,
@@ -91,13 +86,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'gray',
     backgroundColor: 'whitesmoke',
-  },
-  footer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: 'lightgray',
   },
   pillButton: {
     borderRadius: 10,
