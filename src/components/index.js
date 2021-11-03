@@ -19,6 +19,7 @@ import Rule from './Rule';
 import About from './About';
 import Contact from './Contact';
 import Chat from './Chat';
+import Members from './Members';
 
 export {
   EditProfile,
@@ -42,4 +43,5 @@ export {
 	About,
 	Contact,
 	Chat,
+  Members,
 };

@@ -54,6 +54,14 @@ function Header({ navigation }) {
 						>
 							Messages
 						</Text>
+					
+						<Text
+							style={styles.headerText}
+							name="Members"
+							onPress={() => navigation.navigate("Members")}
+						>
+							Members
+						</Text>
 				</View>
 			</TouchableHighlight>
 		</View>
