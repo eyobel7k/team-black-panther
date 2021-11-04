@@ -6,8 +6,8 @@ function HeaderLogPage() {
 		<View style={styles.Header}>
 			<TouchableHighlight style={styles.headerTouchableHighlight}>
 				<View style={styles.HeaderTitle}>
-					<Text h5 style={styles.headerText}>Marvelspace a space</Text>
-					<Text h5 style={styles.headerText}>for super friends</Text>
+					<Text h3 style={styles.headerText}>Marvelspace a space</Text>
+					<Text h3 style={styles.headerText}>for super friends</Text>
 				</View>
 			</TouchableHighlight>
 		
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		top: 0,
 		backgroundColor: "blue",
-	
 		height: "4em",
 		width: "100%",
 	},
@@ -32,9 +31,9 @@ const styles = StyleSheet.create({
 		width: "100%",
 		justifyContent: "flex-start",
 		alignItems: "start",
-		paddingHorizontal: 5,
+		paddingHorizontal: 40,
+		marginVertical: 30,
 	},
-
 	headerTouchableHighlight: {
 		alignItems: "center",
 		justifyContent: "center",

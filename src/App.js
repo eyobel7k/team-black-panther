@@ -55,7 +55,7 @@ export default function App() {
           />
           <Stack.Screen name="EditProfile" component={EditProfile} />
           <Stack.Screen name="Terms" component={Terms} />
-          <Stack.Screen name="Contract" component={Contact} />
+          <Stack.Screen name="Contact" component={Contact} />
           <Stack.Screen name="About" component={About} />
           <Stack.Screen name="Rule" component={Rule} />
         </Stack.Navigator>
