@@ -23,10 +23,7 @@ const Profile = ({ navigation }) => {
 
   return (
     <ThemeLoggedIn navigation={navigation}>
-      <View
-        style={styles.profileContainer}
-        contentContainerStyle={styles.scrollContentContainer}
-      >
+      <View style={styles.profileContainer}>
         <View style={styles.profileInfoContainer}>
           <Image 
             source={profileInfo.avatar_urls?.["96"]} 
@@ -35,7 +32,7 @@ const Profile = ({ navigation }) => {
               maxHeight: width > 300 ? 150: 250,
               height: '100%',
               width: '100%',
-              borderRadius: '100%'
+              borderRadius: '100%',
             }}
           />
           <Text style={styles.h2}>{profileInfo.name}</Text>
@@ -72,9 +69,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		height: "50%",
 		margin: 10,
 		minWidth: 300,
+		height: 300, // for now
 	},
 	profileAboutContainer: {
 		flex: 1,
