@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 	footer: {
 		flex: 1,
 		flexDirection: "row",
-		backgroundColor: "black",
+		backgroundColor: "#d2d2d6",
 		width: "100%",
 		height: "4em",
 		justifyContent: "space-around",
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		padding: 20,
 		margin: 20,
-		backgroundColor: "lightgray",
+		backgroundColor: "#d2d2d6",
 		borderRadius: 10,
 	},
 
