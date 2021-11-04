@@ -92,13 +92,16 @@ const styles = StyleSheet.create({
 		height: "4em",
 		justifyContent: "space-around",
 		alignItems: "center",
-		position: "fixed",
+		// position: "fixed",
 		bottom: 0,
 		// backgroundColor: "#d2d2d6",
 	},
 	footerMobile: {
 		flexDirection: 'column',
 		padding: 20,
+		margin: 20,
+		backgroundColor: "lightgray",
+		borderRadius: 10,
 	},
 
 	footerText: {
