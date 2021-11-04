@@ -6,21 +6,11 @@ import ThemeLoggedIn from "./ThemeLoggedIn";
 
 function About({ navigation }) {
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<ScrollView>
-				<View>
-					<Header navigation={navigation} />
-				</View>
-
-				<View style={styles.body}>
-					<Text style={styles.text}>About!</Text>
-				</View>
-
-				<View>
-					<Footer />
-				</View>
-			</ScrollView>
-		</View>
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.body}>
+				<Text style={styles.text}>About!</Text>
+			</View>
+		</ThemeLoggedIn>
 	);
 }
 const styles = StyleSheet.create({

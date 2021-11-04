@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
+import { StyleSheet,  View, ScrollView, Button } from "react-native";
 import { posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
-
+import { Text } from "react-native-elements";
 function Newsfeed({ navigation }) {
   const [postsArr, setPostsArr] = useState([]);
   useEffect(() => {
@@ -20,21 +18,15 @@ function Newsfeed({ navigation }) {
   });
 
   return (
-    <View style={styles.container} navigation={navigation}>
-      <View>
-        <Header navigation={navigation} />
-      </View>
-      <ScrollView>
-        <View style={styles.body}>
-          <Text>Newsfeed</Text>
-          <ScrollView>{generatePosts}</ScrollView>
-        </View>
-      </ScrollView>
-      <View>
-        <Footer />
-      </View>
-    </View>
-  );
+		<ThemeLoggedIn navigation={navigation}>
+			<ScrollView>
+				<View style={styles.body}>
+					<Text h3 >Newsfeed</Text>
+					<ScrollView>{generatePosts}</ScrollView>
+				</View>
+			</ScrollView>
+		</ThemeLoggedIn>
+	);
 }
 const styles = StyleSheet.create({
   container: {
