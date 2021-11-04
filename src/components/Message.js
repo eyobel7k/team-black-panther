@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image,TouchableOpacity } from "react-native";
 import { ThemeLoggedIn, Chat } from "./";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function Messages({ navigation }) {
   const [members, setMembers] = useState([]);
+ 
+  const onPress = () => setMembers(prevembers => members.name)
+  
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => setMembers(data))
@@ -15,7 +18,9 @@ function Messages({ navigation }) {
 
   const listMembers = members.map((member, index) => (
     <View key={index} style={styles.inlineProfile}>
+		<TouchableOpacity onPress={onPress}>
       <Image style={styles.image} source={member.avatar_urls.thumb} />
+	  </TouchableOpacity>
       <Text>{member.name}</Text>
     </View>
   ));
@@ -26,13 +31,10 @@ function Messages({ navigation }) {
         <View style={styles.body}>
           <Text style={styles.text}>
             <Chat />
-			
           </Text>
-		 
         </View>
-		{listMembers}
+        {listMembers}
       </View>
-	  
     </ThemeLoggedIn>
   );
 }
@@ -59,22 +61,15 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 50,
-	alignItems:'flex-end',
-	
+    alignItems: "flex-end",
   },
   inlineProfile: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flext-center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flext-center",
     marginBottom: 5,
   },
-
 });
 
 export default Messages;
-
-
-  
-	
-  
