@@ -1,40 +1,60 @@
 const BASE_URL = 'https://jualuc1.dreamhosters.com/wp-json';
-const WP_PATH = '/wp/v2';
-const BUDDYPRESS_PATH = '/buddypress/v1';
+const WP_PATH = 'wp/v2';
+const BUDDYPRESS_PATH = 'buddypress/v1';
 
 export const WPAPI_PATHS = {
   wp: {
-    posts: `${BASE_URL}${WP_PATH}/posts`,
-    users: `${BASE_URL}${WP_PATH}/users`,
-    media: `${BASE_URL}${WP_PATH}/media`,
-    comments: `${BASE_URL}${WP_PATH}/comments`,
-    categories: `${BASE_URL}${WP_PATH}/catergories`,
-    search: `${BASE_URL}${WP_PATH}/search`,
-    blockTypes: `${BASE_URL}${WP_PATH}/block-types`,
-    blocks: `${BASE_URL}${WP_PATH}/blocks`,
+    posts: `${WP_PATH}/posts`,
+    users: `${WP_PATH}/users`,
+    media: `${WP_PATH}/media`,
+    comments: `${WP_PATH}/comments`,
+    categories: `${WP_PATH}/catergories`,
+    search: `${WP_PATH}/search`,
+    blockTypes: `${WP_PATH}/block-types`,
+    blocks: `${WP_PATH}/blocks`,
   },
   buddypress: {
-    members: `${BASE_URL}${BUDDYPRESS_PATH}/members`,
-    activity: `${BASE_URL}${BUDDYPRESS_PATH}/activity`,
+    members: `${BUDDYPRESS_PATH}/members`,
+    activity: `${BUDDYPRESS_PATH}/activity`,
   }
 }
+ /**
+  * helper function to build url with query parameters
+  * @param {string} path 
+  * @param {Object} params 
+  * @returns string
+  */
+const buildUrl = ( path, params = {} ) => {
+  const paramsPairs = Object.entries(params);
+  // removes slash (/) from end of path if one exists
+  const trimmedPath = path.endsWith('/') ? path.slice(0, -1) : path;
+  // append query start symbol (?) to path if params exist
+  const queryStart = paramsPairs.length > 0 ? '?' : '';
+  const initialUrl = `${BASE_URL}/${trimmedPath}${queryStart}`;
 
-const urlBuilder = ( path, params = {} ) => {
-  let url = path;
-  for (let key in params) {
-    url += `${key}=${params[key]}`
-  }
-  return url;
+  const builtUrl = paramsPairs.reduce((builtUrl, [ key, value ], i) => {
+    // append query separator (&) if we are not at the final param iteration
+    const querySeparator = i < paramsPairs.length - 1 ? '&' : '';
+    return builtUrl + `${key}=${value}${querySeparator}`;
+  }, initialUrl);
+  // return examples:
+  // https://jualuc1.dreamhosters.com/wp-json/wp/posts?firstKey=firstValue&secondKey=secondValue
+  // or
+  // https://jualuc1.dreamhosters.com/wp-json/wp/posts 
+  return builtUrl;
 }
 
 /**
  * wordpress API fetch function
- * @param {Promise} response
+ * @return {Promise} response
  * example use: wpApiFetch({ path: WPAPI_PATHS.posts }) returns Promise for wordpress posts array
  */
-export const wpApiFetch = async ({ path, params, data, method = 'GET' }) => {
+export const wpApiFetch = async ({ path, queryParams, data, method = 'GET' }) => {
   try {
-    const response = await fetch(path, { method, body: JSON.stringify(data) });
+    const response = await fetch(
+      buildUrl(path, queryParams),
+      { method, body: JSON.stringify(data) }
+    );
     return response.json();
   } catch(error) {
     // any error handling code goes here
