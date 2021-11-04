@@ -1,10 +1,13 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, useWindowDimensions } from "react-native";
 import { Header, Footer } from './';
 
 function ThemeLoggedIn({ children, navigation }) {
+	const { width } = useWindowDimensions();
+	const widthBreakpoint = 700;
+
 	return (
-		<View style={styles.container} navigation={navigation}>
+		<View style={styles.container}>
 			<View style={styles.Header}>
 				<Header navigation={navigation} />
 			</View>
@@ -13,25 +16,36 @@ function ThemeLoggedIn({ children, navigation }) {
 				contentContainerStyle={styles.scrollContentContainer}
 			>
 				{children}
+				{
+					width < widthBreakpoint &&
+						<View style={styles.Footer}>
+							<Footer navigation={navigation} />
+						</View>
+				}
 			</ScrollView>
-			<View style={styles.Footer}>
-				<Footer navigation={navigation} />
-			</View>
+			{
+				width >= widthBreakpoint &&
+					<View style={styles.Footer}>
+						<Footer navigation={navigation} />
+					</View>
+				}
 		</View>
 	);
 }
 const styles = StyleSheet.create({
 	scrollView: {
-		height: "70%",
+		height: "100%",
 		paddingTop: 10,
 		borderWidth: 2,
 		borderRadius: 5,
-		borderColor: "lightGray",
+		borderColor: "lightgray",
 		paddingVertical:70,
 	
 	},
 	scrollContentContainer: {
-		flexWrap: "wrap",
+		flexWrap: 'wrap',
+		justifyContent: 'space-between',
+		// alignItems: 'center',
 	},
 	container: {
 		flex: 1,
@@ -44,14 +58,13 @@ const styles = StyleSheet.create({
 		fontFamily: "Serif",
 	},
 	Header: {
-		height: "20%",
-		top: 0,
+		// height: "20%",
+		// top: 0,
 	},
 	Footer: {
-		height: "10%",
-		bottom: 0,
-		backgroundColor: "red",
-		position: "fixed",
+		// height: "10%",
+		// bottom: 0,
+		// position: "fixed",
 	},
 });
 

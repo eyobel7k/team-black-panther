@@ -1,37 +1,36 @@
 import React from "react";
-import { StyleSheet, TextInput, View, TouchableHighlight } from "react-native";
-import { Text,SearchBar } from "react-native-elements";
-
+import { StyleSheet, View, TouchableHighlight } from "react-native";
+import { useFonts, BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import { Text, SearchBar } from "react-native-elements";
 
 function Header({ navigation }) {
+	const [fontLoaded] = useFonts({ BebasNeue_400Regular });
+
 	return (
 		<View style={styles.Header}>
 			<TouchableHighlight>
 				<View style={styles.HeaderWarp}>
 					<View style={styles.HeaderTitle}>
-						<Text h3 style={styles.headerText}>
-							Marvelspace a space
+						<Text h3 style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>
+							MarvelSpace
 						</Text>
-						<Text h3 style={styles.headerText}>
-							for super friends
+						<Text h4 style={styles.headerText}>
+							A space for super friends
 						</Text>
 					</View>
 					<View style={styles.HeaderSearch}>
-					
-							<SearchBar
-								lightTheme={true}
-								height={50}
-								fontSize={24}
-								fontColor="#fdfdfd"
-								iconColor="#fdfdfd"
-								shadowColor="#282828"
-								cancelIconColor="#fdfdfd"
-								backgroundColor="#ba312f"
-								placeholder="Search  ..."
-								fontFamily="BurbankBigCondensed-Black"
-								
-							/>
-						
+						<SearchBar
+							lightTheme={true}
+							height={50}
+							fontSize={24}
+							fontColor="#fdfdfd"
+							iconColor="#fdfdfd"
+							shadowColor="#282828"
+							cancelIconColor="#fdfdfd"
+							backgroundColor="#ba312f"
+							placeholder="Search  ..."
+							fontFamily="BurbankBigCondensed-Black"
+						/>
 					</View>
 				</View>
 			</TouchableHighlight>
@@ -125,6 +124,7 @@ const styles = StyleSheet.create({
 	},
 	HeaderWarp: {
 		flexDirection: "row",
+		flexWrap: "wrap",
 		justifyContent: "space-around",
 		alignItems: "end",
 		width: "100%",
