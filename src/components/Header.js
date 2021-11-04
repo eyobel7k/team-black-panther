@@ -9,9 +9,6 @@ function Header({ navigation }) {
 	return (
 		<View style={styles.Header}>
 			<TouchableHighlight>
-			{/* <View style={styles.HeaderTitle}>
-					<Text style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>MarvelSpace</Text>
-					<Text style={styles.headerText}>a space for super friends</Text> */}
 				<View style={styles.HeaderWarp}>
 					<View style={styles.HeaderTitle}>
 						<Text h3 style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>
