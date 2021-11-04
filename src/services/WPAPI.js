@@ -25,28 +25,28 @@ export const WPAPI_PATHS = {
   * @returns string
   */
 const buildUrl = ( path, params = {} ) => {
-  // [[ "firstKey", "firstValue" ], [ "secondKey", "secondValue" ]...]
   const paramsPairs = Object.entries(params);
   // removes slash (/) from end of path if one exists
   const trimmedPath = path.endsWith('/') ? path.slice(0, -1) : path;
   // append query start symbol (?) to path if params exist
   const queryStart = paramsPairs.length > 0 ? '?' : '';
   const initialUrl = `${BASE_URL}/${trimmedPath}${queryStart}`;
-  
+
   const builtUrl = paramsPairs.reduce((builtUrl, [ key, value ], i) => {
     // append query separator (&) if we are not at the final param iteration
     const querySeparator = i < paramsPairs.length - 1 ? '&' : '';
     return builtUrl + `${key}=${value}${querySeparator}`;
   }, initialUrl);
-  return builtUrl;
+  // return examples:
   // https://jualuc1.dreamhosters.com/wp-json/wp/posts?firstKey=firstValue&secondKey=secondValue
   // or
-  // https://jualuc1.dreamhosters.com/wp-json/wp/posts
+  // https://jualuc1.dreamhosters.com/wp-json/wp/posts 
+  return builtUrl;
 }
 
 /**
  * wordpress API fetch function
- * @param {Promise} response
+ * @return {Promise} response
  * example use: wpApiFetch({ path: WPAPI_PATHS.posts }) returns Promise for wordpress posts array
  */
 export const wpApiFetch = async ({ path, queryParams, data, method = 'GET' }) => {
