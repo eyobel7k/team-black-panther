@@ -1,28 +1,32 @@
 import React from "react";
 import {
 	StyleSheet,
-
 	Text,
 	View,
 	TouchableHighlight,
-	Linking,
+	useWindowDimensions,
 } from "react-native";
 
+/**
+ * About
+ * Rule
+ * Contact
+ * Terms
+ * 
+ * Brought to you
+ * Copyright
+ */
+
 function Footer({ navigation }) {
+	const {width, height} = useWindowDimensions();
+	const breakpoint = 700;
+
 	return (
 		<TouchableHighlight
 			style={styles.bottomTouchableHighlight}
 			navigation={navigation}
 		>
-			<View style={styles.footer}>
-				<Text
-					style={styles.footerTextSelect}
-					style={styles.footerText}
-					onPress={() => Linking.openURL("#")}
-				>
-					Brought to you by Team Black Panther.
-				</Text>
-
+			<View style={width > breakpoint ? styles.footer : styles.footerMobile}>
 				<Text
 					style={styles.footerText}
 					name="About"
@@ -54,14 +58,21 @@ function Footer({ navigation }) {
 				>
 					Terms
 				</Text>
+				<View style={width > breakpoint ? { marginTop: 0, flexDirection: 'row' } : { marginTop: 20 }}>
+					<Text
+						style={styles.footerTextSelect}
+						style={styles.footerText}
+					>
+						Brought to you by Team Black Panther.
+					</Text>
 
-				<Text
-					style={styles.footerTextSelect}
-					style={styles.footerText}
-					onPress={() => Linking.openURL("#")}
-				>
-					©2021 MarvelSpace.All Rights Reserved.
-				</Text>
+					<Text
+						style={styles.footerTextSelect}
+						style={styles.footerText}
+					>
+						©2021 MarvelSpace.All Rights Reserved.
+					</Text>
+				</View>
 			</View>
 		</TouchableHighlight>
 	);
@@ -74,13 +85,17 @@ const styles = StyleSheet.create({
 		backgroundColor: "#e9e9f5",
 	},
 	footer: {
-		flex: 2,
+		flex: 1,
 		flexDirection: "row",
 		// backgroundColor: "black",
 		width: "100%",
-		height: "20%",
+		// height: "20%",
 		justifyContent: "space-around",
 		alignItems: "center",
+	},
+	footerMobile: {
+		flexDirection: 'column',
+		padding: 20,
 	},
 
 	footerText: {
@@ -88,6 +103,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		alignItems: "center",
 		fontSize: 14,
+		padding: 10,
 	},
 	footerTextSelect: {
 		color: "#6d6f91",

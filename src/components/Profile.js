@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { wpApiFetch, WPAPI_PATHS } from '../services/WPAPI';
 import { ThemeLoggedIn } from './';
 
@@ -25,10 +25,10 @@ const Profile = ({ navigation }) => {
           <Image 
             source={profileInfo.avatar_urls?.["96"]} 
             style={{
-              minWidth: width > 300 ? 200 : 250,
-              minHeight: width > 300 ? 200: 250,
-              height: '50%',
-              width: '50%',
+              maxWidth: width > 300 ? 150 : 250,
+              maxHeight: width > 300 ? 150: 250,
+              height: '100%',
+              width: '100%',
               borderRadius: '100%'
             }}
           />
