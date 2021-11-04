@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
 		top: 0,
 	},
 	Footer: {
-		height: "10%",
-		bottom: 0,
-		position: "fixed",
+		// height: "10%",
+		// bottom: 0,
+		// position: "fixed",
 	},
 });
 export default ThemeLoggedOut;
