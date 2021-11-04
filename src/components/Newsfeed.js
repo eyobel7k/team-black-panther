@@ -18,8 +18,8 @@ function Newsfeed({ navigation }) {
 
   const generatePosts = postsArr
     //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
-    // .slice(0)
-    // .reverse()
+    .slice(0)
+    .reverse()
     .map((post, i) => {
       if (post.excerpt?.rendered) {
         let content = post.excerpt.rendered;

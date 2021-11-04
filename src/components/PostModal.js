@@ -67,7 +67,7 @@ function PostModal(props) {
         <Pressable style={styles.imgSubmitButton}>
           <Text>Upload Image</Text>
         </Pressable>
-        <Pressable style={styles.submitButton}>
+        <Pressable style={styles.submitButton} onPress={addNewPost}>
           <Text>Submit</Text>
         </Pressable>
       </View>
