@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Button,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, ScrollView, Button, Pressable } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
 import { posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import PostModal from "./PostModal";
+import { Text } from "react-native-elements";
 
 function Newsfeed({ navigation }) {
   const [postsArr, setPostsArr] = useState([]);
@@ -23,7 +17,7 @@ function Newsfeed({ navigation }) {
   }, []);
 
   const generatePosts = postsArr
-  //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
+    //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
     // .slice(0)
     // .reverse()
     .map((post, i) => {
@@ -46,7 +40,9 @@ function Newsfeed({ navigation }) {
       </View>
       <ScrollView>
         <View style={styles.body}>
-          <Text style={styles.heading}>Newsfeed</Text>
+          <Text h3 style={styles.heading}>
+            Newsfeed
+          </Text>
           <ScrollView>{generatePosts}</ScrollView>
         </View>
       </ScrollView>
