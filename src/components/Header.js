@@ -14,29 +14,26 @@ function Header({ navigation }) {
 					<Text style={styles.headerText}>a space for super friends</Text> */}
 				<View style={styles.HeaderWarp}>
 					<View style={styles.HeaderTitle}>
-						<Text h3 style={styles.headerText}>
-							Marvelspace a space
+						<Text h3 style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>
+							MarvelSpace
 						</Text>
-						<Text h3 style={styles.headerText}>
-							for super friends
+						<Text h4 style={styles.headerText}>
+							A space for super friends
 						</Text>
 					</View>
 					<View style={styles.HeaderSearch}>
-					
-							<SearchBar
-								lightTheme={true}
-								height={50}
-								fontSize={24}
-								fontColor="#fdfdfd"
-								iconColor="#fdfdfd"
-								shadowColor="#282828"
-								cancelIconColor="#fdfdfd"
-								backgroundColor="#ba312f"
-								placeholder="Search  ..."
-								fontFamily="BurbankBigCondensed-Black"
-								
-							/>
-						
+						<SearchBar
+							lightTheme={true}
+							height={50}
+							fontSize={24}
+							fontColor="#fdfdfd"
+							iconColor="#fdfdfd"
+							shadowColor="#282828"
+							cancelIconColor="#fdfdfd"
+							backgroundColor="#ba312f"
+							placeholder="Search  ..."
+							fontFamily="BurbankBigCondensed-Black"
+						/>
 					</View>
 				</View>
 			</TouchableHighlight>
@@ -130,6 +127,7 @@ const styles = StyleSheet.create({
 	},
 	HeaderWarp: {
 		flexDirection: "row",
+		flexWrap: "wrap",
 		justifyContent: "space-around",
 		alignItems: "end",
 		width: "100%",
