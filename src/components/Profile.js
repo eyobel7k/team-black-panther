@@ -5,7 +5,6 @@ import {
 	Image,
 	Text,
 	TouchableOpacity,
-	ScrollView,
 	useWindowDimensions,
 } from "react-native";
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
@@ -22,44 +21,41 @@ const Profile = ({ navigation }) => {
 		});
 	}, []); // runs onMount only
 
-	return (
-		<ThemeLoggedIn navigation={navigation}>
-			<View
-				style={styles.profileContainer}
-				contentContainerStyle={styles.scrollContentContainer}
-			>
-				<View style={styles.profileInfoContainer}>
-					<Image
-						source={profileInfo.avatar_urls?.["96"]}
-						style={{
-							minWidth: width > 300 ? 200 : 250,
-							minHeight: width > 300 ? 200 : 250,
-							height: "50%",
-							width: "50%",
-							borderRadius: "100%",
-						}}
-					/>
-					<Text style={styles.h2}>{profileInfo.name}</Text>
-					<Text style={styles.h3}>Avengers Tower, New York City</Text>
-					<TouchableOpacity
-						style={styles.pillButton}
-						
+  return (
+    <ThemeLoggedIn navigation={navigation}>
+      <View style={styles.profileContainer}>
+        <View style={styles.profileInfoContainer}>
+          <Image 
+            source={profileInfo.avatar_urls?.["96"]} 
+            style={{
+              maxWidth: width > 300 ? 150 : 250,
+              maxHeight: width > 300 ? 150: 250,
+              height: '100%',
+              width: '100%',
+              borderRadius: '100%',
+            }}
+          />
+          <Text style={styles.h2}>{profileInfo.name}</Text>
+          <Text style={styles.h3}>Avengers Tower, New York City</Text>
+          <TouchableOpacity
+            style={styles.pillButton}
 						name="EditProfile"
 						onPress={() => navigation.navigate("EditProfile")}
-					>
-						<Text>edit profile</Text>
-					</TouchableOpacity>
-				</View>
-				<View style={styles.profileAboutContainer}>
-					<Text style={styles.h3}>About</Text>
-					<View style={styles.profileAbout}>
-						<Text>{profileInfo.description}</Text>
-					</View>
-				</View>
-			</View>
-		</ThemeLoggedIn>
-	);
-};
+          >
+            <Text>edit profile</Text>
+          </TouchableOpacity>
+          
+        </View>
+        <View style={styles.profileAboutContainer}>
+          <Text style={styles.h3}>About</Text>
+          <View style={styles.profileAbout}>
+            <Text>{profileInfo.description}</Text>
+          </View>
+        </View>
+      </View>
+    </ThemeLoggedIn>
+  )
+}
 
 const styles = StyleSheet.create({
 	profileContainer: {
@@ -73,9 +69,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		height: "50%",
 		margin: 10,
 		minWidth: 300,
+		height: 300, // for now
 	},
 	profileAboutContainer: {
 		flex: 1,
