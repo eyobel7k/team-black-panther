@@ -19,14 +19,22 @@ import {
 
 function Footer({ navigation }) {
 	const {width, height} = useWindowDimensions();
-	const breakpoint = 700;
+	const widthBreakpoint = 700;
 
 	return (
 		<TouchableHighlight
 			style={styles.bottomTouchableHighlight}
 			navigation={navigation}
 		>
-			<View style={width > breakpoint ? styles.footer : styles.footerMobile}>
+			<View style={width > widthBreakpoint ? styles.footer : styles.footerMobile}>
+				<Text
+					style={styles.footerTextSelect}
+					style={styles.footerText}
+					onPress={() => Linking.openURL("#")}
+				>
+					Brought to you by Team Black Panther.
+				</Text>
+
 				<Text
 					style={styles.footerText}
 					name="About"
@@ -36,14 +44,15 @@ function Footer({ navigation }) {
 				</Text>
 
 				<Text
+					navigation={navigation}
 					style={styles.footerText}
 					name="Rule"
 					onPress={() => navigation.navigate("Rule")}
 				>
 					Rule
 				</Text>
-
 				<Text
+					navigation={navigation}
 					style={styles.footerText}
 					name="Contact"
 					onPress={() => navigation.navigate("Contact")}
@@ -58,21 +67,13 @@ function Footer({ navigation }) {
 				>
 					Terms
 				</Text>
-				<View style={width > breakpoint ? { marginTop: 0, flexDirection: 'row' } : { marginTop: 20 }}>
-					<Text
-						style={styles.footerTextSelect}
-						style={styles.footerText}
-					>
-						Brought to you by Team Black Panther.
-					</Text>
 
-					<Text
+				<Text
 						style={styles.footerTextSelect}
 						style={styles.footerText}
 					>
 						©2021 MarvelSpace.All Rights Reserved.
-					</Text>
-				</View>
+				</Text>
 			</View>
 		</TouchableHighlight>
 	);
@@ -81,17 +82,19 @@ function Footer({ navigation }) {
 const styles = StyleSheet.create({
 	bottomTouchableHighlight: {
 		flex: 1,
-		bottom: 0,
-		backgroundColor: "#e9e9f5",
+		
 	},
 	footer: {
 		flex: 1,
 		flexDirection: "row",
-		// backgroundColor: "black",
+		backgroundColor: "black",
 		width: "100%",
-		// height: "20%",
+		height: "4em",
 		justifyContent: "space-around",
 		alignItems: "center",
+		position: "fixed",
+		bottom: 0,
+		// backgroundColor: "#d2d2d6",
 	},
 	footerMobile: {
 		flexDirection: 'column',

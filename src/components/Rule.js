@@ -1,26 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
-import ThemeLoggedIn from "./ThemeLoggedIn";
+
+import ThemeLoggedOut from "./ThemeLoggedOut";
 
 function Rule({ navigation }) {
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<ScrollView>
-				<View>
-					<Header navigation={navigation} />
-				</View>
-
-				<View style={styles.body}>
+		<ThemeLoggedOut navigation={navigation}>
+			<view>
+				<View style={styles.body} navigation={navigation}>
 					<Text style={styles.text}>Rule!</Text>
 				</View>
 
-				<View>
-					<Footer />
-				</View>
-			</ScrollView>
-		</View>
+				<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+			</view>
+		</ThemeLoggedOut>
 	);
 }
 const styles = StyleSheet.create({

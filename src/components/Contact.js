@@ -2,25 +2,17 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
-import ThemeLoggedIn from "./ThemeLoggedIn";
+import ThemeLoggedOut from "./ThemeLoggedOut";
 
 function Contact({ navigation }) {
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<ScrollView>
-				<View>
-					<Header navigation={navigation} />
-				</View>
+		<ThemeLoggedOut navigation={navigation}>
+			<View style={styles.body} navigation={navigation}>
+				<Text style={styles.text}>Contact!</Text>
+			</View>
 
-				<View style={styles.body}>
-					<Text style={styles.text}>Contact!</Text>
-				</View>
-
-				<View>
-					<Footer />
-				</View>
-			</ScrollView>
-		</View>
+			<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+		</ThemeLoggedOut>
 	);
 }
 const styles = StyleSheet.create({
