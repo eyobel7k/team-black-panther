@@ -1,27 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
+import { StyleSheet, Text, View } from "react-native";
+import { ThemeLoggedIn } from './';
 
 function Friends({ navigation }) {
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<ScrollView>
-				<View>
-					<Header />
-				</View>
-
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.container} navigation={navigation}>
 				<View style={styles.body}>
 					<Text style={styles.text}>
 						Friends!
 					</Text>
 				</View>
-
-				<View>
-					<Footer />
-				</View>
-			</ScrollView>
-		</View>
+			</View>
+		</ThemeLoggedIn>
 	);
 }
 const styles = StyleSheet.create({

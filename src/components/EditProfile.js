@@ -6,81 +6,72 @@ import {
 	Image,
 	TextInput,
 	TouchableOpacity,
-	ScrollView,
 } from "react-native";
-import { wpApiFetch, WPAPI_PATHS } from "./WPAPI";
-import Footer from "./Footer";
-import Header from "./Header";
+import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
+import { ThemeLoggedIn } from './';
 
 const EditProfile = ({ navigation }) => {
 	const [profileInfo, setProfileInfo] = useState([]);
 
 	useEffect(() => {
-		wpApiFetch({ path: WPAPI_PATHS.posts }).then((response) => {
+		wpApiFetch({ path: WPAPI_PATHS.wp.posts}).then((response) => {
 			setProfileInfo(response.at(0).content.rendered);
 		});
 	});
 	return (
-		<View style={styles.container} navigation={navigation}>
-			
-				<ScrollView>
-					<View style={styles.header}>
-				<Header />
-			</View>
-			<View style={styles.body}>
-				<View style={styles.ImageBorder}>
-					<Image
-						source={"https://i.pravatar.cc/300"}
-						style={{ height: "60%", width: "50%", borderRadius: 10 }}
-					/>
-					<Text>MarvelSpace Tom!</Text>
-					<Text>Avengers Tower, New York City</Text>
-					<View style={styles.pillButton}>
-						<Text>edit profile</Text>
-					</View>
-				</View>
-				<View style={styles.LogInBorder}>
-					<View>
-						<Text h3 style={styles.bodyText}>
-							Edit Profile
-						</Text>
-					</View>
-					<View style={styles.inputView}>
-						<Text style={styles.bodyText}>Edit Name</Text>
-						<TextInput
-							style={styles.TextInput}
-							placeholder=""
-							placeholderTextColor="#1722e8"
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.container}>
+				<View style={styles.body}>
+					<View style={styles.ImageBorder}>
+						<Image
+							source={"https://i.pravatar.cc/300"}
+							style={{ height: "60%", width: "50%", borderRadius: 10 }}
 						/>
+						<Text>MarvelSpace Tom!</Text>
+						<Text>Avengers Tower, New York City</Text>
+						<View style={styles.pillButton}>
+							<Text>edit profile</Text>
+						</View>
 					</View>
+					<View style={styles.LogInBorder}>
+						<View>
+							<Text h3 style={styles.bodyText}>
+								Edit Profile
+							</Text>
+						</View>
+						<View style={styles.inputView}>
+							<Text style={styles.bodyText}>Edit Name</Text>
+							<TextInput
+								style={styles.TextInput}
+								placeholder=""
+								placeholderTextColor="#1722e8"
+							/>
+						</View>
 
-					<View style={styles.inputView}>
-						<Text style={styles.bodyText}>Edit City</Text>
-						<TextInput
-							style={styles.TextInput}
-							placeholder=""
-							placeholderTextColor="#1722e8"
-						/>
+						<View style={styles.inputView}>
+							<Text style={styles.bodyText}>Edit City</Text>
+							<TextInput
+								style={styles.TextInput}
+								placeholder=""
+								placeholderTextColor="#1722e8"
+							/>
+						</View>
+						<View style={styles.inputView}>
+							<Text style={styles.bodyText}>Edit About</Text>
+							<TextInput
+								style={styles.TextInput}
+								placeholder=""
+								placeholderTextColor="#1722e8"
+							/>
+						</View>
+						<TouchableOpacity style={styles.loginBtn}>
+							<Text style={styles.bodyText}>Submit</Text>
+						</TouchableOpacity>
 					</View>
-					<View style={styles.inputView}>
-						<Text style={styles.bodyText}>Edit About</Text>
-						<TextInput
-							style={styles.TextInput}
-							placeholder=""
-							placeholderTextColor="#1722e8"
-						/>
-					</View>
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText}>Submit</Text>
-					</TouchableOpacity>
 				</View>
+				<View />
 			</View>
-			<View style={styles.footer}>
-				<Footer />
-			</View>
-			<View />
-			</ScrollView>
-		</View>
+		</ThemeLoggedIn>
 	);
 };
 const styles = StyleSheet.create({

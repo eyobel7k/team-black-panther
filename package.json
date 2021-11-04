@@ -1,5 +1,5 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "src/App.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -24,8 +24,7 @@
     "react-native-screens": "^3.9.0",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
-    "react-navigation": "^4.4.4",
-    "react-router-native": "^5.2.1"
+    "react-navigation": "^4.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -1,15 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import ThemeLoggedIn from "./ThemeLoggedIn";
+import { ThemeLoggedIn, Chat } from './';
 
-
-function Home({ navigation }) {
+function Messages({ navigation }) {
 	return (
-		<ThemeLoggedIn navigation={navigation} style={styles.container}>
-			<View style={styles.body}>
-				<Text style={styles.text}>
-					Open up App.js to start working on your app!
-				</Text>
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.container}>
+					<View style={styles.body}>
+						<Text style={styles.text}>
+							<Chat />
+						</Text>
+					</View>
 			</View>
 		</ThemeLoggedIn>
 	);
@@ -18,12 +19,13 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
-		
 	},
 	body: {
 		backgroundColor: "#fff",
 		height: "80%",
 		width: "100%",
+		textAlign: "center",
+		justifyContent: "center",
 	},
 	text: {
 		margin: 5,
@@ -33,4 +35,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Home;
+export default Messages;

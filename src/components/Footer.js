@@ -70,25 +70,17 @@ function Footer({ navigation }) {
 const styles = StyleSheet.create({
 	bottomTouchableHighlight: {
 		flex: 1,
-		flexDirection: "row",
-		position: "fixed",
 		bottom: 0,
 		backgroundColor: "#e9e9f5",
-		alignItems: "center",
-		justifyContent: "center",
-		height: "4em",
-		width: "100%",
 	},
 	footer: {
+		flex: 2,
 		flexDirection: "row",
-		justifyContent: "flex-end",
-
 		// backgroundColor: "black",
 		width: "100%",
-		bottom: 0,
-		paddingBottom: "0",
+		height: "20%",
 		justifyContent: "space-around",
-		alignItems: "start",
+		alignItems: "center",
 	},
 
 	footerText: {
