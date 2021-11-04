@@ -1,7 +1,6 @@
 import React from "react";
 import {
 	StyleSheet,
-
 	Text,
 	View,
 	TouchableHighlight,
@@ -14,7 +13,7 @@ function Footer({ navigation }) {
 			style={styles.bottomTouchableHighlight}
 			navigation={navigation}
 		>
-			<View style={styles.footer}>
+			<View style={styles.footer} navigation={navigation}>
 				<Text
 					style={styles.footerTextSelect}
 					style={styles.footerText}
@@ -32,14 +31,15 @@ function Footer({ navigation }) {
 				</Text>
 
 				<Text
+					navigation={navigation}
 					style={styles.footerText}
 					name="Rule"
 					onPress={() => navigation.navigate("Rule")}
 				>
 					Rule
 				</Text>
-
 				<Text
+					navigation={navigation}
 					style={styles.footerText}
 					name="Contact"
 					onPress={() => navigation.navigate("Contact")}
@@ -70,17 +70,19 @@ function Footer({ navigation }) {
 const styles = StyleSheet.create({
 	bottomTouchableHighlight: {
 		flex: 1,
-		bottom: 0,
-		backgroundColor: "#e9e9f5",
+		
 	},
 	footer: {
 		flex: 2,
 		flexDirection: "row",
-		// backgroundColor: "black",
+		backgroundColor: "black",
 		width: "100%",
-		height: "20%",
+		height: "4em",
 		justifyContent: "space-around",
 		alignItems: "center",
+		position: "fixed",
+		bottom: 0,
+		// backgroundColor: "#d2d2d6",
 	},
 
 	footerText: {
