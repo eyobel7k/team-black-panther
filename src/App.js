@@ -20,6 +20,7 @@ import { Home,
 	Contact,
 	Chat,
   Members,
+  Authentication,
 } from "./components";
 
 const Stack = createNativeStackNavigator();
@@ -35,11 +36,12 @@ export default function App() {
 					}}
 				> */}
         <Stack.Navigator
-          initialRouteName="LogInPage"
+          initialRouteName="Authentication"
           screenOptions={{
             headerShown: false,
           }}
         >
+          <Stack.Screen name="Authentication" component={Authentication} />
           <Stack.Screen name="LogInPage" component={LogInPage} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Newsfeed" component={Newsfeed} />
