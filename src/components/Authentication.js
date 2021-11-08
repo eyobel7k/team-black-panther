@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function Authentication () {
+export default function Authentication ({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedin] = useState(false);
@@ -46,6 +46,7 @@ export default function Authentication () {
     setLoading(false);
     setUsername('');
     setPassword('');
+    navigation.navigate('Newsfeed');
   }
 
   const formError = (data) => {
