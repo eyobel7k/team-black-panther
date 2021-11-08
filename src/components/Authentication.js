@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 export default function Authentication () {
   const [username, setUsername] = useState('');
@@ -7,6 +7,7 @@ export default function Authentication () {
   const [loggedIn, setLoggedin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [token, setToken] = useState('');
 
   useEffect(
     () => {
@@ -24,8 +25,11 @@ export default function Authentication () {
         
         fetch(`https://jualuc1.dreamhosters.com/wp-json/jwt-auth/v1/token`, options)
         .then(response => response.json())
-        .then(setLoading(false))
-        .then(data => data.message? setError(data.message):'');
+        .then(data => {
+          data.token 
+            ? formSuccess(data)
+            : formError(data)
+        })
       }
     },
     [loading]
@@ -36,28 +40,57 @@ export default function Authentication () {
     setLoading(true);
 	};
 
+  const formSuccess = (data) => {
+    setToken(data.token);
+    setLoggedin(true);
+    setLoading(false);
+    setUsername('');
+    setPassword('');
+  }
+
+  const formError = (data) => {
+    setLoading(false);
+    setPassword('');
+    data?.message 
+      ? setError(
+        data.message
+          .replaceAll("<strong>", "")
+          .replaceAll("</strong>", "")
+          .replaceAll("<a>", "")
+          .replaceAll("</a>", "")
+          .replaceAll("<a href=", "")
+          .replaceAll(">", "")
+      )
+      :'';
+    console.log(data);
+  }
+
 	return (
-    <View>
+    <View style={styles.container}>
       {loggedIn 
-        ? <View>loggedin</View>
+        ? <View>
+          <Text>Logged In</Text>
+        </View>
         : (
           <View>
               <Text style={{ fontWeight: 'bold' }}>Login</Text>
               <Text>Username:</Text>
               <TextInput
+                style={styles.input}
                 value={username}
                 onChangeText={setUsername}
                 onSubmitEditing={onFormSubmit}
               />
               <Text>Password:</Text>
               <TextInput
+                style={styles.input}
                 value={password}
                 onChangeText={setPassword}
                 onSubmitEditing={onFormSubmit}
                 secureTextEntry={true}
               />
               <Button
-                onPress={() => onFormSubmit()}
+                onPress={onFormSubmit}
                 title="Login"
               />
               <Text>{loading && 'Loading'}</Text>
@@ -68,3 +101,16 @@ export default function Authentication () {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    maxWidth: 300
+  },
+  input: {
+    height: 40,
+    marginBottom: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
