@@ -50,17 +50,13 @@ export default function Authentication ({ navigation }) {
   }
 
   const formError = (data) => {
+    const regex = /<[^>]*>/g;
     setLoading(false);
     setPassword('');
     data?.message 
       ? setError(
         data.message
-          .replaceAll("<strong>", "")
-          .replaceAll("</strong>", "")
-          .replaceAll("<a>", "")
-          .replaceAll("</a>", "")
-          .replaceAll("<a href=", "")
-          .replaceAll(">", "")
+          .replaceAll(regex, "")
       )
       :'';
     console.log(data);
