@@ -1,7 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
+import { StyleSheet, Text, View, } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 
 function Contact({ navigation }) {

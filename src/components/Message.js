@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ThemeLoggedIn, Chat } from './';
+import ThemeLoggedIn from "./ThemeLoggedIn";
+import Chat from "./Chat";
 
 function Messages({ navigation }) {
 	return (

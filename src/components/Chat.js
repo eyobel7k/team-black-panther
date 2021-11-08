@@ -8,7 +8,6 @@ import {
   Keyboard,
   ScrollView,
 } from "react-native";
-// import Task from "./components/Task";
 
 export default function Chat() {
   const [task, setTask] = useState("");

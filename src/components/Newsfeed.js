@@ -4,6 +4,7 @@ import { posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import { Text } from "react-native-elements";
+
 function Newsfeed({ navigation }) {
   const [postsArr, setPostsArr] = useState([]);
   useEffect(() => {

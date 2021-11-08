@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Header, Footer, ThemeLoggedIn } from './';
+import ThemeLoggedIn from "./ThemeLoggedIn";
 
 function Images({ navigation }) {
 	return (
