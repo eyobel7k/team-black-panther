@@ -86,9 +86,9 @@ const styles = StyleSheet.create({
 		color: "#1722e8",
 	},
 	LogInBorder: {
-		border: "solid",
+		borderStyle: "solid",
 		borderRadius: 50,
-		backgroundColor: "white",
+		backgroundColor: "#fff",
 		width: "60%",
 		height: "90%",
 		color: "#e9e9f5",
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 40,
-		backgroundColor: "lightskyblue",
+		backgroundColor: "#87cefa",
 	},
 });
 export default SignUpPage;

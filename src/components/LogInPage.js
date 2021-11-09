@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { ThemeLoggedOut } from "./";
+import  ThemeLoggedOut  from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
 function LogInPage({ navigation }) {
@@ -19,7 +19,7 @@ function LogInPage({ navigation }) {
           </Text>
           <View style={styles.imageContainer}>
             <Image
-              source={"https://i.pravatar.cc/300"}
+              source={{ uri: "https://i.pravatar.cc/300" }}
               style={{ height: "10%", width: "100%" }}
             />
           </View>
@@ -86,104 +86,104 @@ function LogInPage({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  body: {
-    backgroundColor: "#fff",
-    height: "70%%",
-    width: "100%",
-    textAlign: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    margin: 20,
-    padding: 40,
-  },
-  bodyText: {
-    color: "#1722e8",
-  },
-  LogInBorder: {
-    border: "solid",
-    borderRadius: 50,
-    backgroundColor: "white",
-    width: "50%",
-    height: "100%",
-    color: "#e9e9f5",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    marginHorizontal: 10,
-    paddingTop: 20,
-    paddingBottom: 10,
-  },
-  ImageBorder: {
-    // border: "solid",
-    borderRadius: 50,
-    backgroundColor: "white",
-    width: "40%",
-    height: "80%",
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	body: {
+		backgroundColor: "#fff",
+		height: "70%",
+		width: "100%",
+		textAlign: "center",
+		justifyContent: "center",
+		flexDirection: "row",
+		margin: 20,
+		padding: 40,
+	},
+	bodyText: {
+		color: "#1722e8",
+	},
+	LogInBorder: {
+		borderStyle: "solid",
+		borderRadius: 50,
+		backgroundColor: "#fff",
+		width: "50%",
+		height: "100%",
+		color: "#e9e9f5",
+		alignItems: "center",
+		justifyContent: "space-evenly",
+		marginHorizontal: 10,
+		paddingTop: 20,
+		paddingBottom: 10,
+	},
+	ImageBorder: {
+		// border: "solid",
+		borderRadius: 50,
+		backgroundColor: "#fff",
+		width: "40%",
+		height: "80%",
 
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 20,
-  },
-  header: {
-    width: "100%",
-    borderRadius: 10,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-  },
-  footer: {
-    width: "100%",
-    borderRadius: 10,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-  },
-  inputView: {
-    width: "60%",
-    borderRadius: 10,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#e9e9f5",
-  },
+		alignItems: "center",
+		justifyContent: "center",
+		marginHorizontal: 20,
+	},
+	header: {
+		width: "100%",
+		borderRadius: 10,
+		height: 50,
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 40,
+	},
+	footer: {
+		width: "100%",
+		borderRadius: 10,
+		height: 50,
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 40,
+	},
+	inputView: {
+		width: "60%",
+		borderRadius: 10,
+		height: 50,
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 40,
+		backgroundColor: "#e9e9f5",
+	},
 
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 20,
-    alignItems: "center",
-  },
+	TextInput: {
+		height: 50,
+		flex: 1,
+		padding: 10,
+		marginLeft: 20,
+		alignItems: "center",
+	},
 
-  forgot_button: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-  },
-  loginBtn: {
-    width: "20%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10,
-    backgroundColor: "lightskyblue",
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    height: "100%",
-    margin: 10,
-  },
+	forgot_button: {
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 10,
+	},
+	loginBtn: {
+		width: "20%",
+		borderRadius: 25,
+		height: 50,
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 40,
+		marginBottom: 10,
+		backgroundColor: "#87cefa",
+	},
+	imageContainer: {
+		flex: 1,
+		justifyContent: "space-evenly",
+		alignItems: "center",
+		height: "100%",
+		margin: 10,
+	},
 });
 export default LogInPage;

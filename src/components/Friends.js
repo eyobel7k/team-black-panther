@@ -1,15 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ThemeLoggedIn } from './';
+import ThemeLoggedIn from "./ThemeLoggedIn";
 
 function Friends({ navigation }) {
 	return (
 		<ThemeLoggedIn navigation={navigation}>
 			<View style={styles.container} navigation={navigation}>
 				<View style={styles.body}>
-					<Text style={styles.text}>
-						Friends!
-					</Text>
+					<Text style={styles.text}>Friends!</Text>
 				</View>
 			</View>
 		</ThemeLoggedIn>
@@ -29,11 +27,10 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 5,
-		fontSize: "1.5em",
-		fontWeight: 100,
-		fontFamily: "Serif",
+		fontSize: 10,
+		fontWeight: "100",
+		// fontFamily: "Serif",
 	},
 });
 
 export default Friends;
-

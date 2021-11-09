@@ -8,18 +8,19 @@ import {
 	Button,
 	TouchableOpacity,
 } from "react-native";
-import { ThemeLoggedIn, HeaderLogPage } from './';
+import ThemeLoggedOut from "./ThemeLoggedOut";
+
 
 function RestPasswordPage({ navigation }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	return (
-		<ThemeLoggedIn navigation={navigation}>
+		<ThemeLoggedOut navigation={navigation}>
 			<View style={styles.container}>
-				<View style={styles.header}>
+				{/* <View style={styles.header}>
 					<HeaderLogPage />
-				</View>
+				</View> */}
 				<View style={styles.body}>
 					<View style={styles.LogInBorder}>
 						<Text h4 style={styles.bodyText}>
@@ -63,7 +64,7 @@ function RestPasswordPage({ navigation }) {
 				</View>
 				<View />
 			</View>
-		</ThemeLoggedIn>
+		</ThemeLoggedOut>
 	);
 }
 
@@ -88,9 +89,9 @@ const styles = StyleSheet.create({
 		color: "#1722e8",
 	},
 	LogInBorder: {
-		border: "solid",
+		borderStyle: "solid",
 		borderRadius: 50,
-		backgroundColor: "white",
+		backgroundColor: "#fff",
 		width: "60%",
 		height: "90%",
 		color: "#e9e9f5",
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 40,
-		backgroundColor: "lightskyblue",
+		backgroundColor: "#87cefa",
 	},
 });
 export default RestPasswordPage;

@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 5,
-		fontSize: "1.5em",
-		fontWeight: 100,
-		fontFamily: "Serif",
+		fontSize: 24,
+		fontWeight: "100",
+		// fontFamily: "Serif",
 	},
 });
 

@@ -1,16 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ThemeLoggedIn, Chat } from './';
+import ThemeLoggedIn from "./ThemeLoggedIn";
+import Chat from "./Chat";
 
 function Messages({ navigation }) {
 	return (
 		<ThemeLoggedIn navigation={navigation}>
-			<View style={styles.container}>
-					<View style={styles.body}>
-						<Text style={styles.text}>
-							<Chat />
-						</Text>
-					</View>
+			<View style={styles.container} navigation={navigation}>
+				<View style={styles.body} navigation={navigation}>
+					<Text style={styles.text}>
+						<Chat />
+					</Text>
+				</View>
 			</View>
 		</ThemeLoggedIn>
 	);
@@ -22,16 +23,16 @@ const styles = StyleSheet.create({
 	},
 	body: {
 		backgroundColor: "#fff",
-		height: "80%",
+		height: "60%",
 		width: "100%",
 		textAlign: "center",
 		justifyContent: "center",
 	},
 	text: {
 		margin: 5,
-		fontSize: "1.5em",
-		fontWeight: 100,
-		fontFamily: "Serif",
+		fontSize: 24,
+		fontWeight: "100",
+		// fontFamily: "Serif",
 	},
 });
 
