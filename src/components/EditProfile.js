@@ -24,8 +24,8 @@ const EditProfile = ({ navigation }) => {
 				<View style={styles.body}>
 					<View style={styles.ImageBorder}>
 						<Image
-							source={"https://i.pravatar.cc/300"}
-							style={{ height: "60%", width: "50%", borderRadius: 10 }}
+							source={{uri:"https://i.pravatar.cc/300"}}
+							style={{ height: "60%", width: "50%"}}
 						/>
 						<Text>MarvelSpace Tom!</Text>
 						<Text>Avengers Tower, New York City</Text>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 		color: "#1722e8",
 	},
 	LogInBorder: {
-		// border: "solid",
+		
 		borderRadius: 50,
 		backgroundColor: "white",
 		width: "50%",
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 	},
 	ImageBorder: {
-		border: "solid",
+		borderStyle: "solid",
 		borderRadius: 50,
 		backgroundColor: "white",
 		width: "40%",

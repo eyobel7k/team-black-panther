@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet,  View, ScrollView, Button } from "react-native";
+import { StyleSheet, View, ScrollView, Button } from "react-native";
 import { posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
@@ -18,15 +18,15 @@ function Newsfeed({ navigation }) {
   });
 
   return (
-		<ThemeLoggedIn navigation={navigation}>
-			<ScrollView>
-				<View style={styles.body}>
-					<Text h3 >Newsfeed</Text>
-					<ScrollView>{generatePosts}</ScrollView>
-				</View>
-			</ScrollView>
-		</ThemeLoggedIn>
-	);
+    <ThemeLoggedIn navigation={navigation}>
+      <ScrollView>
+        <View style={styles.body}>
+          <Text h3>Newsfeed</Text>
+          <ScrollView>{generatePosts}</ScrollView>
+        </View>
+      </ScrollView>
+    </ThemeLoggedIn>
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -41,20 +41,22 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
-    marginTop: "1rem",
+    marginTop: 15,
   },
   text: {
     margin: 5,
-    fontSize: "1.5em",
-    fontWeight: 100,
+    fontSize: 14,
+    fontWeight: "bold",
     fontFamily: "Serif",
   },
   post: {
-    border: "cadetBlue solid 2px",
-    backgroundColor: "aliceBlue",
-    margin: "1rem",
-    padding: "1rem",
-    borderRadius: "10px",
+    borderColor: "blue",
+    borderStyle: "solid",
+    borderWidth: 2,
+    backgroundColor: "blue",
+    margin: "15",
+    padding: "15",
+    borderRadius: 10,
     width: "40vw",
   },
 });

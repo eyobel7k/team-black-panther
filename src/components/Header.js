@@ -77,6 +77,14 @@ function Header({ navigation }) {
 					>
 						Messages
 					</Text>
+
+					<Text
+						style={styles.headerText}
+						name="Find"
+						onPress={() => navigation.navigate("Find")}
+					>
+						Messages
+					</Text>
 				</View>
 			</TouchableHighlight>
 		</View>
@@ -89,7 +97,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		justifyContent: "space-between",
 		backgroundColor: "blue",
-		height: "4em",
+		height: 15,
 		width: "100%",
 	},
 	HeaderTitle: {
@@ -126,7 +134,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "wrap",
 		justifyContent: "space-around",
-		alignItems: "end",
+		alignItems: "flex-end",
 		width: "100%",
 		// paddingBottom:20,
 	},

@@ -19,7 +19,7 @@ function LogInPage({ navigation }) {
           </Text>
           <View style={styles.imageContainer}>
             <Image
-              source={"https://i.pravatar.cc/300"}
+          source={{uri:"https://i.pravatar.cc/300"}}
               style={{ height: "10%", width: "100%" }}
             />
           </View>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: "#fff",
-    height: "70%%",
+    height: '70%',
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     color: "#1722e8",
   },
   LogInBorder: {
-    border: "solid",
+    borderStyle: "solid",
     borderRadius: 50,
     backgroundColor: "white",
     width: "50%",
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   ImageBorder: {
-    // border: "solid",
+    // borderStyle:"solid",
     borderRadius: 50,
     backgroundColor: "white",
     width: "40%",

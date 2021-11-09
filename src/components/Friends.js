@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		height: "80%",
 		width: "100%",
-		textAlign: "center",
+		textAlign: 'center',
 		justifyContent: "center",
 	},
 	text: {
 		margin: 5,
-		fontSize: "1.5em",
-		fontWeight: 100,
+		fontSize: 14,
+		fontWeight: 'bold',
 		fontFamily: "Serif",
 	},
 });

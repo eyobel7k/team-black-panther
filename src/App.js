@@ -18,7 +18,8 @@ import { Home,
 	Rule,
 	About,
 	Contact,
-	Chat,
+	Chat, 
+  Find,
 } from "./components";
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ export default function App() {
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Images" component={Images} />
           <Stack.Screen name="Message" component={Message} />
+          <Stack.Screen name="Find" component={Find} />
           <Stack.Screen
             name="ResetPasswordPage"
             component={ResetPasswordPage}

@@ -19,6 +19,7 @@ export default function Chat() {
     setTaskItems([...taskItems, task]);
     setTask();
 
+   
     const cleanedInput = task.trim().toLowerCase();
 
     if (cleanedInput.length > 0) {
@@ -26,6 +27,8 @@ export default function Chat() {
       setTask("");
     }else {console.log('Entry cannot be blank');
     setTask("");
+    
+    
   }
 
     
@@ -72,9 +75,9 @@ export default function Chat() {
               </View>
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ height: "40vh", width: "60vw" }}>
+          <ScrollView style={{ height: "60%", width: "90%" }}>
             <View style={styles.items}>
-              {/* This is where the tasks will go! */}
+              {/* This is where the message will go! */}
               {taskItems.map((item, index) => {
                 return (
                   <TouchableOpacity
@@ -91,11 +94,11 @@ export default function Chat() {
                           {item}
                           {"   "}
                         </Text>
-                        <Text style={styles.date}>
+                        {/* <Text style={styles.date}>
                           posted on {"     "}
                           {new Date().toLocaleTimeString()} on{" "}
                           {new Date().toLocaleDateString()}{" "}
-                        </Text>
+                        </Text> */}
                       </View>
                       <View style={styles.circular}></View>
                     </View>
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    marginTop: 15,
+    marginTop: 10,
     height: "100%",
   },
   tasksWrapper: {
@@ -122,9 +125,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
-    alignSelf: "center",
+    alignSelf:'center',
+    justifyContent:'center',
+   
+   
   },
   items: {
     marginTop: 50,
@@ -132,46 +138,50 @@ const styles = StyleSheet.create({
   writeTaskWrapper: {
     position: "absolute",
     bottom: 80,
-    width: "100%",
+    width: "20%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: 'space-evenly',
     alignItems: "center",
   },
   writeTask: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-around",
+    justifyContent:'space-evenly'
   },
   input: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 40,
     backgroundColor: "#FFF",
     borderRadius: 60,
     borderColor: "#C0C0C0",
     borderWidth: 1,
-    width: "90%",
-    marginTop: "15px",
+    width: "100%",
+    marginTop: 20,
+    marginLeft:20,
+     alignItems:'center',
+   
   },
 
   addWrapper: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     backgroundColor: "#FFF",
-    borderRadius: 60,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#C0C0C0",
     borderWidth: 1,
+    marginRight:15,
   },
 
   item: {
     // backgroundColor: '#FFF',
-    padding: 15,
+    padding: 5,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 2,
   },
   itemLeft: {
     flexDirection: "row",
@@ -182,9 +192,9 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   itemText: {
-    maxWidth: "80%",
-    fontSize: "25px",
-    marginLeft: "90px",
+    maxWidth: "100%",
+    fontSize: 15,
+    marginLeft: 90,
   },
   circular: {
     width: 12,
@@ -193,9 +203,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
   },
-  date: {
-    fontSize: "15px",
-    fontStyle: "italic",
-    color: "purple",
-  },
+  // date: {
+  //   fontSize: 15,
+  //   fontStyle: "italic",
+  //   color: "purple",
+  // },
+  addText:{
+    fontSize:15,
+  }
 });

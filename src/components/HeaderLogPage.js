@@ -18,11 +18,11 @@ function HeaderLogPage() {
 const styles = StyleSheet.create({
 	Header: {
 		flex: 1,
-		Position: "absolute",
+		position: "absolute",
 		flexDirection: "column",
 		top: 0,
 		backgroundColor: "blue",
-		height: "4em",
+		height: 15,
 		width: "100%",
 	},
 	HeaderTitle: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "blue",
 		width: "100%",
 		justifyContent: "flex-start",
-		alignItems: "start",
+		alignItems: "flex-start",
 		paddingHorizontal: 40,
 		marginVertical: 30,
 	},

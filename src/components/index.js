@@ -19,6 +19,8 @@ import Rule from './Rule';
 import About from './About';
 import Contact from './Contact';
 import Chat from './Chat';
+import Find from './Find'
+
 
 export {
   EditProfile,
@@ -42,4 +44,6 @@ export {
 	About,
 	Contact,
 	Chat,
+  Find
+  
 };
