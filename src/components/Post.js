@@ -17,7 +17,6 @@ function Post(props) {
   const [commentTimes, setCommentTimes] = useState([]);
   const [commentYears, setCommentYears] = useState([]);
 
-  console.log(props.associatedContent);
   const postAuthor = props.associatedContent.author;
   const postTime = props.associatedContent.date.substring(11);
   const postDate =
@@ -58,24 +57,34 @@ function Post(props) {
               style={styles.likeButton}
               title="👍"
               color="aliceblue"
-              onPress={() => setLikes(likes + 1)}
+              onPress={() => {
+                setLikes(likes + 1);
+                Object.likes = likes;
+              }}
             >
               <Text>👍</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.button}>{likes}</View>
+          <View style={styles.button}>
+            <Text>{likes}</Text>
+          </View>
 
           <View style={styles.button}>
             <TouchableOpacity
               style={styles.likeButton}
               title="👎"
               color="aliceblue"
-              onPress={() => setDislikes(dislikes + 1)}
+              onPress={() => {
+                setDislikes(dislikes + 1);
+                Object.dislikes = dislikes;
+              }}
             >
               <Text>👎</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.button}>{dislikes}</View>
+          <View style={styles.button}>
+            <Text>{dislikes}</Text>
+          </View>
         </View>
       </View>
       <ScrollView style={styles.commentsWindow}>
@@ -97,71 +106,76 @@ export default Post;
 
 const styles = StyleSheet.create({
   post: {
-    border: "cadetBlue solid 2px",
-    backgroundColor: "aliceBlue",
-    margin: "1rem",
-    marginBottom: "0",
-    padding: "1rem",
-    borderRadius: "10px",
-    width: "40vw",
-    height: "40vh",
-    float: "left",
+    borderStyle: "solid",
+    borderColor: "cadetblue",
+    borderWidth: 2,
+    backgroundColor: "aliceblue",
+    margin: 1,
+    marginBottom: 0,
+    padding: 1,
+    borderRadius: 10,
+    width: 40,
+    height: 40,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   button: {
-    float: "left",
-    display: "inline",
-    fontSize: ".9rem",
+    fontSize: 9,
     flex: 1,
     alignItems: "flex-end",
     justifyContent: "flex-end",
     textAlign: "right",
-    width: "1rem",
+    width: 1,
   },
   textInput: {
     textAlign: "center",
-    margin: ".5rem",
-    border: "cadetblue solid 2px",
-    padding: ".3rem",
+    margin: 8,
+    borderStyle: "solid",
+    borderColor: "cadetblue",
+    borderWidth: 2,
+    padding: 4,
     backgroundColor: "aliceblue",
-    borderRadius: "20px",
+    borderRadius: 20,
   },
   comment: {
-    display: "block",
-    border: "solid 1px cadetblue",
-    margin: ".2rem",
-    padding: ".1rem",
-    borderRadius: "10px",
+    display: "flex",
+    borderStyle: "solid",
+    borderColor: "cadetblue",
+    borderWidth: 1,
+    margin: 2,
+    padding: 1,
+    borderRadius: 10,
   },
   commentText: {
-    display: "block",
+    display: "flex",
   },
   commentSubscript: {
-    fontSize: ".7rem",
+    fontSize: 7,
     textAlign: "right",
   },
   postSubscript: {
-    fontSize: ".8rem",
+    fontSize: 8,
     textAlign: "right",
-    display: "inline-block",
+    display: "flex",
     justifyContent: "space-between",
   },
   likeButton: {
-    fontSize: ".4rem",
+    fontSize: 4,
   },
   commentsWindow: {
-    border: "dotted 1px cadetblue",
-    borderRadius: "12px",
-    height: "15vh",
-    marginTop: ".5rem",
+    borderStyle: "dotted",
+    borderColor: "cadetblue",
+    borderWidth: 1,
+    borderRadius: 12,
+    height: "15%",
+    marginTop: 8,
   },
   belowPost: {
     flex: 1,
-    display: "inline-block",
+    display: "flex",
     justifyContent: "space-between",
-    paddingTop: ".1rem",
-    paddingLeft: "2rem",
+    paddingTop: 2,
+    paddingLeft: 32,
   },
 });

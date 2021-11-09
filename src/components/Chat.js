@@ -24,11 +24,10 @@ export default function Chat() {
     if (cleanedInput.length > 0) {
       setTaskItems([...taskItems, task.trim()]);
       setTask("");
-    }else {console.log('Entry cannot be blank');
-    setTask("");
-  }
-
-    
+    } else {
+      console.log("Entry cannot be blank");
+      setTask("");
+    }
   };
   const completeTask = (index) => {
     let itemsCopy = [...taskItems];
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
     borderColor: "#C0C0C0",
     borderWidth: 1,
     width: "90%",
-    marginTop: "15px",
+    marginTop: 15,
   },
 
   addWrapper: {
@@ -183,8 +182,8 @@ const styles = StyleSheet.create({
   },
   itemText: {
     maxWidth: "80%",
-    fontSize: "25px",
-    marginLeft: "90px",
+    fontSize: 25,
+    marginLeft: 90,
   },
   circular: {
     width: 12,
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   date: {
-    fontSize: "15px",
+    fontSize: 15,
     fontStyle: "italic",
     color: "purple",
   },

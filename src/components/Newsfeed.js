@@ -32,6 +32,7 @@ function Newsfeed({ navigation }) {
         );
       }
     });
+  console.log(postsArr);
 
   return (
     <View style={styles.container} navigation={navigation}>
@@ -43,7 +44,9 @@ function Newsfeed({ navigation }) {
           <Text h3 style={styles.heading}>
             Newsfeed
           </Text>
-          <ScrollView>{generatePosts}</ScrollView>
+          <ScrollView>
+            <Text>{generatePosts}</Text>
+          </ScrollView>
         </View>
       </ScrollView>
       <Pressable
@@ -74,46 +77,48 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
-    height: "80%",
-    width: "100%",
+    height: 80,
+    width: 100,
     textAlign: "center",
     justifyContent: "center",
-    marginTop: "1rem",
+    marginTop: 16,
   },
   heading: {
-    fontSize: "2rem",
+    fontSize: 20,
     color: "#1722e8",
-    letterSpacing: ".15rem",
+    letterSpacing: 0.15,
   },
   text: {
     margin: 5,
-    fontSize: "1.5em",
-    fontWeight: 100,
+    fontSize: 15,
+    fontWeight: "100",
     fontFamily: "Serif",
   },
   post: {
-    border: "cadetBlue solid 2px",
-    backgroundColor: "aliceBlue",
-    margin: "1rem",
-    padding: "1rem",
-    borderRadius: "10px",
-    width: "40vw",
+    borderStyle: "solid",
+    borderColor: "cadetblue",
+    borderWidth: 2,
+    backgroundColor: "aliceblue",
+    margin: 16,
+    padding: 16,
+    borderRadius: 10,
+    width: 40,
   },
   newPostButton: {
-    position: "fixed",
-    left: "3.2rem",
-    bottom: "3.2rem",
+    position: "absolute",
+    left: 50,
+    bottom: 50,
     backgroundColor: "blue",
-    paddingTop: "2.05rem",
-    paddingLeft: ".4rem",
-    paddingBottom: "2.05rem",
-    paddingRight: ".4rem",
-    borderRadius: "50%",
+    paddingTop: 16,
+    paddingLeft: 7,
+    paddingBottom: 16,
+    paddingRight: 7,
+    borderRadius: 50,
   },
   postButtonText: {
     color: "skyblue",
     fontWeight: "bold",
-    fontSize: "1rem",
+    fontSize: 10,
   },
 });
 

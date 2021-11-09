@@ -32,7 +32,7 @@ const Profile = ({ navigation }) => {
               maxHeight: width > 300 ? 150: 250,
               height: '100%',
               width: '100%',
-              borderRadius: '100%',
+              borderRadius: 100,
             }}
           />
           <Text style={styles.h2}>{profileInfo.name}</Text>
@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
 		paddingVertical: 4,
 	},
 	h2: {
-		fontSize: "xx-large",
+		fontSize: 32,
 		fontWeight: "bold",
 		color: "blue",
 		paddingTop: 20,
 		paddingHorizontal: "10%",
 	},
 	h3: {
-		fontSize: "large",
+		fontSize: 24,
 		fontWeight: "bold",
 		color: "gray",
 		padding: 10,
