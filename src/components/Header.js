@@ -85,10 +85,11 @@ function Header({ navigation }) {
 
 					<Text
 						style={styles.headerText}
+						navigation={navigation}
 						name="Find"
 						onPress={() => navigation.navigate("Find")}
 					>
-						Messages
+						Search
 					</Text>
 				</View>
 			</TouchableHighlight>

@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import Home from "./components/Home";
 import Newsfeed from "./components/Newsfeed";
 import SignUpPage from "./components/SignUpPage";
@@ -19,6 +18,7 @@ import Terms from "./components/Terms";
 import Rule from "./components/Rule";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Find from "./components/Find"
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +45,7 @@ export default function App() {
 					<Stack.Screen name="Profile" component={Profile} />
 					<Stack.Screen name="Images" component={Images} />
 					<Stack.Screen name="Message" component={Message} />
+					<Stack.Screen name="Find" component={Find} />
 					<Stack.Screen
 						name="ResetPasswordPage"
 						component={ResetPasswordPage}

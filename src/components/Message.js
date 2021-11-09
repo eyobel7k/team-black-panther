@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { ThemeLoggedIn, Chat } from "./";
+import ThemeLoggedIn  from "./ThemeLoggedIn";
+import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function Messages({ navigation }) {
