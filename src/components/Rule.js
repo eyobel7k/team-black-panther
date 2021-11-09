@@ -6,13 +6,13 @@ import ThemeLoggedOut from "./ThemeLoggedOut";
 function Rule({ navigation }) {
 	return (
 		<ThemeLoggedOut navigation={navigation}>
-			<view>
+			<View>
 				<View style={styles.body} navigation={navigation}>
 					<Text style={styles.text}>Rule!</Text>
 				</View>
 
 				<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
-			</view>
+			</View>
 		</ThemeLoggedOut>
 	);
 }
@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 5,
-		fontSize: 15,
+		fontSize: 24,
 		fontWeight: "100",
-		fontFamily: "Serif",
+		// fontFamily: "Serif",
 	},
 });
 

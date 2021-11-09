@@ -1,68 +1,64 @@
 import React from "react";
 import {
-	StyleSheet,
-Button,
-	View,
-	TextInput,
-	TouchableOpacity,
+  StyleSheet,
+  Button,
+  View,
+  TextInput,
+  TouchableOpacity,
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
-function SignUpPage ({ navigation }) {
-	return (
-		<ThemeLoggedOut navigation={navigation}>
-			<View style={styles.body}>
-				
-				<View style={styles.LogInBorder}>
-					<Text h3 style={styles.bodyText}>
-						Sign Up
-					</Text>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Email."
-							placeholderTextColor="#1722e8"
-							onChangeText={(email) => setEmail(email)}
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Full Name"
-							placeholderTextColor="#1722e8"
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="UserName"
-							placeholderTextColor="#1722e8"
-						/>
-					</View>
+function SignUpPage({ navigation }) {
+  return (
+    <ThemeLoggedOut navigation={navigation}>
+      <View style={styles.body}>
+        <View style={styles.LogInBorder}>
+          <Text h3 style={styles.bodyText}>
+            Sign Up
+          </Text>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Email."
+              placeholderTextColor="#1722e8"
+              onChangeText={(email) => setEmail(email)}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Full Name"
+              placeholderTextColor="#1722e8"
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="UserName"
+              placeholderTextColor="#1722e8"
+            />
+          </View>
 
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Password."
-							placeholderTextColor="#1722e8"
-							secureTextEntry={true}
-							onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Password."
+              placeholderTextColor="#1722e8"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+            />
+          </View>
 
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText}>Submit</Text>
-					</TouchableOpacity>
-				</View>
-				
-					<Text  onPress={() => navigation.goBack()}>
-						Back to Logging Page
-					</Text>
-				
-			</View>
-		</ThemeLoggedOut>
-	);
+          <TouchableOpacity style={styles.loginBtn}>
+            <Text style={styles.bodyText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+      </View>
+    </ThemeLoggedOut>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -88,7 +84,7 @@ const styles = StyleSheet.create({
 	LogInBorder: {
 		borderStyle: "solid",
 		borderRadius: 50,
-		backgroundColor: "white",
+		backgroundColor: "#fff",
 		width: "60%",
 		height: "90%",
 		color: "#e9e9f5",
@@ -98,31 +94,31 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 	},
 
-	header: {
-		width: "100%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-	},
-	footer: {
-		width: "100%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-	},
-	inputView: {
-		width: "60%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-		backgroundColor: "#e9e9f5",
-	},
+  header: {
+    width: "100%",
+    borderRadius: 10,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+  },
+  footer: {
+    width: "100%",
+    borderRadius: 10,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+  },
+  inputView: {
+    width: "60%",
+    borderRadius: 10,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "#e9e9f5",
+  },
 
 	TextInput: {
 		height: 50,
@@ -137,7 +133,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 40,
-		backgroundColor: "lightskyblue",
+		backgroundColor: "#87cefa",
 	},
 });
 export default SignUpPage;

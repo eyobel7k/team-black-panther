@@ -18,24 +18,20 @@ import {
  */
 
 function Footer({ navigation }) {
-  const { width, height } = useWindowDimensions();
-  const widthBreakpoint = 700;
+	const { width, height } = useWindowDimensions();
+	const widthBreakpoint = 700;
 
-  return (
-    <TouchableHighlight
-      style={styles.bottomTouchableHighlight}
-      navigation={navigation}
-    >
-      <View
-        style={width > widthBreakpoint ? styles.footer : styles.footerMobile}
-      >
-        <Text
-          style={styles.footerTextSelect}
-          style={styles.footerText}
-          onPress={() => Linking.openURL("#")}
-        >
-          Brought to you by Team Black Panther.
-        </Text>
+	return (
+		<TouchableHighlight
+			style={styles.bottomTouchableHighlight}
+			navigation={navigation}
+		>
+			<View
+				style={width > widthBreakpoint ? styles.footer : styles.footerMobile}
+			>
+				<Text style={styles.footerTextSelect} style={styles.footerText}>
+					Brought to you by Team Black Panther.
+				</Text>
 
         <Text
           style={styles.footerText}
@@ -70,37 +66,38 @@ function Footer({ navigation }) {
           Terms
         </Text>
 
-        <Text style={styles.footerTextSelect} style={styles.footerText}>
-          ©2021 MarvelSpace.All Rights Reserved.
-        </Text>
-      </View>
-    </TouchableHighlight>
-  );
+				<Text style={styles.footerTextSelect} style={styles.footerText}>
+					©2021 MarvelSpace.All Rights Reserved.
+				</Text>
+			</View>
+		</TouchableHighlight>
+	);
 }
 
 const styles = StyleSheet.create({
-  bottomTouchableHighlight: {
-    flex: 1,
-  },
-  footer: {
-    flex: 1,
-    flexDirection: "row",
-    backgroundColor: "#d2d2d6",
-    width: "100%",
-    height: 64,
-    justifyContent: "space-around",
-    alignItems: "center",
-    // position: "absolute",
-    bottom: 0,
-    // backgroundColor: "#d2d2d6",
-  },
-  footerMobile: {
-    flexDirection: "column",
-    padding: 20,
-    margin: 20,
-    backgroundColor: "#d2d2d6",
-    borderRadius: 10,
-  },
+	bottomTouchableHighlight: {
+		flex: 1,
+	},
+	footer: {
+		flex: 1,
+		flexDirection: "row",
+		backgroundColor: "#d2d2d6",
+		width: "100%",
+		height: 64,
+		justifyContent: "space-around",
+		alignItems: "center",
+
+		bottom: 0,
+		backgroundColor: "#d2d2d6",
+	},
+	footerMobile: {
+		flexDirection: "column",
+		padding: 20,
+		margin: 20,
+		backgroundColor: "#d2d2d6",
+		borderRadius: 10,
+		
+	},
 
   footerText: {
     color: "#6c72d9",

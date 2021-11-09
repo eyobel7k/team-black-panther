@@ -1,14 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Header, Footer, ThemeLoggedIn } from './';
-
+import ThemeLoggedIn from "./ThemeLoggedIn";
 function Images({ navigation }) {
 	return (
 		<ThemeLoggedIn navigation={navigation}>
-			<View style={styles.container}>
-					<View style={styles.body}>
-						<Text style={styles.text}>Images!</Text>
-					</View>
+			<View style={styles.container} navigation={navigation}>
+				<View style={styles.body} navigation={navigation}>
+					<Text style={styles.text}>Images!</Text>
+				</View>
 			</View>
 		</ThemeLoggedIn>
 	);
@@ -27,9 +26,9 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 5,
-		fontSize: 15,
+		fontSize: 24,
 		fontWeight: "100",
-		fontFamily: "Serif",
+		// fontFamily: "Serif",
 	},
 });
 export default Images;
