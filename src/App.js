@@ -4,27 +4,23 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Home, 
-	Newsfeed,
-	SignUpPage,
-	LogInPage,
-	Friends,
-	Profile,
-	Images,
-	Message,
-	ResetPasswordPage,
-	EditProfile,
-	Terms,
-	Rule,
-	About,
-	Contact,
-	Chat,
-  Members,
-  Authentication,
-} from "./components";
+
+import Home from "./components/Home";
+import Newsfeed from "./components/Newsfeed";
+import SignUpPage from "./components/SignUpPage";
+import LogInPage from "./components/LogInPage";
+import Friends from "./components/Friends";
+import Profile from "./components/Profile";
+import Images from "./components/Images";
+import Message from "./components/Message";
+import ResetPasswordPage from "./components/ResetPasswordPage";
+import EditProfile from "./components/EditProfile";
+import Terms from "./components/Terms";
+import Rule from "./components/Rule";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 const Stack = createNativeStackNavigator();
-
 
 export default function App() {
 	return (

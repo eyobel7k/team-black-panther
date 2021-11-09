@@ -8,7 +8,7 @@ import {
 	useWindowDimensions,
 } from "react-native";
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
-import { ThemeLoggedIn } from "./";
+import ThemeLoggedIn from "./ThemeLoggedIn";
 
 const Profile = ({ navigation }) => {
 	const [profileInfo, setProfileInfo] = useState({});

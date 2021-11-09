@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, ScrollView, useWindowDimensions } from "react-native";
-import { Header, Footer } from './';
+import Header from "./Header";
+import Footer from './Footer';
 
 function ThemeLoggedIn({ children, navigation }) {
 	const { width } = useWindowDimensions();

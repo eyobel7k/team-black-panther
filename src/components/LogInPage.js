@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { ThemeLoggedOut } from "./";
+import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
 function LogInPage({ navigation }) {
