@@ -6,7 +6,7 @@ import Footer from "./Footer";
 function ThemeLoggedOut({ children, navigation }) {
 	
 	return (
-		<View style={styles.container} navigation={navigation}>
+		<View style={styles.container}>
 			<View style={styles.Header}>
 				<HeaderLogPage navigation={navigation} />
 			</View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 		borderColor: "#D3D3D3",
 	},
 	scrollContentContainer: {
-		flexWrap: "wrap",
+		// flexWrap: "wrap",
 	},
 	container: {
 		flex: 1,

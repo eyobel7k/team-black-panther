@@ -13,6 +13,13 @@ function LogInPage({ navigation }) {
   return (
     <ThemeLoggedOut navigation={navigation}>
       <View style={styles.body}>
+        <Text
+          style={styles.headerText}
+          name="Newsfeed"
+          onPress={() => navigation.navigate("Newsfeed")}
+        >
+          Newsfeed
+        </Text>
         <View style={styles.ImageBorder}>
           <Text h2 style={styles.bodyText}>
             Join the fun ..
@@ -73,13 +80,6 @@ function LogInPage({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text
-          style={styles.headerText}
-          name="Newsfeed"
-          onPress={() => navigation.navigate("Newsfeed")}
-        >
-          Newsfeed
-        </Text>
       </View>
     </ThemeLoggedOut>
   );

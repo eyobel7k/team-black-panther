@@ -29,7 +29,7 @@ function Header({ navigation }) {
 							cancelIconColor="#fdfdfd"
 							backgroundColor="#ba312f"
 							placeholder="Search  ..."
-							fontFamily="BurbankBigCondensed-Black"
+							// fontFamily="BurbankBigCondensed-Black"
 						/>
 					</View> */}
 				</View>

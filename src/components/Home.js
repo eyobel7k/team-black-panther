@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 
-
 function Home({ navigation }) {
 	return (
 		<ThemeLoggedIn navigation={navigation} style={styles.container}>
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
 		margin: 5,
 		fontSize: 24,
 		fontWeight: "100",
-		fontFamily: "Serif",
+		// fontFamily: "Serif",
 	},
 });
 
