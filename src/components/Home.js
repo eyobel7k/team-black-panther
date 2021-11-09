@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ThemeLoggedIn } from "./";
+import ThemeLoggedIn from "./ThemeLoggedIn";
 
 function Home({ navigation }) {
   return (
@@ -14,21 +14,22 @@ function Home({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  body: {
-    backgroundColor: "#fff",
-    height: "80%",
-    width: "100%",
-  },
-  text: {
-    margin: 5,
-    fontSize: 14,
-    fontWeight: "bold",
-    fontFamily: "Serif",
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+		
+	},
+	body: {
+		backgroundColor: "#fff",
+		height: "80%",
+		width: "100%",
+	},
+	text: {
+		margin: 5,
+		fontSize: 24,
+		fontWeight: "100",
+		// fontFamily: "Serif",
+	},
 });
 
 export default Home;

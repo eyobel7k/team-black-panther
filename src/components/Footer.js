@@ -12,13 +12,13 @@ import {
  * Rule
  * Contact
  * Terms
- * 
+ *
  * Brought to you
  * Copyright
  */
 
 function Footer({ navigation }) {
-	const {width, height} = useWindowDimensions();
+	const { width, height } = useWindowDimensions();
 	const widthBreakpoint = 700;
 
 	return (
@@ -26,12 +26,10 @@ function Footer({ navigation }) {
 			style={styles.bottomTouchableHighlight}
 			navigation={navigation}
 		>
-			<View style={width > widthBreakpoint ? styles.footer : styles.footerMobile}>
-				<Text
-					style={styles.footerTextSelect}
-					style={styles.footerText}
-					onPress={() => Linking.openURL("#")}
-				>
+			<View
+				style={width > widthBreakpoint ? styles.footer : styles.footerMobile}
+			>
+				<Text style={styles.footerTextSelect} style={styles.footerText}>
 					Brought to you by Team Black Panther.
 				</Text>
 
@@ -68,11 +66,8 @@ function Footer({ navigation }) {
 					Terms
 				</Text>
 
-				<Text
-						style={styles.footerTextSelect}
-						style={styles.footerText}
-					>
-						©2021 MarvelSpace.All Rights Reserved.
+				<Text style={styles.footerTextSelect} style={styles.footerText}>
+					©2021 MarvelSpace.All Rights Reserved.
 				</Text>
 			</View>
 		</TouchableHighlight>
@@ -82,26 +77,26 @@ function Footer({ navigation }) {
 const styles = StyleSheet.create({
 	bottomTouchableHighlight: {
 		flex: 1,
-		
 	},
 	footer: {
 		flex: 1,
 		flexDirection: "row",
 		backgroundColor: "#d2d2d6",
 		width: "100%",
-		height: 15,
+		height: 64,
 		justifyContent: "space-around",
 		alignItems: "center",
-		// position: "fixed",
+
 		bottom: 0,
 		backgroundColor: "#d2d2d6",
 	},
 	footerMobile: {
-		flexDirection: 'column',
+		flexDirection: "column",
 		padding: 20,
 		margin: 20,
 		backgroundColor: "#d2d2d6",
 		borderRadius: 10,
+		
 	},
 
 	footerText: {

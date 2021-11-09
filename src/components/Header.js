@@ -1,24 +1,24 @@
 import React from "react";
 import { StyleSheet, View, TouchableHighlight } from "react-native";
-import { useFonts, BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+
 import { Text, SearchBar } from "react-native-elements";
 
 function Header({ navigation }) {
-	const [fontLoaded] = useFonts({ BebasNeue_400Regular });
+	
 
 	return (
-		<View style={styles.Header}>
-			<TouchableHighlight>
-				<View style={styles.HeaderWarp}>
-					<View style={styles.HeaderTitle}>
-						<Text h3 style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>
+		<View style={styles.Header} navigation={navigation}>
+			<TouchableHighlight navigation={navigation}>
+				<View style={styles.HeaderWarp} navigation={navigation}>
+					{/* <View style={styles.HeaderTitle}> */}
+						<Text h3 style={styles.HeaderSearch}>
 							MarvelSpace
 						</Text>
 						<Text h4 style={styles.headerText}>
 							A space for super friends
 						</Text>
-					</View>
-					<View style={styles.HeaderSearch}>
+					{/* </View> */}
+					{/* <View style={styles.HeaderSearch}>
 						<SearchBar
 							lightTheme={true}
 							height={50}
@@ -29,24 +29,26 @@ function Header({ navigation }) {
 							cancelIconColor="#fdfdfd"
 							backgroundColor="#ba312f"
 							placeholder="Search  ..."
-							fontFamily="BurbankBigCondensed-Black"
+							// fontFamily="BurbankBigCondensed-Black"
 						/>
-					</View>
+					</View> */}
 				</View>
 			</TouchableHighlight>
 			<TouchableHighlight>
-				<View style={styles.HeaderBar}>
-					<View>
+				<View style={styles.HeaderBar} navigation={navigation}>
+					
 						<Text
+							navigation={navigation}
 							style={styles.headerText}
 							name="Newsfeed"
 							onPress={() => navigation.navigate("Newsfeed")}
 						>
 							Newsfeed
 						</Text>
-					</View>
+				
 
 					<Text
+						navigation={navigation}
 						style={styles.headerText}
 						name="Friends"
 						onPress={() => navigation.navigate("Friends")}
@@ -55,6 +57,7 @@ function Header({ navigation }) {
 					</Text>
 
 					<Text
+						navigation={navigation}
 						style={styles.headerText}
 						name="Profile"
 						onPress={() => navigation.navigate("Profile")}
@@ -63,6 +66,7 @@ function Header({ navigation }) {
 					</Text>
 
 					<Text
+						navigation={navigation}
 						style={styles.headerText}
 						name="Image"
 						onPress={() => navigation.navigate("Images")}
@@ -71,6 +75,7 @@ function Header({ navigation }) {
 					</Text>
 
 					<Text
+						navigation={navigation}
 						style={styles.headerText}
 						name="Message"
 						onPress={() => navigation.navigate("Message")}
@@ -96,8 +101,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: "column",
 		justifyContent: "space-between",
-		backgroundColor: "blue",
-		height: 15,
+		backgroundColor: "#0000FF",
+		height: 100,
 		width: "100%",
 	},
 	HeaderTitle: {
@@ -109,26 +114,19 @@ const styles = StyleSheet.create({
 	},
 	HeaderBar: {
 		flexDirection: "row",
-		backgroundColor: "skyblue",
+		backgroundColor: "#87cefa",
 		width: "100%",
 		padding: 5,
 		justifyContent: "space-around",
 	},
 	headerText: {
-		color: "white",
+		color: "#fff",
 		fontWeight: "bold",
 		alignItems: "center",
 		fontSize: 14,
 	},
 	HeaderSearch: {
-		// flexDirection: "row",
-		// backgroundColor: "#e9e9f5",
-		// width: "55%",
-		// height:"5em",
-		// marginRight: 60,
-		// justifyContent: "space-around",
-		// alignItems: "flex-end",
-		marginVertical:30,
+		marginVertical: 30,
 	},
 	HeaderWarp: {
 		flexDirection: "row",
@@ -141,6 +139,5 @@ const styles = StyleSheet.create({
 	bodyText: {
 		color: "#1722e8",
 	},
-	
 });
 export default Header;

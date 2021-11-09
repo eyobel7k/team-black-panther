@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Keyboard,
-  ScrollView,
+	StyleSheet,
+	Text,
+	View,
+	TextInput,
+	TouchableOpacity,
+	Keyboard,
+	ScrollView,
 } from "react-native";
-// import Task from "./components/Task";
 
 export default function Chat() {
-  const [task, setTask] = useState("");
-  const [taskItems, setTaskItems] = useState([]);
+	const [task, setTask] = useState("");
+	const [taskItems, setTaskItems] = useState([]);
 
-  const handleAddTask = () => {
-    Keyboard.dismiss();
-    setTaskItems([...taskItems, task]);
-    setTask();
+	const handleAddTask = () => {
+		Keyboard.dismiss();
+		setTaskItems([...taskItems, task]);
+		setTask();
 
    
     const cleanedInput = task.trim().toLowerCase();
@@ -31,33 +30,45 @@ export default function Chat() {
     
   }
 
-    
-  };
-  const completeTask = (index) => {
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy);
-  };
+	const handleKeypress = (e) => {
+		//it triggers by pressing the enter key
+		if (e.keyCode === 13) {
+			handleAddTask();
+		}
+	};
 
-  const handleKeypress = (e) => {
-    //it triggers by pressing the enter key
-    if (e.keyCode === 13) {
-      handleAddTask();
-    }
-  };
+	return (
+		<View style={styles.container}>
+			{/* Added this scroll view to enable scrolling when list gets longer than the page */}
+			<View
+				contentContainerStyle={
+					{
+						// flexGrow: 1,
+					}
+				}
+				keyboardShouldPersistTaps="handled"
+			>
+				{/* Today's Tasks */}
+				<View style={styles.tasksWrapper}>
+					<Text style={styles.sectionTitle}> Space Chat</Text>
 
-  return (
-    <View style={styles.container}>
-      {/* Added this scroll view to enable scrolling when list gets longer than the page */}
-      <View
-        contentContainerStyle={{
-          flexGrow: 1,
-        }}
-        keyboardShouldPersistTaps="handled"
-      >
-        {/* Today's Tasks */}
-        <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}> Space Chat</Text>
+					<View style={styles.writeTask}>
+						<TextInput
+							style={styles.input}
+							placeholder={"Type message ..."}
+							value={task}
+							onChangeText={(text) => setTask(text)}
+							onKeyPress={handleKeypress}
+							autoFocus={true}
+							onSubmitEditing={handleAddTask}
+						/>
+						<TouchableOpacity onPress={() => handleAddTask()}>
+							<View style={styles.addWrapper}>
+								<Text style={styles.addText}>Send</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+					
 
           <View style={styles.writeTask}>
             <TextInput
@@ -111,7 +122,7 @@ export default function Chat() {
       </View>
     </View>
   );
-}
+            }}
 
 const styles = StyleSheet.create({
   container: {
@@ -203,11 +214,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
   },
-  // date: {
-  //   fontSize: 15,
-  //   fontStyle: "italic",
-  //   color: "purple",
-  // },
+ 
   addText:{
     fontSize:15,
   }

@@ -8,13 +8,13 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
-import { ThemeLoggedIn } from './';
+import ThemeLoggedIn  from "./ThemeLoggedIn";
 
 const EditProfile = ({ navigation }) => {
 	const [profileInfo, setProfileInfo] = useState([]);
 
 	useEffect(() => {
-		wpApiFetch({ path: WPAPI_PATHS.wp.posts}).then((response) => {
+		wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((response) => {
 			setProfileInfo(response.at(0).content.rendered);
 		});
 	});
@@ -24,8 +24,8 @@ const EditProfile = ({ navigation }) => {
 				<View style={styles.body}>
 					<View style={styles.ImageBorder}>
 						<Image
-							source={{uri:"https://i.pravatar.cc/300"}}
-							style={{ height: "60%", width: "50%"}}
+							source={{ uri: "https://i.pravatar.cc/300" }}
+							style={{ height: "60%", width: "50%", borderRadius: 10 }}
 						/>
 						<Text>MarvelSpace Tom!</Text>
 						<Text>Avengers Tower, New York City</Text>
@@ -77,9 +77,6 @@ const EditProfile = ({ navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// backgroundColor: "#fff",
-		// alignItems: "center",
-		// justifyContent: "center",
 	},
 	body: {
 		backgroundColor: "#fff",
@@ -88,8 +85,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		justifyContent: "center",
 		flexDirection: "row",
-		// margin: 20,
-		// padding: 40,
 	},
 	bodyText: {
 		color: "#1722e8",
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
 	LogInBorder: {
 		
 		borderRadius: 50,
-		backgroundColor: "white",
+		backgroundColor: "#fff",
 		width: "50%",
 		height: "80%",
 		color: "#e9e9f5",
@@ -109,10 +104,9 @@ const styles = StyleSheet.create({
 	ImageBorder: {
 		borderStyle: "solid",
 		borderRadius: 50,
-		backgroundColor: "white",
+		backgroundColor: "#fff",
 		width: "40%",
 		height: "80%",
-
 		alignItems: "center",
 		justifyContent: "center",
 		marginHorizontal: 20,
@@ -162,7 +156,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 30,
-		backgroundColor: "lightskyblue",
+		backgroundColor: "#87cefa",
 	},
 	imageContainer: {
 		flex: 1,
