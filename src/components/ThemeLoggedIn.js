@@ -58,11 +58,11 @@ const styles = StyleSheet.create({
 		// fontFamily: "Serif",
 	},
 	Header: {
-		// height: "20%",
+		height: "20%",
 		// top: 0,
 	},
 	Footer: {
-		// height: "10%",
+		height: "20%",
 		// bottom: 0,
 		// position: "fixed",
 	},

@@ -23,7 +23,7 @@ function ThemeLoggedOut({ children, navigation }) {
 }
 const styles = StyleSheet.create({
 	scrollView: {
-		height: "100%",
+		height: "60%",
 		// paddingTop: 10,
 		borderWidth: 5,
 		borderRadius: 5,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 		top: 0,
 	},
 	Footer: {
-		// height: "10%",
+		height: "20%",
 		// bottom: 0,
 		// position: "fixed",
 	},

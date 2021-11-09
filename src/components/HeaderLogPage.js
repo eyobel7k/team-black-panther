@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		top: 0,
 		backgroundColor: "blue",
-		// height: 100, // was 4em 
+		height: "100%", // was 4em 
 		width: "100%",
 	},
 	HeaderTitle: {
