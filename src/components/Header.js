@@ -11,7 +11,7 @@ function Header({ navigation }) {
 			<TouchableHighlight>
 				<View style={styles.HeaderWarp}>
 					<View style={styles.HeaderTitle}>
-						<Text h3 style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>
+						<Text h3 style={[ styles.headerText, {  fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>
 							MarvelSpace
 						</Text>
 						<Text h4 style={styles.headerText}>
@@ -29,7 +29,7 @@ function Header({ navigation }) {
 							cancelIconColor="#fdfdfd"
 							backgroundColor="#ba312f"
 							placeholder="Search  ..."
-							fontFamily="BurbankBigCondensed-Black"
+							// fontFamily="BurbankBigCondensed-Black"
 						/>
 					</View>
 				</View>

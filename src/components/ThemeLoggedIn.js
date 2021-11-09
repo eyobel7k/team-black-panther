@@ -27,7 +27,7 @@ function ThemeLoggedIn({ children, navigation }) {
 					<View style={styles.Footer}>
 						<Footer navigation={navigation} />
 					</View>
-				}
+			}
 		</View>
 	);
 }
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 	scrollContentContainer: {
 		flexWrap: 'wrap',
 		justifyContent: 'space-between',
-		// alignItems: 'center',
+		alignItems: 'center',
 	},
 	container: {
 		flex: 1,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 		margin: 5,
 		fontSize: 1.5, // was '1.5em'
 		fontWeight: "100",
-		fontFamily: "Serif",
+		// fontFamily: "Serif",
 	},
 	Header: {
 		// height: "20%",
