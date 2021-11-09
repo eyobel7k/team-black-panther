@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableHighlight } from "react-native";
 import { Text } from "react-native-elements";
 
 function HeaderLogPage() {
-	const [fontLoaded] = useFonts({ BebasNeue_400Regular });
+	// const [fontLoaded] = useFonts({ BebasNeue_400Regular });
 	return (
 		<View style={styles.Header}>
 			<TouchableHighlight style={styles.headerTouchableHighlight}>

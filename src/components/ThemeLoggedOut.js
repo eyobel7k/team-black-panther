@@ -4,13 +4,13 @@ import HeaderLogPage from "./HeaderLogPage";
 import Footer from "./Footer";
 
 function ThemeLoggedOut({ children, navigation }) {
-	
 	return (
-		<View style={styles.container}>
-			<View style={styles.Header}>
+		<View style={styles.container} navigation={navigation}>
+			<View style={styles.Header} navigation={navigation}>
 				<HeaderLogPage navigation={navigation} />
 			</View>
 			<ScrollView
+				navigation={navigation}
 				style={styles.scrollView}
 				contentContainerStyle={styles.scrollContentContainer}
 			>

@@ -36,26 +36,25 @@ function Newsfeed({ navigation }) {
 		});
 
 	return (
-		
 		<ThemeLoggedIn navigation={navigation}>
-		<View style={styles.container}>
-			<ScrollView>
-				<View style={styles.body}>
-					<Text h3 style={styles.heading}>
-						Newsfeed
-					</Text>
-					<ScrollView>
-						<Text>{generatePosts}</Text>
-					</ScrollView>
-				</View>
-			</ScrollView>
-			<Pressable
-				style={styles.newPostButton}
-				onPress={() => setShowPostModal(true)}
-			>
-				<Text style={styles.postButtonText}>New Post</Text>
-			</Pressable>
-			
+			<View style={styles.container} navigation={navigation}>
+				<ScrollView>
+					<View style={styles.body}>
+						<Text h3 style={styles.heading}>
+							Newsfeed
+						</Text>
+						<ScrollView>
+							<Text>{generatePosts}</Text>
+						</ScrollView>
+					</View>
+				</ScrollView>
+				<Pressable
+					style={styles.newPostButton}
+					onPress={() => setShowPostModal(true)}
+				>
+					<Text style={styles.postButtonText}>New Post</Text>
+				</Pressable>
+
 				{showPostModal && (
 					<PostModal
 						setShowPostModal={setShowPostModal}
@@ -64,7 +63,7 @@ function Newsfeed({ navigation }) {
 					/>
 				)}
 			</View>
-				</ThemeLoggedIn>
+		</ThemeLoggedIn>
 	);
 }
 const styles = StyleSheet.create({

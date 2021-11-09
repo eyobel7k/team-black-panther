@@ -1,88 +1,89 @@
 import React from "react";
 import {
-  StyleSheet,
-  Image,
-  View,
-  TextInput,
-  TouchableOpacity,
+	StyleSheet,
+	Image,
+	View,
+	TextInput,
+	TouchableOpacity,
 } from "react-native";
-import  ThemeLoggedOut  from "./ThemeLoggedOut";
+import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
 function LogInPage({ navigation }) {
-  return (
-    <ThemeLoggedOut navigation={navigation}>
-      <View style={styles.body}>
-        <Text
-          style={styles.headerText}
-          name="Newsfeed"
-          onPress={() => navigation.navigate("Newsfeed")}
-        >
-          Newsfeed
-        </Text>
-        <View style={styles.ImageBorder}>
-          <Text h2 style={styles.bodyText}>
-            Join the fun ..
-          </Text>
-          <View style={styles.imageContainer}>
-            <Image
-              source={{ uri: "https://i.pravatar.cc/300" }}
-              style={{ height: "10%", width: "100%" }}
-            />
-          </View>
-        </View>
-        <View style={styles.LogInBorder}>
-          <Text h3 style={styles.bodyText}>
-            Login
-          </Text>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Email"
-              placeholderTextColor="#1722e8"
-              // onChangeText={(email) => setEmail(email)}
-            />
-          </View>
+	return (
+		<ThemeLoggedOut navigation={navigation}>
+			<View style={styles.body} navigation={navigation}>
+				<Text
+					navigation={navigation}
+					style={styles.headerText}
+					name="Newsfeed"
+					onPress={() => navigation.navigate("Newsfeed")}
+				>
+					Newsfeed
+				</Text>
+				<View style={styles.ImageBorder}>
+					<Text h2 style={styles.bodyText}>
+						Join the fun ..
+					</Text>
+					<View style={styles.imageContainer}>
+						<Image
+							source={{ uri: "https://i.pravatar.cc/300" }}
+							style={{ height: "10%", width: "100%" }}
+						/>
+					</View>
+				</View>
+				<View style={styles.LogInBorder}>
+					<Text h3 style={styles.bodyText}>
+						Login
+					</Text>
+					<View style={styles.inputView}>
+						<TextInput
+							style={styles.TextInput}
+							placeholder="Email"
+							placeholderTextColor="#1722e8"
+							// onChangeText={(email) => setEmail(email)}
+						/>
+					</View>
 
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Password"
-              placeholderTextColor="#1722e8"
-              secureTextEntry={true}
-              // onChangeText={(password) => setPassword(password)}
-            />
-          </View>
-          <TouchableOpacity style={styles.loginBtn}>
-            <Text style={styles.bodyText}>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.forgot_button} style={styles.bodyText}>
-              Forgot Password?{" "}
-              <Text
-                name="ResetPasswordPage"
-                onPress={() => navigation.navigate("ResetPasswordPage")}
-              >
-                Click here.
-              </Text>
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.forgot_button} style={styles.bodyText}>
-              Don't have an account?
-              <Text
-                name="SignUpPage"
-                onPress={() => navigation.navigate("SignUpPage")}
-              >
-                Sign Up
-              </Text>
-              here.
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ThemeLoggedOut>
-  );
+					<View style={styles.inputView}>
+						<TextInput
+							style={styles.TextInput}
+							placeholder="Password"
+							placeholderTextColor="#1722e8"
+							secureTextEntry={true}
+							// onChangeText={(password) => setPassword(password)}
+						/>
+					</View>
+					<TouchableOpacity style={styles.loginBtn}>
+						<Text style={styles.bodyText}>Submit</Text>
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Text style={styles.forgot_button} style={styles.bodyText}>
+							Forgot Password?{" "}
+							<Text
+								name="ResetPasswordPage"
+								onPress={() => navigation.navigate("ResetPasswordPage")}
+							>
+								Click here.
+							</Text>
+						</Text>
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Text style={styles.forgot_button} style={styles.bodyText}>
+							Don't have an account?
+							<Text
+								name="SignUpPage"
+								onPress={() => navigation.navigate("SignUpPage")}
+							>
+								Sign Up
+							</Text>
+							here.
+						</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+		</ThemeLoggedOut>
+	);
 }
 
 const styles = StyleSheet.create({

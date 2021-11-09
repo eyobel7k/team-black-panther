@@ -5,7 +5,7 @@ import ThemeLoggedIn from "./ThemeLoggedIn";
 function About({ navigation }) {
 	return (
 		<ThemeLoggedIn navigation={navigation}>
-			<View style={styles.body}>
+			<View style={styles.body} navigation={navigation}>
 				<Text style={styles.text}>About!</Text>
 			</View>
 		</ThemeLoggedIn>
