@@ -88,25 +88,31 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   modal: {
-    border: "solid 1px #000",
+    // border: "solid 1px #000",
+    borderColor: "#000",
+    borderStyle: "solid",
+    borderWidth: 1, // was '1px'
     margin: "0 auto",
     borderRadius: 5,
     padding: 30,
     backgroundColor: "#FFF",
-    width: "60vw",
-    height: "60vh",
+    width: 60, // was 60vw
+    height: 60, // was 60vh
     alignItems: "center",
     justifyContent: "center",
-    border: "solid 2px cadetblue",
-    borderRadius: "20px",
+    // border: "solid 2px cadetblue",
+    // borderRadius: "20px",
   },
   textInput: {
-    marginTop: "2rem",
+    marginTop: 2, // was 2rem
     backgroundColor: "aliceblue",
-    width: "20rem",
-    border: "solid 1px cadetblue",
-    padding: "1rem",
-    borderRadius: "20px",
+    width: 20, // was 20rem
+    // border: "solid 1px cadetblue",
+    borderColor: "cadetblue",
+    borderStyle: "solid",
+    borderWidth: 1, // was '1px'
+    padding: 1, // was 1rem
+    borderRadius: 20, // was 20px
     textAlign: "center",
   },
   cornerX: {
@@ -115,10 +121,10 @@ const styles = StyleSheet.create({
     right: 16,
   },
   cornerXText: {
-    fontSize: "1.2rem",
+    fontSize: 1.2, // was '1.2rem'
   },
   submitButton: {
-    width: "6rem",
+    width: 6, // was 6rem
     borderRadius: 25,
     height: 50,
     alignItems: "center",
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
     color: "blue",
   },
   imgSubmitButton: {
-    width: "8rem",
+    width: 8, // was 8rem
     borderRadius: 25,
     height: 50,
     alignItems: "center",

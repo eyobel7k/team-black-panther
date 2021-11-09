@@ -63,7 +63,9 @@ function Post(props) {
               <Text>👍</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.button}>{likes}</View>
+          <View style={styles.button}>
+            <Text>{likes}</Text>
+          </View>
 
           <View style={styles.button}>
             <TouchableOpacity
@@ -75,7 +77,9 @@ function Post(props) {
               <Text>👎</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.button}>{dislikes}</View>
+          <View style={styles.button}>
+            <Text>{dislikes}</Text>
+          </View>
         </View>
       </View>
       <ScrollView style={styles.commentsWindow}>
@@ -97,71 +101,82 @@ export default Post;
 
 const styles = StyleSheet.create({
   post: {
-    border: "cadetBlue solid 2px",
-    backgroundColor: "aliceBlue",
-    margin: "1rem",
-    marginBottom: "0",
-    padding: "1rem",
-    borderRadius: "10px",
-    width: "40vw",
-    height: "40vh",
-    float: "left",
-    display: "flex",
+    // border: "cadetblue solid 2px",
+    borderColor: "cadetblue",
+    borderStyle: "solid",
+    borderWidth: 2, // was '2px'
+    backgroundColor: "aliceblue",
+    margin: 1, // was 1rem 
+    marginBottom: 0,
+    padding: 1, // was 1rem 
+    borderRadius: 10, // was 10px
+    width: 40, // was 40vw 
+    height: 40, // was 40vh
+    // float: "left",
     alignItems: "center",
     justifyContent: "center",
   },
   button: {
-    float: "left",
-    display: "inline",
-    fontSize: ".9rem",
+    // float: "left",
+    // display: "inline",
+    fontSize: 0.9, // was '0.9rem'
     flex: 1,
     alignItems: "flex-end",
     justifyContent: "flex-end",
     textAlign: "right",
-    width: "1rem",
+    width: 1, // was 1rem
   },
   textInput: {
     textAlign: "center",
-    margin: ".5rem",
-    border: "cadetblue solid 2px",
-    padding: ".3rem",
+    margin: 0.5, // was 0.5rem
+    // border: "cadetblue solid 2px",
+    borderColor: "cadetblue",
+    borderStyle: "solid",
+    borderWidth: 2, // was '2px'
+    padding: 0.3, // was 0.3rem
     backgroundColor: "aliceblue",
-    borderRadius: "20px",
+    borderRadius: 20, // was 20px
   },
   comment: {
-    display: "block",
-    border: "solid 1px cadetblue",
-    margin: ".2rem",
-    padding: ".1rem",
-    borderRadius: "10px",
+    // display: "block",
+    // border: "solid 1px cadetblue",
+    borderColor: "cadetblue",
+    borderStyle: "solid",
+    borderWidth: 1, // was '1px'
+    margin: 0.2, // was 0.2rem
+    padding: 0.1, // was 0.1rem
+    borderRadius: 10, // was 10px
   },
   commentText: {
-    display: "block",
+    // display: "block",
   },
   commentSubscript: {
-    fontSize: ".7rem",
+    fontSize: 0.7, // was '0.7rem'
     textAlign: "right",
   },
   postSubscript: {
-    fontSize: ".8rem",
+    fontSize: 0.8, // was '0.8rem'
     textAlign: "right",
-    display: "inline-block",
+    // display: "inline-block",
     justifyContent: "space-between",
   },
   likeButton: {
-    fontSize: ".4rem",
+    fontSize: 0.4, // was '0.4rem'
   },
   commentsWindow: {
-    border: "dotted 1px cadetblue",
-    borderRadius: "12px",
-    height: "15vh",
-    marginTop: ".5rem",
+    // border: "cadetblue dotted 1px",
+    borderColor: "cadetblue",
+    borderStyle: "dotted",
+    borderWidth: 1, // was '1px'
+    borderRadius: 12, // was 12px
+    height: 15, // was 15vh
+    marginTop: 0.5, // was 0.5rem
   },
   belowPost: {
     flex: 1,
-    display: "inline-block",
+    // display: "inline-block",
     justifyContent: "space-between",
-    paddingTop: ".1rem",
-    paddingLeft: "2rem",
+    paddingTop: 0.1, // was 0.1rem
+    paddingLeft: 2, // was 2rem
   },
 });

@@ -9,9 +9,7 @@ function ThemeLoggedIn({ children, navigation }) {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.Header}>
-				<Header navigation={navigation} />
-			</View>
+			<Header navigation={navigation} />
 			<ScrollView
 				style={styles.scrollView}
 				contentContainerStyle={styles.scrollContentContainer}
@@ -35,7 +33,7 @@ function ThemeLoggedIn({ children, navigation }) {
 }
 const styles = StyleSheet.create({
 	scrollView: {
-		height: "100%",
+		height: '100%',
 		paddingTop: 10,
 		borderWidth: 2,
 		borderRadius: 5,
@@ -50,12 +48,13 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
+		justifyContent: 'space-between',
 		backgroundColor: "#fff",
 	},
 	text: {
 		margin: 5,
-		fontSize: "1.5em",
-		fontWeight: 100,
+		fontSize: 1.5, // was '1.5em'
+		fontWeight: "100",
 		fontFamily: "Serif",
 	},
 	Header: {

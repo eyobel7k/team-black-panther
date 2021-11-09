@@ -1,13 +1,16 @@
 import React from "react";
 import { StyleSheet,  View, TouchableHighlight } from "react-native";
+import { useFonts, BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import { Text } from "react-native-elements";
+
 function HeaderLogPage() {
+	const [fontLoaded] = useFonts({ BebasNeue_400Regular });
 	return (
 		<View style={styles.Header}>
 			<TouchableHighlight style={styles.headerTouchableHighlight}>
 				<View style={styles.HeaderTitle}>
-					<Text h3 style={styles.headerText}>Marvelspace a space</Text>
-					<Text h3 style={styles.headerText}>for super friends</Text>
+					<Text h3 style={[ styles.headerText, { fontFamily: fontLoaded ? 'BebasNeue_400Regular' : 'Arial', fontSize: 36, }]}>Marvelspace</Text>
+					<Text h3 style={styles.headerText}>a space for super friends</Text>
 				</View>
 			</TouchableHighlight>
 		
@@ -18,11 +21,11 @@ function HeaderLogPage() {
 const styles = StyleSheet.create({
 	Header: {
 		flex: 1,
-		Position: "absolute",
+		// position: "absolute",
 		flexDirection: "column",
 		top: 0,
 		backgroundColor: "blue",
-		height: "4em",
+		// height: 100, // was 4em 
 		width: "100%",
 	},
 	HeaderTitle: {
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "blue",
 		width: "100%",
 		justifyContent: "flex-start",
-		alignItems: "start",
+		alignItems: "flex-start",
 		paddingHorizontal: 40,
 		marginVertical: 30,
 	},

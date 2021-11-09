@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     color: "#1722e8",
   },
   LogInBorder: {
-    border: "solid",
+    borderStyle: "solid",
     borderRadius: 50,
     backgroundColor: "white",
     width: "60%",

@@ -17,7 +17,7 @@ const Profile = ({ navigation }) => {
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
 			console.log(response);
-			setProfileInfo(response.at(0));
+			setProfileInfo(response[0]);
 		});
 	}, []); // runs onMount only
 
@@ -26,13 +26,13 @@ const Profile = ({ navigation }) => {
       <View style={styles.profileContainer}>
         <View style={styles.profileInfoContainer}>
           <Image 
-            source={profileInfo.avatar_urls?.["96"]} 
+            source={{ uri: profileInfo.avatar_urls?.["96"] }} 
             style={{
               maxWidth: width > 300 ? 150 : 250,
               maxHeight: width > 300 ? 150: 250,
               height: '100%',
               width: '100%',
-              borderRadius: '100%',
+              borderRadius: 100, // was 100%
             }}
           />
           <Text style={styles.h2}>{profileInfo.name}</Text>
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		margin: 20,
 		width: "100%",
+		height: 20,
 		borderRadius: 10,
 		borderWidth: 2,
 		borderColor: "gray",
@@ -98,14 +99,14 @@ const styles = StyleSheet.create({
 		paddingVertical: 4,
 	},
 	h2: {
-		fontSize: "xx-large",
+		fontSize: 36, // was 'xx-large'
 		fontWeight: "bold",
 		color: "blue",
 		paddingTop: 20,
 		paddingHorizontal: "10%",
 	},
 	h3: {
-		fontSize: "large",
+		fontSize: 26, // was 'large'
 		fontWeight: "bold",
 		color: "gray",
 		padding: 10,

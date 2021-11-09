@@ -13,7 +13,8 @@ function Newsfeed({ navigation }) {
   const [showPostModal, setShowPostModal] = useState(false);
 
   useEffect(() => {
-    posts().then((data) => setPostsArr(data));
+    posts().then((data) => setPostsArr(data))
+    .catch(error => console.log('in newsfeed.js ', error));
   }, []);
 
   const generatePosts = postsArr
@@ -34,7 +35,7 @@ function Newsfeed({ navigation }) {
     });
 
   return (
-    <View style={styles.container} navigation={navigation}>
+    <View style={styles.container}>
       <View>
         <Header navigation={navigation} />
       </View>
@@ -43,7 +44,9 @@ function Newsfeed({ navigation }) {
           <Text h3 style={styles.heading}>
             Newsfeed
           </Text>
-          <ScrollView>{generatePosts}</ScrollView>
+          <ScrollView>
+            <Text>{generatePosts}</Text>
+          </ScrollView>
         </View>
       </ScrollView>
       <Pressable
@@ -78,42 +81,45 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
-    marginTop: "1rem",
+    marginTop: 1, // was 1rem 
   },
   heading: {
-    fontSize: "2rem",
+    fontSize: 2, // was '2rem'
     color: "#1722e8",
-    letterSpacing: ".15rem",
+    letterSpacing: 0.15, // 0.15rem
   },
   text: {
     margin: 5,
-    fontSize: "1.5em",
-    fontWeight: 100,
+    fontSize: 1.5, // was "1.5em"
+    fontWeight: "100",
     fontFamily: "Serif",
   },
   post: {
-    border: "cadetBlue solid 2px",
-    backgroundColor: "aliceBlue",
-    margin: "1rem",
-    padding: "1rem",
-    borderRadius: "10px",
-    width: "40vw",
+    // border: "cadetBlue solid 2px",
+    borderColor: "cadetblue",
+    borderStyle: "solid",
+    borderWidth: 2, // was 2px
+    backgroundColor: "aliceblue",
+    margin: 1, // was 1rem
+    padding: 1, // was 1rem
+    borderRadius: 10, // was 10px
+    width: 40, // was 40vw 
   },
   newPostButton: {
-    position: "fixed",
-    left: "3.2rem",
-    bottom: "3.2rem",
+    // position: "fixed",
+    left: 3.2, // was 3.2rem 
+    bottom: 3.2, // was 3.2rem 
     backgroundColor: "blue",
-    paddingTop: "2.05rem",
-    paddingLeft: ".4rem",
-    paddingBottom: "2.05rem",
-    paddingRight: ".4rem",
-    borderRadius: "50%",
+    paddingTop: 2.05, // was 2.05rem 
+    paddingLeft: 0.4, // was 0.4rem 
+    paddingBottom: 2.05, // was 2.05rem 
+    paddingRight: 0.4, // was 0.4rem 
+    borderRadius: 50, // was 50%
   },
   postButtonText: {
     color: "skyblue",
     fontWeight: "bold",
-    fontSize: "1rem",
+    fontSize: 1, // was '1rem'
   },
 });
 

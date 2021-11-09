@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		backgroundColor: "#d2d2d6",
 		width: "100%",
-		height: "4em",
+		height: 4, // was 4em 
 		justifyContent: "space-around",
 		alignItems: "center",
 		// position: "fixed",

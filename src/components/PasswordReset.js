@@ -49,7 +49,6 @@ export default function PasswordReset() {
 
 const styles = StyleSheet.create({
   container: {
-    // display: "flex",
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
@@ -63,22 +62,25 @@ const styles = StyleSheet.create({
   textInput: {
     textAlign: "center",
     margin: ".5rem",
-    border: "cadetblue solid 2px",
+    // border: "cadetblue solid 2px",
+    borderColor: "cadetblue",
+    borderStyle: "solid",
+    borderWidth: 2, // was 2px
     padding: ".3rem",
     backgroundColor: "aliceblue",
-    borderRadius: "20px",
+    borderRadius: 20, // was 20px
   },
   buttonWrapper: {
     padding: "0",
     margin: "0",
-    borderRadius: "50%",
+    borderRadius: 50, // was 50%
     width: "6rem",
     alignItems: "center",
   },
   text: {
     textAlign: "center",
     alignItems: "center",
-    marginBottom: "2rem",
+    marginBottom: 2, // was 2rem
     padding: "4rem",
     alignSelf: "center",
   },

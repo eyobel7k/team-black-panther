@@ -15,7 +15,7 @@ const EditProfile = ({ navigation }) => {
 
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.wp.posts}).then((response) => {
-			setProfileInfo(response.at(0).content.rendered);
+			setProfileInfo(response[0].content.rendered);
 		});
 	});
 	return (
@@ -24,7 +24,7 @@ const EditProfile = ({ navigation }) => {
 				<View style={styles.body}>
 					<View style={styles.ImageBorder}>
 						<Image
-							source={"https://i.pravatar.cc/300"}
+							source={{ uri:"https://i.pravatar.cc/300" }}
 							style={{ height: "60%", width: "50%", borderRadius: 10 }}
 						/>
 						<Text>MarvelSpace Tom!</Text>
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 	},
 	ImageBorder: {
-		border: "solid",
+		// border: "solid",
+		borderStyle: "solid",
 		borderRadius: 50,
 		backgroundColor: "white",
 		width: "40%",

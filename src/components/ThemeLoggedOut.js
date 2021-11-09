@@ -5,7 +5,7 @@ import Footer from './Footer';
 
 function ThemeLoggedOut({ children, navigation }) {
 	return (
-		<View style={styles.container} navigation={navigation}>
+		<View style={styles.container}>
 			<View style={styles.Header}>
 				<HeaderLogPage navigation={navigation} />
 			</View>
@@ -23,14 +23,14 @@ function ThemeLoggedOut({ children, navigation }) {
 }
 const styles = StyleSheet.create({
 	scrollView: {
-		height: "80%",
-		paddingTop: 10,
-		borderWidth: 2,
+		height: "100%",
+		// paddingTop: 10,
+		borderWidth: 5,
 		borderRadius: 5,
-		borderColor: "lightgray",
+		borderColor: "yellow",
 	},
 	scrollContentContainer: {
-		flexWrap: "wrap",
+		// flexWrap: "wrap",
 	},
 	container: {
 		flex: 1,
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 5,
-		fontSize: "1.5em",
-		fontWeight: 100,
+		fontSize: 1.5, // was '1.5em'
+		fontWeight: "100",
 		fontFamily: "Serif",
 	},
 	Header: {

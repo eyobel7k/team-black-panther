@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		justifyContent: "space-between",
 		backgroundColor: "blue",
-		height: "4em",
+		// height: 4, // was 4em 
 		width: "100%",
 	},
 	HeaderTitle: {
@@ -126,8 +126,9 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "wrap",
 		justifyContent: "space-around",
-		alignItems: "end",
-		width: "100%",
+		alignItems: "flex-end",
+		// width: 100, // was '100%'
+		// height: 200,
 		// paddingBottom:20,
 	},
 	bodyText: {

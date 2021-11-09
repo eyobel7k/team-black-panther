@@ -13,13 +13,20 @@ function LogInPage({ navigation }) {
   return (
     <ThemeLoggedOut navigation={navigation}>
       <View style={styles.body}>
+        <Text
+          style={styles.headerText}
+          name="Newsfeed"
+          onPress={() => navigation.navigate("Newsfeed")}
+        >
+          Newsfeed
+        </Text>
         <View style={styles.ImageBorder}>
           <Text h2 style={styles.bodyText}>
             Join the fun ..
           </Text>
           <View style={styles.imageContainer}>
             <Image
-              source={"https://i.pravatar.cc/300"}
+              source={{ uri: "https://i.pravatar.cc/300" }}
               style={{ height: "10%", width: "100%" }}
             />
           </View>
@@ -73,13 +80,6 @@ function LogInPage({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text
-          style={styles.headerText}
-          name="Newsfeed"
-          onPress={() => navigation.navigate("Newsfeed")}
-        >
-          Newsfeed
-        </Text>
       </View>
     </ThemeLoggedOut>
   );
@@ -93,24 +93,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   body: {
+
     backgroundColor: "#fff",
-    height: "70%%",
+    height: "100%",
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
-    flexDirection: "row",
-    margin: 20,
-    padding: 40,
+    flexDirection: Platform.OS === "web" ? "row" : "column",
+    // margin: 20,
+    // padding: 40, 
   },
   bodyText: {
     color: "#1722e8",
   },
   LogInBorder: {
-    border: "solid",
+    // border: "solid",
+    borderStyle: "solid",
     borderRadius: 50,
+    borderWidth: 2,
     backgroundColor: "white",
-    width: "50%",
-    height: "100%",
+    // width: "100%",
+    // height: "100%",
     color: "#e9e9f5",
     alignItems: "center",
     justifyContent: "space-evenly",
@@ -120,14 +123,16 @@ const styles = StyleSheet.create({
   },
   ImageBorder: {
     // border: "solid",
+    borderWidth: 2,
     borderRadius: 50,
     backgroundColor: "white",
-    width: "40%",
-    height: "80%",
-
+    // width: "100%",
+    // height: "50%",
     alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 20,
+    justifyContent: "space-evenly",
+    marginHorizontal: 10,
+    paddingTop: 20,
+    paddingBottom: 10,
   },
   header: {
     width: "100%",

@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     maxWidth: "80%",
-    fontSize: "25px",
+    fontSize: 25, // was "25px"
     marginLeft: "90px",
   },
   circular: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   date: {
-    fontSize: "15px",
+    fontSize: 15, // was "15px"
     fontStyle: "italic",
     color: "purple",
   },
