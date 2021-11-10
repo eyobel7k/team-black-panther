@@ -4,6 +4,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import Home from "./components/Home";
 import Newsfeed from "./components/Newsfeed";
 import SignUpPage from "./components/SignUpPage";
@@ -26,11 +27,6 @@ export default function App() {
 	return (
 		<View style={styles.container}>
 			<NavigationContainer>
-				{/* <Stack.Navigator
-					screenOptions={{
-						headerShown: false,
-					}}
-				> */}
 				<Stack.Navigator
 					initialRouteName="LogInPage"
 					screenOptions={{
