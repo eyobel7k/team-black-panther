@@ -41,18 +41,13 @@ function ThemeLoggedIn({ children, navigation }) {
 }
 const styles = StyleSheet.create({
 	scrollView: {
-		height: "60%",
-		paddingTop: 10,
-		borderWidth: 2,
-		borderRadius: 5,
+		borderTopWidth: 2,
 		borderColor: "#D3D3D3",
-		paddingVertical: 70,
 	},
 	scrollContentContainer: {
-		flexWrap: "wrap",
 		justifyContent: "space-between",
-		alignItems: 'center',
-		
+		paddingTop: '5%',
+		paddingBottom: '50%',
 	},
 	container: {
 		flex: 1,
