@@ -15,7 +15,7 @@ function Messages({ navigation }) {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => {
         setMembers(data);
-        console.log(data);
+        // console.log(data);
       })
 
       .catch((error) => console.log(error));
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     margin: 5,
     fontSize: 14,
     fontWeight: "bold",
-    fontFamily: "Serif",
+    // fontFamily: "Serif",
   },
 
   image: {
