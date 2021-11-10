@@ -72,15 +72,18 @@ const Find = ({ navigation }) => {
 
   return (
     <ThemeLoggedIn navigation={navigation}>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 } }>
         <View style={styles.container}>
           <SearchBar
             round
             searchIcon={{ size: 24 }}
+            backgroundColor={'white'}
+            padding={10}
             onChangeText={(text) => searchFilterFunction(text)}
             onClear={(text) => searchFilterFunction("")}
-            placeholder="Search members here..."
+            placeholder="Search super friends..."
             value={search}
+            
           />
           <FlatList
             data={filteredDataSource}
@@ -96,7 +99,7 @@ const Find = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "blue",
+    backgroundColor: "#D5DAFF",
   },
   itemStyle: {
     padding: 10,
