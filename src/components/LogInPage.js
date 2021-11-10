@@ -194,9 +194,9 @@ const styles = StyleSheet.create({
 		alignSelf: 'center'
 	},
 	LogInBorder: {
-		borderWidth: 2,
-		borderStyle: "solid",
-		borderRadius: 50,
+		// borderWidth: 2,
+		// borderStyle: "solid",
+		// borderRadius: 50,
 		backgroundColor: "#fff",
 		// width: "50%",
 		// height: "100%",
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
 	ImageBorder: {
 		// border: "solid",
 		flex: 1,
-		borderWidth: 2,
-		borderRadius: 50,
+		// borderWidth: 2,
+		// borderRadius: 50,
 		backgroundColor: "#fff",
 		// width: "40%",
 		// height: "80%",
