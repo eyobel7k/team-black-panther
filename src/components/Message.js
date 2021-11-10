@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  
-} from "react-native";
-import {Picker} from '@react-native-picker/picker';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
-
-
 
 // const [selectedValue, setSelectedValue] = useState("java");
 function Messages({ navigation }) {
@@ -21,7 +12,7 @@ function Messages({ navigation }) {
   const onPress = (selectedMemberId) => {
     setSelectedMember(members[selectedMemberId]);
   };
-  
+
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => {
@@ -45,58 +36,49 @@ function Messages({ navigation }) {
   //     <Text>{member.name}</Text>
   //   </View>
   // ));
-  
-  
-  members.map((member, index)=>
-    <Text>member </Text>
-  
-  
-  
-  )
+
+  members.map((member, index) => <Text>member </Text>);
 
   return (
-    
-
     <ThemeLoggedIn navigation={navigation}>
-
       <View style={styles.container}>
         <View style={styles.body}>
           <Text style={styles.text}>
-
-         
-
-
-            
-          <Picker
-          
-                    selectedValue={selectedMember.name ? selectedMember.name :'Iron Man'}
-                    style={{ height: 50, width: 170, backgroundColor:'#535981',borderRadius:35,}}
-                    onValueChange={(member, itemIndex) =>{
-                      setSelectedMember(members[itemIndex])
-                      // console.log(members[itemIndex])
-                    }}
-                  >
-                    {/* <Picker.Item label="Friends " value=" Friends" /> */}
-                    <Picker.Item label={"Iron Man"} value="Iron Man" />
-                    <Picker.Item label="Spiderman" value="Spiderman" />
-                    <Picker.Item label="Wolverine" value="Wolverine" />
-                    <Picker.Item label="Xavier Mercado" value="Xavier Mercado" />
-                    <Picker.Item label="Professor Xavier " value=" Professor Xavier" />
-                    
-                    
-                  </Picker>
+            <Picker
+              selectedValue={
+                selectedMember.name ? selectedMember.name : "Iron Man"
+              }
+              style={{
+                height: 50,
+                width: 170,
+                backgroundColor: "#535981",
+                borderRadius: 35,
+              }}
+              onValueChange={(member, itemIndex) => {
+                setSelectedMember(members[itemIndex]);
+                // console.log(members[itemIndex])
+              }}
+            >
+              {/* <Picker.Item label="Friends " value=" Friends" /> */}
+              <Picker.Item label={"Iron Man"} value="Iron Man" />
+              <Picker.Item label="Spiderman" value="Spiderman" />
+              <Picker.Item label="Wolverine" value="Wolverine" />
+              <Picker.Item label="Xavier Mercado" value="Xavier Mercado" />
+              <Picker.Item
+                label="Professor Xavier "
+                value=" Professor Xavier"
+              />
+            </Picker>
             {Object.keys(selectedMember).length !== 0 && (
               <View style={styles.img}>
                 {console.log(selectedMember)}
                 <View styles={styles.pick}>
-                <Image
-                      source={{ uri: selectedMember.avatar_urls?.thumb }}
-                      style={styles.image}
-                    ></Image>
-                    
-                    <Text>{selectedMember.name}</Text>
+                  <Image
+                    source={{ uri: selectedMember.avatar_urls?.thumb }}
+                    style={styles.image}
+                  ></Image>
 
-                    
+                  <Text>{selectedMember.name}</Text>
                 </View>
               </View>
             )}
@@ -147,8 +129,6 @@ const styles = StyleSheet.create({
   pick: {
     paddingTop: 5,
     alignItems: "center",
-
-    
   },
 });
 
