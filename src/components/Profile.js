@@ -20,7 +20,7 @@ const Profile = ({ navigation }) => {
 	}, []); // runs onMount only
 
   return (
-    // <ThemeLoggedIn navigation={navigation}>
+    <ThemeLoggedIn navigation={navigation}>
       <View style={styles.profileContainer}>
 				<Image 
 					source={{ uri: profileInfo.avatar_urls?.["96"] }} 
@@ -53,7 +53,7 @@ const Profile = ({ navigation }) => {
 				</View>
 
       </View>
-    // </ThemeLoggedIn>
+    </ThemeLoggedIn>
   )
 }
 
@@ -76,36 +76,36 @@ const styles = StyleSheet.create({
 		// height: 300,
 	},
 	profileAboutContainer: {
-		// flex: 1,
-		// justifyContent: "space-around",
-		// alignItems: "center",
-		// margin: 20,
-		// minWidth: 300,
+		flex: 1,
+		justifyContent: "space-around",
+		alignItems: "center",
+		margin: 20,
+		minWidth: 300,
 	},
 	profileAbout: {
-		// flex: 1,
+		flex: 1,
 		// justifyContent: "space-around",
-		// padding: 20,
-		// margin: 20,
-		// width: "100%",
-		// height: 20,
+		padding: 20,
+		margin: 20,
+		width: "100%",
+		height: "100%",
 		// borderRadius: 10,
 		// borderWidth: 2,
-		// borderColor: "gray",
-		// backgroundColor: "whitesmoke",
+		borderColor: "gray",
+		backgroundColor: "whitesmoke",
 	},
 	pillButton: {
-		// borderRadius: 10,
-		// backgroundColor: "lightgray",
-		// paddingHorizontal: 20,
-		// paddingVertical: 4,
+		borderRadius: 10,
+		backgroundColor: "lightgray",
+		paddingHorizontal: 20,
+		paddingVertical: 4,
 	},
 	h2: {
 		fontSize: 36, // was 'xx-large'
 		fontWeight: "bold",
 		color: "blue",
-		// paddingTop: 20,
-		// paddingHorizontal: "10%",
+		paddingTop: 20,
+		paddingHorizontal: "10%",
 	},
 	h3: {
 		fontSize: 26, // was 'large'
