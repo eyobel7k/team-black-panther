@@ -24,13 +24,10 @@ const Profile = ({ navigation }) => {
       <View style={styles.profileContainer}>
 				<Image 
 					source={{ uri: profileInfo.avatar_urls?.["96"] }} 
-					style={{
+					style={[styles.profileImage, {
 						maxWidth: width > 300 ? 150 : 250,
 						maxHeight: width > 300 ? 150: 250,
-						height: '100%',
-						width: '100%',
-						borderRadius: 100, // was 100%
-					}}
+					}]}
 				/>
 				<View style={styles.profileInfo}>
 					<Text style={styles.h2}>{profileInfo.name}</Text>
@@ -61,11 +58,13 @@ const styles = StyleSheet.create({
 	profileContainer: {
 		flex: 1,
 		flexDirection: "column",
-		justifyContent: "space-between",
-		maxWidth: 300,
-		// paddingVertical: '20%',
-		// alignItems: "center",
-		// flexWrap: "wrap",
+		justifyContent: "flex-start",
+		alignItems: "center",
+	},
+	profileImage: {
+		height: '100%',
+		width: '100%',
+		borderRadius: 100,
 	},
 	profileInfo: {
 		flex: 1,
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		margin: 10,
 		minWidth: 300,
-		// height: 300,
 	},
 	profileAboutContainer: {
 		flex: 1,
@@ -84,13 +82,10 @@ const styles = StyleSheet.create({
 	},
 	profileAbout: {
 		flex: 1,
-		// justifyContent: "space-around",
 		padding: 20,
 		margin: 20,
 		width: "100%",
 		height: "100%",
-		// borderRadius: 10,
-		// borderWidth: 2,
 		borderColor: "gray",
 		backgroundColor: "whitesmoke",
 	},
