@@ -1,10 +1,10 @@
 import React from "react";
 import {
-	StyleSheet,
-	Text,
-	View,
-	TouchableHighlight,
-	useWindowDimensions,
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+  useWindowDimensions,
 } from "react-native";
 
 /**
@@ -33,38 +33,38 @@ function Footer({ navigation }) {
 					Brought to you by Team Black Panther.
 				</Text>
 
-				<Text
-					style={styles.footerText}
-					name="About"
-					onPress={() => navigation.navigate("About")}
-				>
-					About
-				</Text>
+        <Text
+          style={styles.footerText}
+          name="About"
+          onPress={() => navigation.navigate("About")}
+        >
+          About
+        </Text>
 
-				<Text
-					navigation={navigation}
-					style={styles.footerText}
-					name="Rule"
-					onPress={() => navigation.navigate("Rule")}
-				>
-					Rule
-				</Text>
-				<Text
-					navigation={navigation}
-					style={styles.footerText}
-					name="Contact"
-					onPress={() => navigation.navigate("Contact")}
-				>
-					Contact
-				</Text>
+        <Text
+          navigation={navigation}
+          style={styles.footerText}
+          name="Rule"
+          onPress={() => navigation.navigate("Rule")}
+        >
+          Rule
+        </Text>
+        <Text
+          navigation={navigation}
+          style={styles.footerText}
+          name="Contact"
+          onPress={() => navigation.navigate("Contact")}
+        >
+          Contact
+        </Text>
 
-				<Text
-					style={styles.footerText}
-					name="Terms"
-					onPress={() => navigation.navigate("Terms")}
-				>
-					Terms
-				</Text>
+        <Text
+          style={styles.footerText}
+          name="Terms"
+          onPress={() => navigation.navigate("Terms")}
+        >
+          Terms
+        </Text>
 
 				<Text style={styles.footerTextSelect} style={styles.footerText}>
 					©2021 MarvelSpace.All Rights Reserved.
@@ -99,18 +99,18 @@ const styles = StyleSheet.create({
 		
 	},
 
-	footerText: {
-		color: "#6c72d9",
-		fontWeight: "bold",
-		alignItems: "center",
-		fontSize: 14,
-		padding: 10,
-	},
-	footerTextSelect: {
-		color: "#6d6f91",
-		fontWeight: "bold",
-		alignItems: "center",
-		fontSize: 10,
-	},
+  footerText: {
+    color: "#6c72d9",
+    fontWeight: "bold",
+    alignItems: "center",
+    fontSize: 14,
+    padding: 10,
+  },
+  footerTextSelect: {
+    color: "#6d6f91",
+    fontWeight: "bold",
+    alignItems: "center",
+    fontSize: 10,
+  },
 });
 export default Footer;

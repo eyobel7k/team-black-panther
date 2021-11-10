@@ -87,7 +87,7 @@ export default function Chat() {
                 </View>
               </TouchableOpacity>
             </View>
-            <ScrollView style={{ height: "60%", width: "90%" }}>
+            <ScrollView style={{ height: "60%", width: "90%",  }}>
               <View style={styles.items}>
                 {/* This is where the message will go! */}
                 {taskItems.map((item, index) => {
@@ -138,8 +138,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
+    
     alignSelf: "center",
     justifyContent: "center",
   },
@@ -149,10 +150,11 @@ const styles = StyleSheet.create({
   writeTaskWrapper: {
     position: "absolute",
     bottom: 80,
-    width: "20%",
+    // width: "70%",
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    
   },
   writeTask: {
     flexDirection: "row",
@@ -160,28 +162,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   input: {
-    paddingVertical: 5,
+    
     paddingHorizontal: 40,
     backgroundColor: "#FFF",
-    borderRadius: 60,
+    borderRadius: 50,
     borderColor: "#C0C0C0",
-    borderWidth: 1,
-    width: "100%",
-    marginTop: 20,
-    marginLeft: 20,
-    alignItems: "center",
+    borderWidth: 3,
+    width: "77%",
+    marginTop: 50,
+    marginLeft: 10,
+    alignItems: "stretch",
+    borderColor:"#0115B1"
   },
 
   addWrapper: {
-    width: 60,
-    height: 60,
-    backgroundColor: "#FFF",
-    borderRadius: 30,
+    width: 55,
+    height: 55,
+    backgroundColor: "blue",
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#C0C0C0",
-    borderWidth: 1,
+    borderWidth: 3,
+    borderColor:"#00052C",
     marginRight: 15,
+    marginHorizontal: 52,
+    marginVertical:23,
+    paddingVertical:10
+    
   },
 
   item: {
