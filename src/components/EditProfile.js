@@ -15,7 +15,7 @@ const EditProfile = ({ navigation }) => {
 
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((response) => {
-			setProfileInfo(response.at(0).content.rendered);
+			setProfileInfo(response[0].content.rendered);
 		});
 	});
 	return (

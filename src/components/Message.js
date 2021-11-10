@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     margin: 5,
     fontSize: 14,
     fontWeight: "bold",
-    // fontFamily: "tho",
+    // fontFamily: "Serif",
   },
 
   image: {

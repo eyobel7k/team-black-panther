@@ -1,62 +1,147 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	StyleSheet,
 	Image,
 	View,
 	TextInput,
 	TouchableOpacity,
+	Button,
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
+import welcomeImg from '../../assets/marvelspace_login.png';
+
+	// example response
+	// {
+	// 	"token": "random.characters.string",
+	// 	"user_display_name": "Iron Man",
+	// 	"user_email": "me@marvelspace.com",
+	// 	"user_nickname": "ironmann",
+	// }
 
 function LogInPage({ navigation }) {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const [token, setToken] = useState("");
+
+	useEffect(() => {
+		if (loading) {
+			// for demo purposes, will delete afterwards
+			if (username === 'user' && password === 'pass') {
+				new Promise(resolve => setTimeout(() => resolve({
+					"token": "random.characters.string",
+					"user_display_name": "Iron Man",
+					"user_email": "me@marvelspace.com",
+					"user_nickname": "ironmann",
+				}), 2000))
+				.then(formSuccess);
+				return;
+			}
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: `${username}`,
+					password: `${password}`,
+				}),
+			};
+
+			fetch(
+				`https://jualuc1.dreamhosters.com/wp-json/jwt-auth/v1/token`,
+				options
+			)
+				.then(response => response.json())
+				.then((data) => {
+					data.token ? formSuccess(data) : formError(data);
+				});
+		}
+	}, [loading]);
+
+	const onFormSubmit = () => {
+		setError("");
+		setLoading(true);
+	};
+
+	const formSuccess = (response) => {
+		setToken(response.token);
+		setLoggedIn(true);
+		setLoading(false);
+		setUsername("");
+		setPassword("");
+		navigation.navigate("Newsfeed", { ...response });
+	};
+
+	const formError = (response) => {
+		const regex = /<[^>]*>/g;
+		setLoading(false);
+		setPassword("");
+		setError(response.message ? response.message.replace(regex, "") : "An error has occurred!");
+	};
 	return (
 		<ThemeLoggedOut navigation={navigation}>
 			<View style={styles.body} navigation={navigation}>
-				<Text
+				{/* <Text
 					navigation={navigation}
 					style={styles.headerText}
 					name="Newsfeed"
 					onPress={() => navigation.navigate("Newsfeed")}
 				>
 					Newsfeed
-				</Text>
+				</Text> */}
 				<View style={styles.ImageBorder}>
 					<Text h2 style={styles.bodyText}>
 						Join the fun ..
 					</Text>
 					<View style={styles.imageContainer}>
 						<Image
-							source={{ uri: "https://i.pravatar.cc/300" }}
-							style={{ height: "10%", width: "100%" }}
+							source={welcomeImg}
+							style={{ height: 350, width: 350  }}
 						/>
 					</View>
 				</View>
 				<View style={styles.LogInBorder}>
-					<Text h3 style={styles.bodyText}>
-						Login
-					</Text>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Email"
-							placeholderTextColor="#1722e8"
-							// onChangeText={(email) => setEmail(email)}
-						/>
-					</View>
-
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Password"
-							placeholderTextColor="#1722e8"
-							secureTextEntry={true}
-							// onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText}>Submit</Text>
-					</TouchableOpacity>
+					{loggedIn ? (
+						<View>
+							<Text>Logged In</Text>
+						</View>
+					) : (
+						<View>
+							{/* <Text style={{ fontWeight: "bold" }}>Login</Text> */}
+							<Text h3 style={styles.bodyText}>
+								Login
+							</Text>
+							<View style={styles.inputView}>
+								<Text>Username:</Text>
+								<TextInput
+									style={styles.input}
+									value={username}
+									onChangeText={setUsername}
+									onSubmitEditing={onFormSubmit}
+								/>
+							</View>
+							<View style={styles.inputView}>
+								<Text>Password:</Text>
+								<TextInput
+									// style={styles.input}
+									value={password}
+									onChangeText={setPassword}
+									onSubmitEditing={onFormSubmit}
+									secureTextEntry={true}
+								/>
+							</View>
+							<TouchableOpacity>
+								<Button onPress={onFormSubmit} title="Login" />
+								<Text>{loading && "Loading"}</Text>
+								<Text>{error}</Text>
+								{/* <Text style={styles.bodyText}>Submit</Text> */}
+							</TouchableOpacity>
+						</View>
+					)}
 					<TouchableOpacity>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
 							Forgot Password?{" "}
@@ -94,41 +179,47 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	body: {
+		flex: 1,
 		backgroundColor: "#fff",
-		height: "70%",
+		// height: "70%",
 		width: "100%",
-		textAlign: "center",
-		justifyContent: "center",
-		flexDirection: "row",
-		margin: 20,
-		padding: 40,
+		// textAlign: "center",
+		justifyContent: "space-around",
+		flexDirection: "column",
+		// margin: 20,
+		// padding: 40,
 	},
 	bodyText: {
 		color: "#1722e8",
+		alignSelf: 'center'
 	},
 	LogInBorder: {
-		borderStyle: "solid",
-		borderRadius: 50,
+		// borderWidth: 2,
+		// borderStyle: "solid",
+		// borderRadius: 50,
 		backgroundColor: "#fff",
-		width: "50%",
-		height: "100%",
+		// width: "50%",
+		// height: "100%",
 		color: "#e9e9f5",
-		alignItems: "center",
-		justifyContent: "space-evenly",
+		// alignItems: "center",
+		// justifyContent: "space-around",
 		marginHorizontal: 10,
 		paddingTop: 20,
 		paddingBottom: 10,
 	},
 	ImageBorder: {
 		// border: "solid",
-		borderRadius: 50,
+		flex: 1,
+		// borderWidth: 2,
+		// borderRadius: 50,
 		backgroundColor: "#fff",
-		width: "40%",
-		height: "80%",
+		// width: "40%",
+		// height: "80%",
 
 		alignItems: "center",
-		justifyContent: "center",
-		marginHorizontal: 20,
+		// flexWrap: "wrap",
+		// justifyContent: "center",
+		marginHorizontal: 10,
 	},
 	header: {
 		width: "100%",
@@ -147,7 +238,7 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 	},
 	inputView: {
-		width: "60%",
+		// width: "60%",
 		borderRadius: 10,
 		height: 50,
 		alignItems: "center",
@@ -161,7 +252,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 10,
 		marginLeft: 20,
-		alignItems: "center",
+		// alignItems: "center",
 	},
 
 	forgot_button: {

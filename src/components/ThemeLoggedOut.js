@@ -1,37 +1,45 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, useWindowDimensions } from "react-native";
 import HeaderLogPage from "./HeaderLogPage";
 import Footer from "./Footer";
 
 function ThemeLoggedOut({ children, navigation }) {
+	const {width} = useWindowDimensions();
+	const widthBreakpoint = 700;
+	
 	return (
-		<View style={styles.container} navigation={navigation}>
-			<View style={styles.Header} navigation={navigation}>
+		<View style={styles.container}>
+			<View style={styles.Header}>
 				<HeaderLogPage navigation={navigation} />
 			</View>
 			<ScrollView
-				navigation={navigation}
 				style={styles.scrollView}
 				contentContainerStyle={styles.scrollContentContainer}
 			>
 				{children}
+				{width < widthBreakpoint && (
+					<View style={styles.Footer}>
+						<Footer navigation={navigation} />
+					</View>
+				)}
 			</ScrollView>
-			<View style={styles.Footer}>
-				<Footer navigation={navigation} />
-			</View>
+			{width >= widthBreakpoint && (
+				<View style={styles.Footer}>
+					<Footer navigation={navigation} />
+				</View>
+			)}
 		</View>
 	);
 }
 const styles = StyleSheet.create({
 	scrollView: {
-		height: "60%",
-		paddingTop: 10,
-		borderWidth: 2,
-		borderRadius: 5,
+		borderTopWidth: 2,
 		borderColor: "#D3D3D3",
 	},
 	scrollContentContainer: {
-		// flexWrap: "wrap",
+		justifyContent: "space-between",
+		paddingTop: '5%',
+		paddingBottom: '50%',
 	},
 	container: {
 		flex: 1,
@@ -44,11 +52,11 @@ const styles = StyleSheet.create({
 		// fontFamily: "Serif",
 	},
 	Header: {
-		height: "15%",
+		height: "20%",
 		top: 0,
 	},
 	Footer: {
-		height: "25%",
+		height: "20%",
 		bottom: 0,
 	},
 });

@@ -8,7 +8,7 @@ import ThemeLoggedIn from "./ThemeLoggedIn";
 import PostModal from "./PostModal";
 import { Text } from "react-native-elements";
 
-function Newsfeed({ navigation }) {
+function Newsfeed({ route, navigation }) {
 	const [postsArr, setPostsArr] = useState([]);
 	const [showPostModal, setShowPostModal] = useState(false);
 
@@ -39,6 +39,8 @@ function Newsfeed({ navigation }) {
 		<ThemeLoggedIn navigation={navigation}>
 			<View style={styles.container} navigation={navigation}>
 				<ScrollView>
+					{/* for demo purposes, will delete afterwards */}
+					{ route.params?.user_display_name && <Text>{`Howdy ${route.params.user_display_name}!`}</Text> }
 					<View style={styles.body}>
 						<Text h3 style={styles.heading}>
 							Newsfeed

@@ -17,7 +17,7 @@ function Post(props) {
 	const [commentTimes, setCommentTimes] = useState([]);
 	const [commentYears, setCommentYears] = useState([]);
 
-	console.log(props.associatedContent);
+	// console.log(props.associatedContent);
 	const postAuthor = props.associatedContent.author;
 	const postTime = props.associatedContent.date.substring(11);
 	const postDate =

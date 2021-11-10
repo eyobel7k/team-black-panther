@@ -1,6 +1,7 @@
 const BASE_URL = 'https://jualuc1.dreamhosters.com/wp-json';
 const WP_PATH = 'wp/v2';
 const BUDDYPRESS_PATH = 'buddypress/v1';
+const JWT_AUTH_PATH = 'jwt-auth/v1';
 
 export const WPAPI_PATHS = {
   wp: {
@@ -16,31 +17,32 @@ export const WPAPI_PATHS = {
   buddypress: {
     members: `${BUDDYPRESS_PATH}/members`,
     activity: `${BUDDYPRESS_PATH}/activity`,
+  },
+  jwtAuth: {
+    token: `${JWT_AUTH_PATH}/token`,
   }
 }
- /**
+
+const isNotEmptyObject = object => Object.keys(object).length > 0;
+/**
   * helper function to build url with query parameters
   * @param {string} path 
   * @param {Object} params 
   * @returns string
   */
-const buildUrl = ( path, params = {} ) => {
+const buildQueryUrl = ( path, params = {} ) => {
   const paramsPairs = Object.entries(params);
   // removes slash (/) from end of path if one exists
   const trimmedPath = path.endsWith('/') ? path.slice(0, -1) : path;
-  // append query start symbol (?) to path if params exist
-  const queryStart = paramsPairs.length > 0 ? '?' : '';
-  const initialUrl = `${BASE_URL}/${trimmedPath}${queryStart}`;
+  const initialUrl = `${BASE_URL}/${trimmedPath}?`;
 
-  const builtUrl = paramsPairs.reduce((builtUrl, [ key, value ], i) => {
+  const builtUrl = paramsPairs.reduce((urlAccumulator, [ key, value ], i) => {
     // append query separator (&) if we are not at the final param iteration
     const querySeparator = i < paramsPairs.length - 1 ? '&' : '';
-    return builtUrl + `${key}=${value}${querySeparator}`;
+    return urlAccumulator + `${key}=${value}${querySeparator}`;
   }, initialUrl);
-  // return examples:
+  // return example:
   // https://jualuc1.dreamhosters.com/wp-json/wp/posts?firstKey=firstValue&secondKey=secondValue
-  // or
-  // https://jualuc1.dreamhosters.com/wp-json/wp/posts 
   return builtUrl;
 }
 
@@ -49,12 +51,12 @@ const buildUrl = ( path, params = {} ) => {
  * @return {Promise} response
  * example use: wpApiFetch({ path: WPAPI_PATHS.posts }) returns Promise for wordpress posts array
  */
-export const wpApiFetch = async ({ path, queryParams, data, method = 'GET' }) => {
+export const wpApiFetch = async ({ path, queryParams = {}, headers = {}, body, method = 'GET' }) => {
+  const url = isNotEmptyObject(queryParams)
+    ? buildQueryUrl(path, queryParams)
+    : `${BASE_URL}/${path}`
   try {
-    const response = await fetch(
-      buildUrl(path, queryParams),
-      { method, body: JSON.stringify(data) }
-    );
+    const response = await fetch(url, { method, headers, body: JSON.stringify(body) });
     return response.json();
   } catch(error) {
     // any error handling code goes here

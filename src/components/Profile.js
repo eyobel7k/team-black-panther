@@ -15,23 +15,19 @@ const Profile = ({ navigation }) => {
 	const { height, width } = useWindowDimensions();
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
-			console.log(response);
 			setProfileInfo(response[0]);
 		});
 	}, []); // runs onMount only
 
   return (
-    // <ThemeLoggedIn navigation={navigation}>
+    <ThemeLoggedIn navigation={navigation}>
       <View style={styles.profileContainer}>
 				<Image 
 					source={{ uri: profileInfo.avatar_urls?.["96"] }} 
-					style={{
+					style={[styles.profileImage, {
 						maxWidth: width > 300 ? 150 : 250,
 						maxHeight: width > 300 ? 150: 250,
-						height: '100%',
-						width: '100%',
-						borderRadius: 100, // was 100%
-					}}
+					}]}
 				/>
 				<View style={styles.profileInfo}>
 					<Text style={styles.h2}>{profileInfo.name}</Text>
@@ -54,7 +50,7 @@ const Profile = ({ navigation }) => {
 				</View>
 
       </View>
-    // </ThemeLoggedIn>
+    </ThemeLoggedIn>
   )
 }
 
@@ -62,11 +58,13 @@ const styles = StyleSheet.create({
 	profileContainer: {
 		flex: 1,
 		flexDirection: "column",
-		justifyContent: "space-between",
-		maxWidth: 300,
-		// paddingVertical: '20%',
-		// alignItems: "center",
-		// flexWrap: "wrap",
+		justifyContent: "flex-start",
+		alignItems: "center",
+	},
+	profileImage: {
+		height: '100%',
+		width: '100%',
+		borderRadius: 100,
 	},
 	profileInfo: {
 		flex: 1,
@@ -74,39 +72,35 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		margin: 10,
 		minWidth: 300,
-		// height: 300,
 	},
 	profileAboutContainer: {
-		// flex: 1,
-		// justifyContent: "space-around",
-		// alignItems: "center",
-		// margin: 20,
-		// minWidth: 300,
+		flex: 1,
+		justifyContent: "space-around",
+		alignItems: "center",
+		margin: 20,
+		minWidth: 300,
 	},
 	profileAbout: {
-		// flex: 1,
-		// justifyContent: "space-around",
-		// padding: 20,
-		// margin: 20,
-		// width: "100%",
-		// height: 20,
-		// borderRadius: 10,
-		// borderWidth: 2,
-		// borderColor: "gray",
-		// backgroundColor: "whitesmoke",
+		flex: 1,
+		padding: 20,
+		margin: 20,
+		width: "100%",
+		height: "100%",
+		borderColor: "gray",
+		backgroundColor: "whitesmoke",
 	},
 	pillButton: {
-		// borderRadius: 10,
-		// backgroundColor: "lightgray",
-		// paddingHorizontal: 20,
-		// paddingVertical: 4,
+		borderRadius: 10,
+		backgroundColor: "lightgray",
+		paddingHorizontal: 20,
+		paddingVertical: 4,
 	},
 	h2: {
 		fontSize: 36, // was 'xx-large'
 		fontWeight: "bold",
 		color: "blue",
-		// paddingTop: 20,
-		// paddingHorizontal: "10%",
+		paddingTop: 20,
+		paddingHorizontal: "10%",
 	},
 	h3: {
 		fontSize: 26, // was 'large'
