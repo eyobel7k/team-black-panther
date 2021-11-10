@@ -1,26 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	StyleSheet,
 	Image,
 	View,
 	TextInput,
 	TouchableOpacity,
+	Button,
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
 function LogInPage({ navigation }) {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const [token, setToken] = useState("");
+
+	useEffect(() => {
+		if (loading) {
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: `${username}`,
+					password: `${password}`,
+				}),
+			};
+
+			fetch(
+				`https://jualuc1.dreamhosters.com/wp-json/jwt-auth/v1/token`,
+				options
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					data.token ? formSuccess(data) : formError(data);
+				});
+		}
+	}, [loading]);
+
+	const onFormSubmit = () => {
+		setError("");
+		setLoading(true);
+	};
+
+	const formSuccess = (data) => {
+		setToken(data.token);
+		setLoggedIn(true);
+		setLoading(false);
+		setUsername("");
+		setPassword("");
+		navigation.navigate("Newsfeed");
+	};
+
+	const formError = (data) => {
+		const regex = /<[^>]*>/g;
+		setLoading(false);
+		setPassword("");
+		// data?.message ? setError(data.message.replaceAll(regex, "")) : "";
+		console.log(data);
+	};
 	return (
 		<ThemeLoggedOut navigation={navigation}>
 			<View style={styles.body} navigation={navigation}>
-				<Text
+				{/* <Text
 					navigation={navigation}
 					style={styles.headerText}
 					name="Newsfeed"
 					onPress={() => navigation.navigate("Newsfeed")}
 				>
 					Newsfeed
-				</Text>
+				</Text> */}
 				<View style={styles.ImageBorder}>
 					<Text h2 style={styles.bodyText}>
 						Join the fun ..
@@ -33,30 +86,43 @@ function LogInPage({ navigation }) {
 					</View>
 				</View>
 				<View style={styles.LogInBorder}>
-					<Text h3 style={styles.bodyText}>
-						Login
-					</Text>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Email"
-							placeholderTextColor="#1722e8"
-							// onChangeText={(email) => setEmail(email)}
-						/>
-					</View>
-
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Password"
-							placeholderTextColor="#1722e8"
-							secureTextEntry={true}
-							// onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText}>Submit</Text>
-					</TouchableOpacity>
+					{loggedIn ? (
+						<View>
+							<Text>Logged In</Text>
+						</View>
+					) : (
+						<View>
+							{/* <Text style={{ fontWeight: "bold" }}>Login</Text> */}
+							<Text h3 style={styles.bodyText}>
+								Login
+							</Text>
+							<View style={styles.inputView}>
+								<Text>Username:</Text>
+								<TextInput
+									style={styles.input}
+									value={username}
+									onChangeText={setUsername}
+									onSubmitEditing={onFormSubmit}
+								/>
+								</View>
+								<View style={styles.inputView}>
+								<Text>Password:</Text>
+								<TextInput
+									// style={styles.input}
+									value={password}
+									onChangeText={setPassword}
+									onSubmitEditing={onFormSubmit}
+									secureTextEntry={true}
+								/>
+								</View>
+								<TouchableOpacity>
+								<Button onPress={onFormSubmit} title="Login" />
+								<Text>{loading && "Loading"}</Text>
+								<Text>{error}</Text>
+								{/* <Text style={styles.bodyText}>Submit</Text> */}
+							</TouchableOpacity>
+						</View>
+					)}
 					<TouchableOpacity>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
 							Forgot Password?{" "}

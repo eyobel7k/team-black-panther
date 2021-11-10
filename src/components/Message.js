@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     margin: 5,
     fontSize: 14,
     fontWeight: "bold",
-    fontFamily: "Serif",
+    // fontFamily: "Serif",
   },
 
   image: {
