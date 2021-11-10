@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
-import welcomeImg from '../../assets/marvelspace_login.png';
+import welcomeImg from "../../assets/marvelspace_login.png";
 
-	// example response
-	// {
-	// 	"token": "random.characters.string",
-	// 	"user_display_name": "Iron Man",
-	// 	"user_email": "me@marvelspace.com",
-	// 	"user_nickname": "ironmann",
-	// }
+// example response
+// {
+// 	"token": "random.characters.string",
+// 	"user_display_name": "Iron Man",
+// 	"user_email": "me@marvelspace.com",
+// 	"user_nickname": "ironmann",
+// }
 
 function LogInPage({ navigation }) {
 	const [username, setUsername] = useState("");
@@ -30,14 +30,19 @@ function LogInPage({ navigation }) {
 	useEffect(() => {
 		if (loading) {
 			// for demo purposes, will delete afterwards
-			if (username === 'user' && password === 'pass') {
-				new Promise(resolve => setTimeout(() => resolve({
-					"token": "random.characters.string",
-					"user_display_name": "Iron Man",
-					"user_email": "me@marvelspace.com",
-					"user_nickname": "ironmann",
-				}), 2000))
-				.then(formSuccess);
+			if (username === "user" && password === "pass") {
+				new Promise((resolve) =>
+					setTimeout(
+						() =>
+							resolve({
+								token: "random.characters.string",
+								user_display_name: "Iron Man",
+								user_email: "me@marvelspace.com",
+								user_nickname: "ironmann",
+							}),
+						2000
+					)
+				).then(formSuccess);
 				return;
 			}
 			const options = {
@@ -55,7 +60,7 @@ function LogInPage({ navigation }) {
 				`https://jualuc1.dreamhosters.com/wp-json/jwt-auth/v1/token`,
 				options
 			)
-				.then(response => response.json())
+				.then((response) => response.json())
 				.then((data) => {
 					data.token ? formSuccess(data) : formError(data);
 				});
@@ -80,7 +85,11 @@ function LogInPage({ navigation }) {
 		const regex = /<[^>]*>/g;
 		setLoading(false);
 		setPassword("");
-		setError(response.message ? response.message.replace(regex, "") : "An error has occurred!");
+		setError(
+			response.message
+				? response.message.replace(regex, "")
+				: "An error has occurred!"
+		);
 	};
 	return (
 		<ThemeLoggedOut navigation={navigation}>
@@ -98,16 +107,13 @@ function LogInPage({ navigation }) {
 						Join the fun ..
 					</Text>
 					<View style={styles.imageContainer}>
-						<Image
-							source={welcomeImg}
-							style={{ height: 350, width: 350  }}
-						/>
+						<Image source={welcomeImg} style={{ height: 350, width: 350 }} />
 					</View>
 				</View>
 				<View style={styles.LogInBorder}>
 					{loggedIn ? (
 						<View>
-							<Text>Logged In</Text>
+							<Text> Logged In </Text>
 						</View>
 					) : (
 						<View>
@@ -116,7 +122,7 @@ function LogInPage({ navigation }) {
 								Login
 							</Text>
 							<View style={styles.inputView}>
-								<Text>Username:</Text>
+								<Text>  Username  </Text>
 								<TextInput
 									style={styles.input}
 									value={username}
@@ -125,7 +131,7 @@ function LogInPage({ navigation }) {
 								/>
 							</View>
 							<View style={styles.inputView}>
-								<Text>Password:</Text>
+								<Text> Password </Text>
 								<TextInput
 									// style={styles.input}
 									value={password}
@@ -134,7 +140,7 @@ function LogInPage({ navigation }) {
 									secureTextEntry={true}
 								/>
 							</View>
-							<TouchableOpacity>
+							<TouchableOpacity style={styles.bodyText}>
 								<Button onPress={onFormSubmit} title="Login" />
 								<Text>{loading && "Loading"}</Text>
 								<Text>{error}</Text>
@@ -142,9 +148,9 @@ function LogInPage({ navigation }) {
 							</TouchableOpacity>
 						</View>
 					)}
-					<TouchableOpacity>
+					<TouchableOpacity style={styles.forgot_button}>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Forgot Password?{" "}
+							Forgot Password?
 							<Text
 								name="ResetPasswordPage"
 								onPress={() => navigation.navigate("ResetPasswordPage")}
@@ -153,7 +159,7 @@ function LogInPage({ navigation }) {
 							</Text>
 						</Text>
 					</TouchableOpacity>
-					<TouchableOpacity>
+					<TouchableOpacity style={styles.forgot_button}>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
 							Don't have an account?
 							<Text
@@ -181,44 +187,30 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		backgroundColor: "#fff",
-		// height: "70%",
 		width: "100%",
-		// textAlign: "center",
+		textAlign: "center",
 		justifyContent: "space-around",
 		flexDirection: "column",
-		// margin: 20,
-		// padding: 40,
 	},
 	bodyText: {
 		color: "#1722e8",
-		alignSelf: 'center'
+		alignSelf: "center",
 	},
 	LogInBorder: {
-		// borderWidth: 2,
-		// borderStyle: "solid",
-		// borderRadius: 50,
 		backgroundColor: "#fff",
-		// width: "50%",
-		// height: "100%",
+
+		width: "100%",
 		color: "#e9e9f5",
-		// alignItems: "center",
-		// justifyContent: "space-around",
-		marginHorizontal: 10,
+		alignItems: "center",
+		justifyContent: "space-around",
 		paddingTop: 20,
 		paddingBottom: 10,
+		marginTop: 20,
 	},
 	ImageBorder: {
-		// border: "solid",
 		flex: 1,
-		// borderWidth: 2,
-		// borderRadius: 50,
 		backgroundColor: "#fff",
-		// width: "40%",
-		// height: "80%",
-
 		alignItems: "center",
-		// flexWrap: "wrap",
-		// justifyContent: "center",
 		marginHorizontal: 10,
 	},
 	header: {
@@ -238,12 +230,13 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 	},
 	inputView: {
-		// width: "60%",
+		width: "100%",
 		borderRadius: 10,
 		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
+		// alignItems: "center",
+		// justifyContent: "center",
+		marginTop: 20,
+		marginBottom: 10,
 		backgroundColor: "#e9e9f5",
 	},
 
@@ -252,24 +245,17 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 10,
 		marginLeft: 20,
-		// alignItems: "center",
+		alignItems: "center",
 	},
 
 	forgot_button: {
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
 	},
-	loginBtn: {
-		width: "20%",
-		borderRadius: 25,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-		marginBottom: 10,
-		backgroundColor: "#87cefa",
-	},
+
 	imageContainer: {
 		flex: 1,
 		justifyContent: "space-evenly",
