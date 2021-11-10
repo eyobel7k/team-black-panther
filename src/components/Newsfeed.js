@@ -9,8 +9,8 @@ import PostModal from "./PostModal";
 import { Text } from "react-native-elements";
 
 function Newsfeed({ route, navigation }) {
-	const [postsArr, setPostsArr] = useState([]);
-	const [showPostModal, setShowPostModal] = useState(false);
+  const [postsArr, setPostsArr] = useState([]);
+  const [showPostModal, setShowPostModal] = useState(false);
 
   useEffect(() => {
     posts()
@@ -39,8 +39,10 @@ function Newsfeed({ route, navigation }) {
     <ThemeLoggedIn navigation={navigation}>
       <View style={styles.container} navigation={navigation}>
         <ScrollView>
-          	{/* for demo purposes, will delete afterwards */}
-					{ route.params?.user_display_name && <Text>{`Howdy ${route.params.user_display_name}!`}</Text> }
+          {/* for demo purposes, will delete afterwards */}
+          {route.params?.user_display_name && (
+            <Text>{`Howdy ${route.params.user_display_name}!`}</Text>
+          )}
           <View style={styles.body}>
             <Text h3 style={styles.heading}>
               Newsfeed
@@ -66,7 +68,6 @@ function Newsfeed({ route, navigation }) {
             setPostsArr={setPostsArr}
           />
         )}
-        <Footer style={styles.footerWrapper} />
       </View>
     </ThemeLoggedIn>
   );
