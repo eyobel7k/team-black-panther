@@ -15,7 +15,6 @@ const Profile = ({ navigation }) => {
 	const { height, width } = useWindowDimensions();
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
-			console.log(response);
 			setProfileInfo(response[0]);
 		});
 	}, []); // runs onMount only
