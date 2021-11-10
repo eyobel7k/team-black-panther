@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native-elements";
 import {
-	StyleSheet,
-	View,
-	Image,
-	TextInput,
-	TouchableOpacity,
+  StyleSheet,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
 import ThemeLoggedIn  from "./ThemeLoggedIn";
 
 const EditProfile = ({ navigation }) => {
-	const [profileInfo, setProfileInfo] = useState([]);
+  const [profileInfo, setProfileInfo] = useState([]);
 
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((response) => {
@@ -48,31 +48,31 @@ const EditProfile = ({ navigation }) => {
 							/>
 						</View>
 
-						<View style={styles.inputView}>
-							<Text style={styles.bodyText}>Edit City</Text>
-							<TextInput
-								style={styles.TextInput}
-								placeholder=""
-								placeholderTextColor="#1722e8"
-							/>
-						</View>
-						<View style={styles.inputView}>
-							<Text style={styles.bodyText}>Edit About</Text>
-							<TextInput
-								style={styles.TextInput}
-								placeholder=""
-								placeholderTextColor="#1722e8"
-							/>
-						</View>
-						<TouchableOpacity style={styles.loginBtn}>
-							<Text style={styles.bodyText}>Submit</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-				<View />
-			</View>
-		</ThemeLoggedIn>
-	);
+            <View style={styles.inputView}>
+              <Text style={styles.bodyText}>Edit City</Text>
+              <TextInput
+                style={styles.TextInput}
+                placeholder=""
+                placeholderTextColor="#1722e8"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <Text style={styles.bodyText}>Edit About</Text>
+              <TextInput
+                style={styles.TextInput}
+                placeholder=""
+                placeholderTextColor="#1722e8"
+              />
+            </View>
+            <TouchableOpacity style={styles.loginBtn}>
+              <Text style={styles.bodyText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View />
+      </View>
+    </ThemeLoggedIn>
+  );
 };
 const styles = StyleSheet.create({
 	container: {
@@ -137,12 +137,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "#e9e9f5",
 	},
 
-	TextInput: {
-		height: 50,
-		flex: 1,
-		padding: 10,
-		marginLeft: 20,
-	},
+  TextInput: {
+    height: 50,
+    flex: 1,
+    padding: 10,
+    marginLeft: 20,
+  },
 
 	forgot_button: {
 		alignItems: "center",
