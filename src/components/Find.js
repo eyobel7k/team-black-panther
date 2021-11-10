@@ -14,7 +14,7 @@ const Find = ({ navigation }) => {
       .then((data) => {
         setFilteredDataSource(data);
         setMasterDataSource(data);
-        console.log(data);
+        // console.log(data);
       })
 
       .catch((error) => console.log(error));

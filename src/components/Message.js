@@ -15,7 +15,7 @@ function Messages({ navigation }) {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => {
         setMembers(data);
-        console.log(data);
+        // console.log(data);
       })
 
       .catch((error) => console.log(error));
