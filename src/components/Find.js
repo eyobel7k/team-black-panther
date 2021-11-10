@@ -72,7 +72,7 @@ const Find = ({ navigation }) => {
 
   return (
     <ThemeLoggedIn navigation={navigation}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <View style={styles.container}>
           <SearchBar
             round
@@ -89,7 +89,7 @@ const Find = ({ navigation }) => {
             renderItem={ItemView}
           />
         </View>
-      </SafeAreaView>
+      </View>
     </ThemeLoggedIn>
   );
 };
