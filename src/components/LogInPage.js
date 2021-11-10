@@ -10,15 +10,6 @@ import {
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
-/*
-example to fetch token for authentication
-
-wpApiFetch({
-	method: 'POST',
-	path: WPAPI_PATHS.jwtAuth.token,
-	headers: { "Content-Type": 'application/json' },
-	body: { username, password } 
-}).then(response => {	
 	// example response
 	// {
 	// 	"token": "string of random characters",
@@ -26,9 +17,6 @@ wpApiFetch({
 	// 	"user_email": "albertm@alphaworks.tech",
 	// 	"user_nicename": "ironmann",
 	// }
-	console.log(response)
-});
-*/
 
 function LogInPage({ navigation }) {
 	const [username, setUsername] = useState("");
