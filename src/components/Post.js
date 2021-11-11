@@ -226,7 +226,7 @@ const stylesWeb = StyleSheet.create({
     padding: 16,
     borderRadius: 10,
     width: 500,
-    height: 500,
+    height: 300,
     // height: "40%",
     // float: "left",
     // display: "flex",

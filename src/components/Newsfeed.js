@@ -207,7 +207,7 @@ const stylesWeb = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
-    marginTop: 16,
+    // marginTop: 16,
     flexBasis: "100%",
     flexShrink: 0,
     flexGrow: 0,
