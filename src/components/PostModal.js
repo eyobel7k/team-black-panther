@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  useWindowDimensions,
+} from "react-native";
 
 function PostModal(props) {
   const [text, onChangeText] = useState("");
+  const { width } = useWindowDimensions();
+  const widthBreakpoint = 700;
 
   const addNewPost = () => {
     let year = new Date().getFullYear();
@@ -48,6 +57,13 @@ function PostModal(props) {
     props.setShowPostModal(false);
   };
 
+  let styles;
+  if (width < widthBreakpoint) {
+    styles = stylesMobile;
+  } else {
+    styles = stylesWeb;
+  }
+
   return (
     <View style={styles.modalContainer}>
       <View style={styles.modal}>
@@ -75,7 +91,7 @@ function PostModal(props) {
   );
 }
 
-const styles = StyleSheet.create({
+const stylesMobile = StyleSheet.create({
   modalContainer: {
     position: "absolute",
     paddingTop: 80,
@@ -146,6 +162,77 @@ const styles = StyleSheet.create({
   },
   modalText: {
     textAlign: "center",
+  },
+});
+
+const stylesWeb = StyleSheet.create({
+  modalContainer: {
+    position: "absolute",
+    top: -65,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    alignItems: "center",
+    // justifyContent: "center",
+    zIndex: 100,
+  },
+  modal: {
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "#000",
+    top: 40,
+    margin: 0,
+    borderRadius: 5,
+    padding: 30,
+    backgroundColor: "#FFF",
+    width: 600,
+    height: 300,
+    alignItems: "center",
+    justifyContent: "center",
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "cadetblue",
+    borderRadius: 20,
+  },
+  textInput: {
+    marginTop: 32,
+    backgroundColor: "aliceblue",
+    width: 320,
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "cadetblue",
+    padding: 16,
+    borderRadius: 20,
+    textAlign: "center",
+  },
+  cornerX: {
+    position: "absolute",
+    top: 12,
+    right: 16,
+  },
+  cornerXText: {
+    fontSize: 19,
+  },
+  submitButton: {
+    width: 96,
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "lightskyblue",
+    color: "blue",
+  },
+  imgSubmitButton: {
+    width: 128,
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: "lightskyblue",
+    color: "blue",
   },
 });
 
