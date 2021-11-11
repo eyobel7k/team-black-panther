@@ -37,32 +37,26 @@ function Post(props) {
   let styles;
   if (width < widthBreakpoint) {
     styles = stylesMobile;
-  } else {
-    styles = stylesWeb;
-  }
-
-  const showComments = comments.map((comment, i) => {
-    return (
-      <View key={i} style={styles.comment}>
-        <Text style={styles.commentText}>{comment}</Text>
-        <Text style={styles.commentSubscript}>
-          posted by user at {commentTimes[i]} on {commentYears[i]}
-        </Text>
-      </View>
-    );
-  });
-
-  return (
-    <View key={props.id} style={styles.postWrapper}>
-      <View style={styles.post}>
-        <Text>{props.content}</Text>
-      </View>
-      <View>
-        <View style={styles.belowPost}>
-          <Text style={styles.postSubscript}>
-            Posted by {postAuthor} at {postTime} on {postDate}
+    const showComments = comments.map((comment, i) => {
+      return (
+        <View key={i} style={styles.comment}>
+          <Text style={styles.commentText}>{comment}</Text>
+          <Text style={styles.commentSubscript}>
+            posted by user at {commentTimes[i]} on {commentYears[i]}
           </Text>
-          <View style={styles.likesAndDislikes}>
+        </View>
+      );
+    });
+    return (
+      <View key={props.id}>
+        <View style={styles.post}>
+          <Text>{props.content}</Text>
+        </View>
+        <View>
+          <View style={styles.belowPost}>
+            <Text style={styles.postSubscript}>
+              Posted by {postAuthor} at {postTime} on {postDate}
+            </Text>
             <View style={styles.button}>
               <TouchableOpacity
                 style={styles.likeButton}
@@ -70,11 +64,11 @@ function Post(props) {
                 color="#f0f8ff"
                 onPress={() => setLikes(likes + 1)}
               >
-                <Text style={styles.thumb}>👍</Text>
+                <Text>👍</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.button}>
-              <Text style={styles.thumb}>{likes}</Text>
+              <Text>{likes}</Text>
             </View>
 
             <View style={styles.button}>
@@ -84,30 +78,96 @@ function Post(props) {
                 color="#f0f8ff"
                 onPress={() => setDislikes(dislikes + 1)}
               >
-                <Text style={styles.thumb}>👎</Text>
+                <Text>👎</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.button}>
-              <Text style={styles.thumb}>{dislikes}</Text>
+              <Text>{dislikes}</Text>
             </View>
           </View>
         </View>
-      </View>
-      <ScrollView style={styles.commentsWindow}>
-        <Text>{showComments}</Text>
-      </ScrollView>
+        <ScrollView style={styles.commentsWindow}>
+          <Text>{showComments}</Text>
+        </ScrollView>
 
-      <TextInput
-        style={styles.textInput}
-        value={reply}
-        onChangeText={setReply}
-        onSubmitEditing={addToComments}
-      />
-      <View style={styles.commentButtonWrapper}>
+        <TextInput
+          style={styles.textInput}
+          value={reply}
+          onChangeText={setReply}
+          onSubmitEditing={addToComments}
+        />
         <Button title="comment" onPress={addToComments} />
       </View>
-    </View>
-  );
+    );
+  } else {
+    styles = stylesWeb;
+    const showComments = comments.map((comment, i) => {
+      return (
+        <View key={i} style={styles.comment}>
+          <Text style={styles.commentText}>{comment}</Text>
+          <Text style={styles.commentSubscript}>
+            posted by user at {commentTimes[i]} on {commentYears[i]}
+          </Text>
+        </View>
+      );
+    });
+    return (
+      <View key={props.id} style={styles.postWrapper}>
+        <View style={styles.post}>
+          <Text>{props.content}</Text>
+        </View>
+        <View>
+          <View style={styles.belowPost}>
+            <Text style={styles.postSubscript}>
+              Posted by {postAuthor} at {postTime} on {postDate}
+            </Text>
+            <View style={styles.likesAndDislikes}>
+              <View style={styles.button}>
+                <TouchableOpacity
+                  style={styles.likeButton}
+                  title="👍"
+                  color="#f0f8ff"
+                  onPress={() => setLikes(likes + 1)}
+                >
+                  <Text style={styles.thumb}>👍</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.button}>
+                <Text style={styles.thumb}>{likes}</Text>
+              </View>
+
+              <View style={styles.button}>
+                <TouchableOpacity
+                  style={styles.likeButton}
+                  title="👎"
+                  color="#f0f8ff"
+                  onPress={() => setDislikes(dislikes + 1)}
+                >
+                  <Text style={styles.thumb}>👎</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.button}>
+                <Text style={styles.thumb}>{dislikes}</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <ScrollView style={styles.commentsWindow}>
+          <Text>{showComments}</Text>
+        </ScrollView>
+
+        <TextInput
+          style={styles.textInput}
+          value={reply}
+          onChangeText={setReply}
+          onSubmitEditing={addToComments}
+        />
+        <View style={styles.commentButtonWrapper}>
+          <Button title="comment" onPress={addToComments} />
+        </View>
+      </View>
+    );
+  }
 }
 
 export default Post;
@@ -255,7 +315,7 @@ const stylesWeb = StyleSheet.create({
     padding: 4.8,
     backgroundColor: "#f0f8ff",
     borderRadius: 20,
-    width: 320,
+    width: 380,
     alignSelf: "center",
   },
   comment: {
