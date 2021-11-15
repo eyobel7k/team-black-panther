@@ -1,8 +1,4 @@
-// import React from "react";
-// import { StyleSheet, Text, View } from "react-native";
-// import ThemeLoggedIn from "./ThemeLoggedIn";
-// function Images({ navigation }) {
-
+import ThemeLoggedIn from "./ThemeLoggedIn";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -12,10 +8,10 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function ImageGallery() {
+export default function Images({ navigation }) {
   const [imageArr, setImageArr] = useState([]);
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.wp.media }).then((data) =>
@@ -57,26 +53,30 @@ export default function ImageGallery() {
             color="#5569FE"
             key={index}
             onPress={() => deleteImage(index)}
-            title="Delete"
+            title="delete"
           />
+          <View></View>
         </View>
       </View>
     );
   });
 
   return (
-    <ScrollView style={styles.background}>
-      <View style={styles.topContainer}>
-        <Text>Images</Text>
-        <View style={styles.buttonContainer}>
-          {/* <Button color="#5569FE" onPress={uploadImage} title="Upload" /> */}
-          <View style={styles.spacing} />
-          {/* <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
+    <ThemeLoggedIn navigation={navigation}>
+      <ScrollView style={styles.background}>
+        <View style={styles.topContainer}>
+          <View style={styles.buttonContainer}>
+            {/* <Button color="#5569FE" onPress={uploadImage} title="Upload" /> */}
+            <View style={styles.spacing} />
+            {/* <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
+          </View>
         </View>
-      </View>
 
-      <View style={styles.imageContainer}>{generateGallery}</View>
-    </ScrollView>
+        <View style={styles.imageContainer}>{generateGallery}</View>
+        <Button color="#5569FE" onPress={uploadImage} title="Upload" />
+        <Button color="#5569FE" onPress={sendImage} title="Send" />
+      </ScrollView>
+    </ThemeLoggedIn>
   );
 }
 
@@ -118,17 +118,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// 	return (
-// 		<ThemeLoggedIn navigation={navigation}>
-// 			<View style={styles.container} navigation={navigation}>
-// 				<View style={styles.body} navigation={navigation}>
-
-// 					<Text style={styles.text}>Images!</Text>
-// 				</View>
-// 			</View>
-// 		</ThemeLoggedIn>
-// 	);
-// }
 // const styles = StyleSheet.create({
 // 	container: {
 // 		flex: 1,
