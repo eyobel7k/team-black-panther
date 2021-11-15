@@ -10,14 +10,14 @@ function Header({ navigation }) {
 		<View style={styles.Header} navigation={navigation}>
 			<TouchableHighlight navigation={navigation}>
 				<View style={styles.HeaderWarp} navigation={navigation}>
-					{/* <View style={styles.HeaderTitle}> */}
-						<Text h3 style={styles.HeaderSearch}>
-							MarvelSpace
-						</Text>
-						<Text h4 style={styles.headerText}>
-							A space for super friends
-						</Text>
-					{/* </View> */}
+					<View style={styles.HeaderTitle}>
+					<Text h3 style={styles.headerText}>
+						marvelspace
+					</Text>
+					<Text h4 style={styles.headerText}>
+						a space for super friends
+					</Text>
+					</View>
 					{/* <View style={styles.HeaderSearch}>
 						<SearchBar
 							lightTheme={true}
@@ -36,16 +36,14 @@ function Header({ navigation }) {
 			</TouchableHighlight>
 			<TouchableHighlight>
 				<View style={styles.HeaderBar} navigation={navigation}>
-					
-						<Text
-							navigation={navigation}
-							style={styles.headerText}
-							name="Newsfeed"
-							onPress={() => navigation.navigate("Newsfeed")}
-						>
-							Newsfeed
-						</Text>
-				
+					<Text
+						navigation={navigation}
+						style={styles.headerText}
+						name="Newsfeed"
+						onPress={() => navigation.navigate("Newsfeed")}
+					>
+						Newsfeed
+					</Text>
 
 					<Text
 						navigation={navigation}

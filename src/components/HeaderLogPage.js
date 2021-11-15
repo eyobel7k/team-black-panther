@@ -9,10 +9,10 @@ function HeaderLogPage() {
 			<TouchableHighlight style={styles.headerTouchableHighlight}>
 				<View style={styles.HeaderTitle}>
 					<Text h3 style={styles.headerText}>
-						Marvelspace a space
+						marvelspace
 					</Text>
 					<Text h3 style={styles.headerText}>
-						for super friends
+						a space for super friends
 					</Text>
 				</View>
 			</TouchableHighlight>
