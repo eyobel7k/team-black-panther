@@ -5,113 +5,102 @@ import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 
 const Find = ({ navigation }) => {
-	const [search, setSearch] = useState("");
-	const [filteredDataSource, setFilteredDataSource] = useState([]);
-	const [masterDataSource, setMasterDataSource] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
 
-	useEffect(() => {
-		wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
-			.then((data) => {
-				setFilteredDataSource(data);
-				setMasterDataSource(data);
-				// console.log(data);
-			})
+  useEffect(() => {
+    wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
+      .then((data) => {
+        setFilteredDataSource(data);
+        setMasterDataSource(data);
+      })
 
-			.catch((error) => console.log(error));
-	}, []);
-	// console.log(MasterDataSource);
-	const searchFilterFunction = (text) => {
-		// Check if searched text is not blank
-		if (text) {
-			// Inserted text is not blank
-			// Filter the masterDataSource
-			// Update FilteredDataSource
-			const newData = masterDataSource.filter((item) => {
-				const itemData = item.name ? item.name.toLowerCase() : "".toLowerCase();
-				const textData = text.toLowerCase();
-				return itemData.indexOf(textData) > -1;
-			});
-			setFilteredDataSource(newData);
-			setSearch(text);
-		} else {
-			// Inserted text is blank
-			// Update FilteredDataSource with masterDataSource
-			setFilteredDataSource(masterDataSource);
-			setSearch(text);
-		}
-	};
+      .catch((error) => console.log(error));
+  }, []);
 
-	const ItemView = ({ item }) => {
-		return (
-			// Flat List Item
-			<Text style={styles.itemStyle} onPress={() => getItem(item)}>
-				{/* {item.id}
-          {"."}   */}
-				{item.name.toLowerCase()}
-			</Text>
-		);
-	};
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = masterDataSource.filter((item) => {
+        const itemData = item.name ? item.name.toLowerCase() : "".toLowerCase();
+        const textData = text.toLowerCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
 
-	const ItemSeparatorView = () => {
-		return (
-			// Flat List Item Separator
-			<View
-				style={{
-					height: 0.5,
-					width: "100%",
-					backgroundColor: "#C8C8C8",
-				}}
-			/>
-		);
-	};
+  const ItemView = ({ item }) => {
+    return (
+      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
+        {item.name.toLowerCase()}
+      </Text>
+    );
+  };
 
-	const getItem = (item) => {
-		// Function for click on an item
-		alert("Id : " + item.id + "   Name: " + item.name);
-	};
+  const ItemSeparatorView = () => {
+    return (
+      <View
+        style={{
+          height: 0.5,
+          width: "100%",
+          backgroundColor: "#C8C8C8",
+        }}
+      />
+    );
+  };
 
-	return (
-		<ThemeLoggedIn navigation={navigation}>
-			<View style={styles.container}>
-			
-					<SearchBar
-						round
-						style={styles.body}
-						searchIcon={{ size: 24 }}
-						backgroundColor={"white"}
-						padding={10}
-						onChangeText={(text) => searchFilterFunction(text)}
-						onClear={(text) => searchFilterFunction("")}
-						placeholder="Search super friends..."
-						value={search}
-					/>
-					<FlatList
-						data={filteredDataSource}
-						keyExtractor={(item, index) => index.toString()}
-						ItemSeparatorComponent={ItemSeparatorView}
-						renderItem={ItemView}
-					/>
-			
-			</View>
-		</ThemeLoggedIn>
-	);
+  const getItem = (item) => {
+    alert("Id : " + item.id + "   Name: " + item.name);
+  };
+
+  return (
+    <ThemeLoggedIn navigation={navigation}>
+      <View style={styles.container}>
+        <SearchBar
+          round
+          style={styles.body}
+          searchIcon={{ size: 24 }}
+          backgroundColor={"white"}
+          padding={10}
+          onChangeText={(text) => searchFilterFunction(text)}
+          onClear={(text) => searchFilterFunction("")}
+          placeholder="Search super friends..."
+          value={search}
+        />
+        <FlatList
+          data={filteredDataSource}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
+      </View>
+    </ThemeLoggedIn>
+  );
 };
 
 const styles = StyleSheet.create({
-	container: {
-	flex: 1,
-		width: "80%",
-		backgroundColor: "#D5DAFF",
-		textAlign: "center",
-		paddingTop: 20,
-		paddingBottom: 10,
-		justifyContent: "center",
-		marginHorizontal: 45,
-	},
-	itemStyle: {
-		padding: 10,
-	},
-
+  container: {
+    flex: 1,
+    width: "80%",
+    backgroundColor: "#D5DAFF",
+    textAlign: "center",
+    paddingTop: 20,
+    paddingBottom: 10,
+    justifyContent: "center",
+    marginHorizontal: 45,
+    zIndex: -3,
+  },
+  itemStyle: {
+    padding: 10,
+  },
+  body: {
+    backgroundColor: "#D5DAFF",
+  },
 });
 
 export default Find;

@@ -5,7 +5,7 @@ import ThemeLoggedIn from "./ThemeLoggedIn";
 import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
-// const [selectedValue, setSelectedValue] = useState("java");
+
 function Messages({ navigation }) {
   const [members, setMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState({});
@@ -17,27 +17,15 @@ function Messages({ navigation }) {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => {
         setMembers(data);
-        // console.log(data);
+        console.log(data);
       })
 
       .catch((error) => console.log(error));
   }, []);
 
-  console.log("Members", members);
-
-  // const listMembers = members?.map((member, index) => (
-  //   <View key={index} style={styles.inlineProfile}>
-  //     <TouchableOpacity onPress={() => onPress(index)}>
-  //       <Image
-  //         style={styles.image}
-  //         source={{ uri: member.avatar_urls.thumb }}
-  //       />
-  //     </TouchableOpacity>
-  //     <Text>{member.name}</Text>
-  //   </View>
-  // ));
-
-  members.map((member, index) => <Text>member </Text>);
+  const newMembers = members?.map((member, index) => (
+    <Picker.Item label={member.name} key={index} value={member.name} />
+  ));
 
   return (
     <ThemeLoggedIn navigation={navigation}>
@@ -46,28 +34,20 @@ function Messages({ navigation }) {
           <Text style={styles.text}>
             <Picker
               selectedValue={
-                selectedMember.name ? selectedMember.name : "Iron Man"
+                selectedMember.name ? selectedMember.name : "Select"
               }
               style={{
                 height: 50,
                 width: 170,
-                backgroundColor: "#535981",
+                backgroundColor: "#d2d2d6",
+                color: "#6c72d9",
                 borderRadius: 35,
               }}
               onValueChange={(member, itemIndex) => {
                 setSelectedMember(members[itemIndex]);
-                // console.log(members[itemIndex])
               }}
             >
-              {/* <Picker.Item label="Friends " value=" Friends" /> */}
-              <Picker.Item label={"Iron Man"} value="Iron Man" />
-              <Picker.Item label="Spiderman" value="Spiderman" />
-              <Picker.Item label="Wolverine" value="Wolverine" />
-              <Picker.Item label="Xavier Mercado" value="Xavier Mercado" />
-              <Picker.Item
-                label="Professor Xavier "
-                value=" Professor Xavier"
-              />
+              {newMembers}
             </Picker>
             {Object.keys(selectedMember).length !== 0 && (
               <View style={styles.img}>
