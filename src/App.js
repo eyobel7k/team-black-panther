@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { registerRootComponent } from "expo";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -23,7 +23,17 @@ import Find from "./components/Find"
 
 const Stack = createNativeStackNavigator();
 
+// example loggedInUserData
+// {
+// 	"token": "random.characters.string",
+// 	"user_display_name": "Iron Man",
+// 	"user_email": "me@marvelspace.com",
+// 	"user_nickname": "ironmann",
+// }
+
 export default function App() {
+	const [loggedInUserData, setLoggedInUserData] = useState("");
+
 	return (
 		<View style={styles.container}>
 			<NavigationContainer>
@@ -33,9 +43,13 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
-					<Stack.Screen name="LogInPage" component={LogInPage} />
+					<Stack.Screen name="LogInPage">
+						{ props => <LogInPage {...props} setLoggedInUserData={setLoggedInUserData} /> }
+					</Stack.Screen>
 					{/* <Stack.Screen name="Home" component={Home} /> */}
-					<Stack.Screen name="Newsfeed" component={Newsfeed} />
+					<Stack.Screen name="Newsfeed">
+						{ props => <Newsfeed {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
 					<Stack.Screen name="SignUpPage" component={SignUpPage} />
 					<Stack.Screen name="Friends" component={Friends} />
 					<Stack.Screen name="Profile" component={Profile} />

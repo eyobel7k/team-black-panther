@@ -10,22 +10,14 @@ import {
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 import welcomeImg from "../../assets/marvelspace_login.png";
+import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
 
-// example response
-// {
-// 	"token": "random.characters.string",
-// 	"user_display_name": "Iron Man",
-// 	"user_email": "me@marvelspace.com",
-// 	"user_nickname": "ironmann",
-// }
-
-function LogInPage({ navigation }) {
+function LogInPage({ navigation, setLoggedInUserData }) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
-	const [token, setToken] = useState("");
 
 	useEffect(() => {
 		if (loading) {
@@ -35,7 +27,7 @@ function LogInPage({ navigation }) {
 					setTimeout(
 						() =>
 							resolve({
-								token: "random.characters.string",
+								token: "",
 								user_display_name: "Iron Man",
 								user_email: "me@marvelspace.com",
 								user_nickname: "ironmann",
@@ -46,21 +38,12 @@ function LogInPage({ navigation }) {
 				return;
 			}
 			const options = {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					username: `${username}`,
-					password: `${password}`,
-				}),
+				path: WPAPI_PATHS.jwtAuth.token,
+				method: 'POST',
+				data: {username, password}
 			};
 
-			fetch(
-				`https://jualuc1.dreamhosters.com/wp-json/jwt-auth/v1/token`,
-				options
-			)
-				.then((response) => response.json())
+			wpApiFetch(options)
 				.then((data) => {
 					data.token ? formSuccess(data) : formError(data);
 				});
@@ -73,12 +56,12 @@ function LogInPage({ navigation }) {
 	};
 
 	const formSuccess = (response) => {
-		setToken(response.token);
+		setLoggedInUserData(response);
 		setLoggedIn(true);
 		setLoading(false);
 		setUsername("");
 		setPassword("");
-		navigation.navigate("Newsfeed", { ...response });
+		navigation.navigate("Newsfeed", { loginSucess: true });
 	};
 
 	const formError = (response) => {
