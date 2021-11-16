@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
 
 function PostModal(props) {
-  const [text, onChangeText] = useState("");
+	const [text, onChangeText] = useState("");
+  const [post, setNewPost] = useState("");
+	const [loading, setLoading] = useState(false);
 
-  const addNewPost = () => {
+  const addNewPost = (newText) => {
     let year = new Date().getFullYear();
     let month = new Date().getMonth() + 1;
     let date = new Date().getDate();
@@ -40,13 +43,29 @@ function PostModal(props) {
       ":" +
       seconds;
     let newPost = {
-      excerpt: { rendered: text },
-      author: "me",
-      date: now,
+			content: newText,
+      author: props.loggedInUserData.id,
+      status: 'publish',
+      title: now,
+      slug: now,
     };
-    props.setPostsArr([...props.postsArr, newPost]);
-    props.setShowPostModal(false);
+    // props.setPostsArr([...props.postsArr, newPost]);
+		// props.setShowPostModal(false);
+		setNewPost(newPost);
+		setLoading(true);
   };
+
+	useEffect(() => {
+		console.log('in PostModal effect: ', loading)
+		if (loading) {
+			wpApiFetch({ path: WPAPI_PATHS.wp.posts, method: "POST", data: post, token: props.loggedInUserData.token})
+				.then(response => {
+					console.log('in PostModal: ', response);
+					setLoading(false);
+					props.setShowPostModal(false);
+				})
+		}
+	}, [loading])
 
   return (
     <View style={styles.modalContainer}>
@@ -61,14 +80,16 @@ function PostModal(props) {
         <TextInput
           style={styles.textInput}
           value={text}
-          onChangeText={onChangeText}
-          onSubmitEditing={addNewPost}
+          onSubmitEditing={newText => {
+						onChangeText(newText);
+						addNewPost(newText);
+					}}
         ></TextInput>
         <Pressable style={styles.imgSubmitButton}>
           <Text>Upload Image</Text>
         </Pressable>
         <Pressable style={styles.submitButton} onPress={addNewPost}>
-          <Text>Submit</Text>
+          <Text>{loading ? 'Loading...' : 'Submit'}</Text>
         </Pressable>
       </View>
     </View>
