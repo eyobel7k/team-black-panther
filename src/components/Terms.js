@@ -17,10 +17,11 @@ function Terms({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor:"#efd595",
 	},
 	body: {
-		backgroundColor: "#fff",
+		backgroundColor:  "#efd595",
+
 		height: "80%",
 		width: "100%",
 		textAlign: "center",

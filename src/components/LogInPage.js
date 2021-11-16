@@ -180,27 +180,26 @@ function LogInPage({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	body: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 		width: "100%",
 		textAlign: "center",
 		justifyContent: "space-around",
 		flexDirection: "column",
 	},
 	bodyText: {
-		color: "#1722e8",
+		color: "#000000",
 		alignSelf: "center",
 	},
 	LogInBorder: {
-		backgroundColor: "#fff",
-
+		backgroundColor: "#efd595",
 		width: "100%",
-		color: "#e9e9f5",
+		color: "#c5834c",
 		alignItems: "center",
 		justifyContent: "space-around",
 		paddingTop: 20,
@@ -209,7 +208,7 @@ const styles = StyleSheet.create({
 	},
 	ImageBorder: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 		alignItems: "center",
 		marginHorizontal: 10,
 	},
@@ -237,7 +236,7 @@ const styles = StyleSheet.create({
 		// justifyContent: "center",
 		marginTop: 20,
 		marginBottom: 10,
-		backgroundColor: "#e9e9f5",
+		backgroundColor: "#c5834c",
 	},
 
 	TextInput: {

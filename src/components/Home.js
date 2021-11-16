@@ -16,11 +16,10 @@ function Home({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
-		
+		backgroundColor: "#c5834c",
 	},
 	body: {
-		backgroundColor: "#fff",
+		backgroundColor: "#c5834c",
 		height: "80%",
 		width: "100%",
 	},
