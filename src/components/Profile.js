@@ -14,6 +14,7 @@ const Profile = ({ navigation }) => {
 	const [profileInfo, setProfileInfo] = useState({});
 	const { height, width } = useWindowDimensions();
 	useEffect(() => {
+		// use buddypress.members/id and get id from jsonwebtoken
 		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
 			setProfileInfo(response[0]);
 		});
