@@ -77,7 +77,7 @@ function PostModal(props) {
 
 const styles = StyleSheet.create({
 	modalContainer: {
-		position: "absolute",
+		// position: "absolute",
 		paddingTop: 80,
 		top: 0,
 		right: -14,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 	cornerX: {
-		position: "absolute",
+		// position: "absolute",
 		top: 12,
 		right: 16,
 	},
