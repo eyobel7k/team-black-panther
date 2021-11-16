@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
 	},
 
 	addWrapper: {
-		width: 65,
+		width: 45,
 		height: 55,
 		backgroundColor: "#c5834c",
 		borderRadius: 15,
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
 		borderColor: "#C0C0C0",
 		borderWidth: 3,
 		borderColor: "#C0C0C0",
-		marginRight: 30,
-		marginHorizontal: 60,
+		// marginRight: 30,
+		marginHorizontal: 30,
 		paddingVertical: 15,
 		marginTop: 40,
 	},

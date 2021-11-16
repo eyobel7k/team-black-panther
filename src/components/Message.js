@@ -8,43 +8,46 @@ import { Text } from "react-native-elements";
 
 // const [selectedValue, setSelectedValue] = useState("java");
 function Messages({ navigation }) {
-  const [members, setMembers] = useState([]);
-  const [selectedMember, setSelectedMember] = useState({});
-  const onPress = (selectedMemberId) => {
-    setSelectedMember(members[selectedMemberId]);
-  };
+	const [members, setMembers] = useState([]);
+	const [selectedMember, setSelectedMember] = useState({});
+	const onPress = (selectedMemberId) => {
+		setSelectedMember(members[selectedMemberId]);
+	};
 
-  useEffect(() => {
-    wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
-      .then((data) => {
-        setMembers(data);
-        // console.log(data);
-      })
+	useEffect(() => {
+		wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
+			.then((data) => {
+				setMembers(data);
+				// console.log(data);
+			})
 
-      .catch((error) => console.log(error));
-  }, []);
+			.catch((error) => console.log(error));
+	}, []);
 
-  console.log("Members", members);
+	console.log("Members", members);
 
-  // const listMembers = members?.map((member, index) => (
-  //   <View key={index} style={styles.inlineProfile}>
-  //     <TouchableOpacity onPress={() => onPress(index)}>
-  //       <Image
-  //         style={styles.image}
-  //         source={{ uri: member.avatar_urls.thumb }}
-  //       />
-  //     </TouchableOpacity>
-  //     <Text>{member.name}</Text>
-  //   </View>
-  // ));
+	// const listMembers = members?.map((member, index) => (
+	//   <View key={index} style={styles.inlineProfile}>
+	//     <TouchableOpacity onPress={() => onPress(index)}>
+	//       <Image
+	//         style={styles.image}
+	//         source={{ uri: member.avatar_urls.thumb }}
+	//       />
+	//     </TouchableOpacity>
+	//     <Text>{member.name}</Text>
+	//   </View>
+	// ));
 
-  members.map((member, index) => <Text>member </Text>);
+	members.map((member, index) => <Text>member </Text>);
 
-  return (
+	return (
 		<ThemeLoggedIn navigation={navigation}>
 			<View style={styles.container}>
 				<View style={styles.body}>
-					<Text h4> Space Chat</Text>
+					<Text h4 Style={{ justifyContent: "center" }}>
+						
+						Space Chat
+					</Text>
 					<Text style={styles.text}>
 						<Picker
 							selectedValue={
