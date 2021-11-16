@@ -4,23 +4,24 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 
 function Terms({ navigation }) {
-  return (
-    <ThemeLoggedOut navigation={navigation}>
-      <View style={styles.body} navigation={navigation}>
-        <Text style={styles.text}>Terms!</Text>
-      </View>
+	return (
+		<ThemeLoggedOut navigation={navigation}>
+			<View style={styles.body} navigation={navigation}>
+				<Text style={styles.text}>Terms!</Text>
+			</View>
 
-      <Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
-    </ThemeLoggedOut>
-  );
+			<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+		</ThemeLoggedOut>
+	);
 }
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 	},
 	body: {
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
+
 		height: "80%",
 		width: "100%",
 		textAlign: "center",

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
-
+import { Text } from "react-native-elements";
 
 function Messages({ navigation }) {
   const [members, setMembers] = useState([]);
@@ -74,10 +74,10 @@ function Messages({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#efd595",
   },
   body: {
-    backgroundColor: "#fff",
+    backgroundColor: "#efd595",
     // height: "10%",
     width: "100%",
     textAlign: "center",

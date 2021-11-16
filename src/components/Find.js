@@ -54,30 +54,29 @@ const Find = ({ navigation }) => {
     );
   };
 
-  const getItem = (item) => {
-    alert("Id : " + item.id + "   Name: " + item.name);
-  };
-
   return (
     <ThemeLoggedIn navigation={navigation}>
       <View style={styles.container}>
-        <SearchBar
-          round
-          style={styles.body}
-          searchIcon={{ size: 24 }}
-          backgroundColor={"white"}
-          padding={10}
-          onChangeText={(text) => searchFilterFunction(text)}
-          onClear={(text) => searchFilterFunction("")}
-          placeholder="Search super friends..."
-          value={search}
-        />
-        <FlatList
-          data={filteredDataSource}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={ItemView}
-        />
+        <View>
+          <SearchBar
+            style={styles.searchBar}
+            round
+            searchIcon={{ size: 24 }}
+            padding={10}
+            onChangeText={(text) => searchFilterFunction(text)}
+            onClear={(text) => searchFilterFunction("")}
+            placeholder="Search super friends..."
+            value={search}
+          />
+        </View>
+        <View>
+          <FlatList
+            data={filteredDataSource}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={ItemSeparatorView}
+            renderItem={ItemView}
+          />
+        </View>
       </View>
     </ThemeLoggedIn>
   );
@@ -87,19 +86,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "80%",
-    backgroundColor: "#D5DAFF",
+    backgroundColor: "#c5834c",
     textAlign: "center",
     paddingTop: 20,
     paddingBottom: 10,
     justifyContent: "center",
     marginHorizontal: 45,
-    zIndex: -3,
   },
   itemStyle: {
     padding: 10,
   },
-  body: {
-    backgroundColor: "#D5DAFF",
+  searchBar: {
+    backgroundColor: "#efd595",
   },
 });
 
