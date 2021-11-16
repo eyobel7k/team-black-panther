@@ -97,16 +97,17 @@ export default function Chat() {
                   onPress={() => completeTask(index)}
                 >
                   {/* <Task text={item} /> */}
-
+                  <View style={{display:'flex', flexDirection:'row', alignItems:'flex-end', justifyContent:"space-between"}}>
                   <View style={styles.item}>
                     <View style={styles.itemLeft}>
                       <View style={styles.square}></View>
 
                       <Text style={styles.itemText}>{item}</Text>
                     </View>
-                    <View>
-                      <AntDesign name="delete" size={12} color="red" />
-                    </View>
+                  </View>
+                  <View>
+                    <AntDesign name="delete" size={12} color="red" />
+                  </View>
                   </View>
                 </TouchableOpacity>
               );
@@ -122,7 +123,7 @@ export default function Chat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#efd595",
     marginTop: 10,
     height: "100%",
     flexGrow: 1,
@@ -143,8 +144,8 @@ const styles = StyleSheet.create({
   },
   writeTaskWrapper: {
     position: "absolute",
-    bottom: 80,
-    // width: "70%",
+    // bottom: 80,
+    width: "90%",
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 2,
     flexWrap: "wrap",
-    maxWidth: 350,
+    maxWidth: 250,
     flex: 1,
   },
   itemLeft: {

@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 export default function Images({ navigation }) {
   const [imageArr, setImageArr] = useState([]);
@@ -50,6 +50,8 @@ export default function Images({ navigation }) {
         </View>
         <View style={styles.deleteButton}>
           <Button
+icon={<MaterialCommunityIcons name="delete-circle" size={24} color="black" />}
+
             color="#5569FE"
             key={index}
             onPress={() => deleteImage(index)}
