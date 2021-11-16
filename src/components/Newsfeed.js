@@ -17,20 +17,26 @@ import { Text } from "react-native-elements";
 
 function Newsfeed({ route, navigation }) {
   const [postsArr, setPostsArr] = useState([]);
+  const [likes, setLikes] = useState([]);
+  const [dislikes, setDislikes] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
   useEffect(() => {
-    posts()
-      .then((data) => setPostsArr(data))
-      .catch((error) => console.log("in newsfeed.js ", error));
+    {
+      posts()
+        .then((data) => setPostsArr(data))
+        .catch((error) => console.log("in newsfeed.js ", error));
+    }
+    setDislikes([0]);
+    setLikes([0]);
   }, []);
 
   const generatePosts = postsArr
     //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
-    // .slice(0)
-    // .reverse()
+    .slice(0)
+    .reverse()
     .map((post, i) => {
       if (post.excerpt?.rendered) {
         let content = post.excerpt.rendered;
@@ -39,7 +45,16 @@ function Newsfeed({ route, navigation }) {
         content = content.replace("\n", "");
 
         return (
-          <Post key={i} content={content} id={i} associatedContent={post} />
+          <Post
+            key={i}
+            content={content}
+            id={i}
+            associatedContent={post}
+            likes={likes}
+            dislikes={dislikes}
+            setLikes={setLikes}
+            setDislikes={setDislikes}
+          />
         );
       }
     });

@@ -11,8 +11,6 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function Post(props) {
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
   const [reply, setReply] = useState("");
   const [comments, setComments] = useState([]);
   const [commentTimes, setCommentTimes] = useState([]);
@@ -64,13 +62,16 @@ function Post(props) {
                 style={styles.likeButton}
                 title="👍"
                 color="#f0f8ff"
-                onPress={() => setLikes(likes + 1)}
+                onPress={() => {
+                  props.setLikes([...props.likes, props.likes[props.id] + 1]);
+                  console.log(props.likes, props.dislikes);
+                }}
               >
                 <Text>👍</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.button}>
-              <Text>{likes}</Text>
+              <Text>{props.likes[props.id]}</Text>
             </View>
 
             <View style={styles.button}>
@@ -78,13 +79,18 @@ function Post(props) {
                 style={styles.likeButton}
                 title="👎"
                 color="#f0f8ff"
-                onPress={() => setDislikes(dislikes + 1)}
+                onPress={() =>
+                  props.setDislikes([
+                    ...props.dislikes,
+                    props.dislikes[props.id] + 1,
+                  ])
+                }
               >
                 <Text>👎</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.button}>
-              <Text>{dislikes}</Text>
+              <Text>{props.dislikes[props.id]}</Text>
             </View>
           </View>
         </View>
@@ -130,13 +136,16 @@ function Post(props) {
                   style={styles.likeButton}
                   title="👍"
                   color="#f0f8ff"
-                  onPress={() => setLikes(likes + 1)}
+                  onPress={() => {
+                    props.setLikes([...props.likes, props.likes[props.id] + 1]);
+                    console.log(props.likes, props.dislikes);
+                  }}
                 >
                   <Text style={styles.thumb}>👍</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.button}>
-                <Text style={styles.thumb}>{likes}</Text>
+                <Text style={styles.thumb}>{props.likes[props.id]}</Text>
               </View>
 
               <View style={styles.button}>
@@ -144,13 +153,18 @@ function Post(props) {
                   style={styles.likeButton}
                   title="👎"
                   color="#f0f8ff"
-                  onPress={() => setDislikes(dislikes + 1)}
+                  onPress={() =>
+                    props.setDislikes([
+                      ...props.dislikes,
+                      props.dislikes[props.id] + 1,
+                    ])
+                  }
                 >
                   <Text style={styles.thumb}>👎</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.button}>
-                <Text style={styles.thumb}>{dislikes}</Text>
+                <Text style={styles.thumb}>{props.dislikes[props.id]}</Text>
               </View>
             </View>
           </View>
