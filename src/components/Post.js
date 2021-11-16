@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,14 +7,19 @@ import {
   useWindowDimensions,
   TextInput,
   ScrollView,
+  Image,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function Post(props) {
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [reply, setReply] = useState("");
   const [comments, setComments] = useState([]);
   const [commentTimes, setCommentTimes] = useState([]);
   const [commentYears, setCommentYears] = useState([]);
+  const [members, setMembers] = useState([]);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
@@ -24,6 +29,16 @@ function Post(props) {
     props.associatedContent.date.substring(5, 10) +
     "-" +
     props.associatedContent.date.substring(0, 4);
+
+  useEffect(() => {
+    wpApiFetch({ path: WPAPI_PATHS.buddypress.members }).then((data) => {
+      setMembers(data);
+    });
+  }, []);
+
+  const memberById = (id) => {
+    return members.find((member) => member.id === id);
+  };
 
   function addToComments() {
     setComments([...comments, reply]);
@@ -55,23 +70,31 @@ function Post(props) {
         <View>
           <View style={styles.belowPost}>
             <Text style={styles.postSubscript}>
-              Posted by {postAuthor} at {postTime} on {postDate}
+              Posted by by {memberById(postAuthor)?.name}{" "}
+              <Image
+                style={{ width: 18, height: 18 }}
+                source={{
+                  uri: memberById(postAuthor)?.avatar_urls.full.startsWith(
+                    "https:"
+                  )
+                    ? memberById(postAuthor).avatar_urls?.full
+                    : "https://www.gravatar.com/avatar/?d=identicon",
+                }}
+              />
+              at {postTime} on {postDate}
             </Text>
             <View style={styles.button}>
               <TouchableOpacity
                 style={styles.likeButton}
                 title="👍"
                 color="#f0f8ff"
-                onPress={() => {
-                  props.setLikes([...props.likes, props.likes[props.id] + 1]);
-                  console.log(props.likes, props.dislikes);
-                }}
+                onPress={() => setLikes(likes + 1)}
               >
                 <Text>👍</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.button}>
-              <Text>{props.likes[props.id]}</Text>
+              <Text>{likes}</Text>
             </View>
 
             <View style={styles.button}>
@@ -79,18 +102,13 @@ function Post(props) {
                 style={styles.likeButton}
                 title="👎"
                 color="#f0f8ff"
-                onPress={() =>
-                  props.setDislikes([
-                    ...props.dislikes,
-                    props.dislikes[props.id] + 1,
-                  ])
-                }
+                onPress={() => setDislikes(dislikes + 1)}
               >
                 <Text>👎</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.button}>
-              <Text>{props.dislikes[props.id]}</Text>
+              <Text>{dislikes}</Text>
             </View>
           </View>
         </View>
@@ -128,7 +146,18 @@ function Post(props) {
         <View>
           <View style={styles.belowPost}>
             <Text style={styles.postSubscript}>
-              Posted by {postAuthor} at {postTime} on {postDate}
+              by {memberById(postAuthor)?.name}{" "}
+              <Image
+                style={{ width: 18, height: 18 }}
+                source={{
+                  uri: memberById(postAuthor)?.avatar_urls.full.startsWith(
+                    "https:"
+                  )
+                    ? memberById(postAuthor).avatar_urls?.full
+                    : "https://www.gravatar.com/avatar/?d=identicon",
+                }}
+              />
+              at {postTime} on {postDate}
             </Text>
             <View style={styles.likesAndDislikes}>
               <View style={styles.button}>
@@ -136,16 +165,13 @@ function Post(props) {
                   style={styles.likeButton}
                   title="👍"
                   color="#f0f8ff"
-                  onPress={() => {
-                    props.setLikes([...props.likes, props.likes[props.id] + 1]);
-                    console.log(props.likes, props.dislikes);
-                  }}
+                  onPress={() => setLikes(likes + 1)}
                 >
                   <Text style={styles.thumb}>👍</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.button}>
-                <Text style={styles.thumb}>{props.likes[props.id]}</Text>
+                <Text style={styles.thumb}>{likes}</Text>
               </View>
 
               <View style={styles.button}>
@@ -153,18 +179,13 @@ function Post(props) {
                   style={styles.likeButton}
                   title="👎"
                   color="#f0f8ff"
-                  onPress={() =>
-                    props.setDislikes([
-                      ...props.dislikes,
-                      props.dislikes[props.id] + 1,
-                    ])
-                  }
+                  onPress={() => setDislikes(dislikes + 1)}
                 >
                   <Text style={styles.thumb}>👎</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.button}>
-                <Text style={styles.thumb}>{props.dislikes[props.id]}</Text>
+                <Text style={styles.thumb}>{dislikes}</Text>
               </View>
             </View>
           </View>
