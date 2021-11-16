@@ -73,67 +73,67 @@ function Newsfeed({ route, navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    height: "80%",
-    // flexBasis: "100%"
-  },
-  body: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#fff",
-    height: "80%",
-    width: "100%",
-    textAlign: "center",
-    justifyContent: "center",
-    marginTop: 16,
-    flexBasis: "100%",
-    flexShrink: 0,
-    flexGrow: 0,
-    flexDirection: "column",
-    marginLeft: 7,
-  },
-  heading: {
-    fontSize: 16,
-    color: "#1722e8",
-    letterSpacing: 2.4,
-  },
-  text: {
-    margin: 5,
-    fontSize: 24,
-    fontWeight: "100",
-    // fontFamily: "Serif",
-  },
-  newPostButton: {
-    left: 10,
-    top: -10,
-    backgroundColor: "#0000ff",
-    paddingTop: 12,
-    paddingLeft: 15,
-    paddingBottom: 12,
-    paddingRight: 6.4,
-    borderRadius: 50,
-    width: 64,
-  },
-  postButtonText: {
-    color: "#87ceeb",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  buttonWrapper: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-  },
-  postsContainer: {
-    width: "100%",
-    padding: 20,
-    flexWrap: "nowrap",
-  },
-  footerWrapper: {
-    // bottom: -500,
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#efd595",
+		height: "80%",
+		// flexBasis: "100%"
+	},
+	body: {
+		flex: 1,
+		alignItems: "center",
+		backgroundColor: "#efd595",
+		height: "80%",
+		width: "100%",
+		textAlign: "center",
+		justifyContent: "center",
+		marginTop: 16,
+		flexBasis: "100%",
+		flexShrink: 0,
+		flexGrow: 0,
+		flexDirection: "column",
+		marginLeft: 7,
+	},
+	heading: {
+		fontSize: 16,
+		color: "#000000",
+		letterSpacing: 2.4,
+	},
+	text: {
+		margin: 5,
+		fontSize: 24,
+		fontWeight: "100",
+		// fontFamily: "Serif",
+	},
+	newPostButton: {
+		left: 10,
+		top: -10,
+		backgroundColor: "#c5834c",
+		paddingTop: 12,
+		paddingLeft: 15,
+		paddingBottom: 12,
+		paddingRight: 6.4,
+		borderRadius: 50,
+		width: 64,
+	},
+	postButtonText: {
+		color: "#87cefa",
+		fontWeight: "bold",
+		fontSize: 16,
+	},
+	buttonWrapper: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+	},
+	postsContainer: {
+		width: "100%",
+		padding: 20,
+		flexWrap: "nowrap",
+	},
+	footerWrapper: {
+		// bottom: -500,
+	},
 });
 
 export default Newsfeed;
