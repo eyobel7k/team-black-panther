@@ -87,32 +87,32 @@ export default function Chat() {
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={{ height: "60%", width: "100%" }}>
-            <View style={styles.items}>
-              {/* This is where the message will go! */}
-              {taskItems.map((item, index) => {
-                return (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => completeTask(index)}
-                  >
-                    {/* <Task text={item} /> */}
+          {/* <ScrollView style={{ height: 60, width: "100%" }}> */}
+          <View style={styles.items}>
+            {/* This is where the message will go! */}
+            {taskItems.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => completeTask(index)}
+                >
+                  {/* <Task text={item} /> */}
 
-                    <View style={styles.item}>
-                      <View style={styles.itemLeft}>
-                        <View style={styles.square}></View>
+                  <View style={styles.item}>
+                    <View style={styles.itemLeft}>
+                      <View style={styles.square}></View>
 
-                        <Text style={styles.itemText}>{item}</Text>
-                      </View>
-                      <View >
-                      <AntDesign name="delete" size={12} color="red" />
-                      </View>
+                      <Text style={styles.itemText}>{item}</Text>
                     </View>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          </ScrollView>
+                    <View>
+                      <AntDesign name="delete" size={12} color="red" />
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          {/* </ScrollView> */}
         </View>
       </View>
     </View>
@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 2,
     flexWrap: "wrap",
+    maxWidth: 350,
     flex: 1,
   },
   itemLeft: {
