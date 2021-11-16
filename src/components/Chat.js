@@ -62,7 +62,7 @@ export default function Chat() {
       >
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}> Space Chat</Text>
+          {/* <Text style={styles.sectionTitle}> Space Chat</Text> */}
 
           <View style={styles.inputContainer}>
             <TextInput
@@ -122,7 +122,7 @@ export default function Chat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#efd595",
     marginTop: 10,
     height: "100%",
     flexGrow: 1,
