@@ -91,6 +91,7 @@ function PostModal(props) {
   );
 }
 
+// ***  Styles for Mobile  ***
 const stylesMobile = StyleSheet.create({
   modalContainer: {
     position: "absolute",
@@ -165,6 +166,7 @@ const stylesMobile = StyleSheet.create({
   },
 });
 
+// ***  Styles for Web  ***
 const stylesWeb = StyleSheet.create({
   modalContainer: {
     position: "absolute",

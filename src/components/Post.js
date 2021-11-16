@@ -35,6 +35,8 @@ function Post(props) {
   }
 
   let styles;
+
+  // ***  Code and Render for Mobile  ***
   if (width < widthBreakpoint) {
     styles = stylesMobile;
     const showComments = comments.map((comment, i) => {
@@ -100,6 +102,7 @@ function Post(props) {
       </View>
     );
   } else {
+    // ***  Code and Render for Web  ***
     styles = stylesWeb;
     const showComments = comments.map((comment, i) => {
       return (
@@ -152,9 +155,11 @@ function Post(props) {
             </View>
           </View>
         </View>
-        <ScrollView style={styles.commentsWindow}>
-          <Text>{showComments}</Text>
-        </ScrollView>
+        <View style={{ flexGrow: 1 }}>
+          <ScrollView style={styles.commentsWindow}>
+            <Text>{showComments}</Text>
+          </ScrollView>
+        </View>
 
         <TextInput
           style={styles.textInput}
@@ -172,6 +177,7 @@ function Post(props) {
 
 export default Post;
 
+// ***  Styles for Mobile  ***
 const stylesMobile = StyleSheet.create({
   post: {
     borderStyle: "solid",
@@ -242,6 +248,7 @@ const stylesMobile = StyleSheet.create({
     fontSize: 6,
   },
   commentsWindow: {
+    flexGrow: 1,
     borderStyle: "solid",
     borderColor: "#5f9ea0",
     borderWidth: 2,
@@ -275,6 +282,7 @@ const stylesMobile = StyleSheet.create({
   },
 });
 
+// ***  Styles for Web  ***
 const stylesWeb = StyleSheet.create({
   post: {
     borderStyle: "solid",

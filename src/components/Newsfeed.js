@@ -47,6 +47,8 @@ function Newsfeed({ route, navigation }) {
   let styles;
   if (width < widthBreakpoint) {
     styles = stylesMobile;
+
+    // ***  Render for Mobile  ***
     return (
       <ThemeLoggedIn navigation={navigation}>
         <View style={styles.container} navigation={navigation}>
@@ -86,6 +88,7 @@ function Newsfeed({ route, navigation }) {
   } else {
     styles = stylesWeb;
 
+    // ***  Render for Web  ***
     return (
       <ThemeLoggedIn navigation={navigation}>
         <View style={styles.container} navigation={navigation}>
@@ -124,6 +127,7 @@ function Newsfeed({ route, navigation }) {
   }
 }
 
+// ***  Styles for Mobile ***
 const stylesMobile = StyleSheet.create({
   container: {
     flex: 1,
@@ -158,6 +162,7 @@ const stylesMobile = StyleSheet.create({
     // fontFamily: "Serif",
   },
   newPostButton: {
+    position: "absolute",
     left: 10,
     top: -10,
     backgroundColor: "#0000ff",
@@ -188,6 +193,7 @@ const stylesMobile = StyleSheet.create({
   },
 });
 
+// ***  Styles for Web  ***
 const stylesWeb = StyleSheet.create({
   container: {
     flex: 1,
