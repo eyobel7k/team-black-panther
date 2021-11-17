@@ -81,6 +81,13 @@ function PostModal(props) {
     }
   }, [loading]);
 
+  let styles;
+  if (width < widthBreakpoint) {
+    styles = stylesMobile;
+  } else {
+    styles = stylesWeb;
+  }
+
   return (
     <View style={styles.modalContainer}>
       <View style={styles.modal}>
