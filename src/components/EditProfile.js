@@ -14,6 +14,7 @@ const EditProfile = ({ navigation }) => {
   const [profileInfo, setProfileInfo] = useState([]);
 
 	useEffect(() => {
+		// https://developer.wordpress.org/rest-api/reference/users/#update-a-user
 		wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((response) => {
 			setProfileInfo(response[0].content.rendered);
 		});

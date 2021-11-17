@@ -11,7 +11,8 @@ import {
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 import welcomeImg from "../../assets/marvelspace_login.png";
-import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
+import jwtDecode from "jwt-decode";
 
 function LogInPage({ navigation, setLoggedInUserData }) {
 	const [username, setUsername] = useState("");
@@ -56,7 +57,8 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 	};
 
 	const formSuccess = (response) => {
-		setLoggedInUserData(response);
+		const { data } = jwtDecode(response.token);
+		setLoggedInUserData({...response, id: data.user.id});
 		setLoggedIn(true);
 		setLoading(false);
 		setUsername("");
