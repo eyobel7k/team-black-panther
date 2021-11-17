@@ -11,6 +11,7 @@ import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 import welcomeImg from "../../assets/marvelspace_login.png";
 import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
+import jwtDecode from 'jwt-decode';
 
 function LogInPage({ navigation, setLoggedInUserData }) {
 	const [username, setUsername] = useState("");
@@ -56,7 +57,8 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 	};
 
 	const formSuccess = (response) => {
-		setLoggedInUserData(response);
+		const { data } = jwtDecode(response.token);
+		setLoggedInUserData({...response, id: data.user.id});
 		setLoggedIn(true);
 		setLoading(false);
 		setUsername("");
@@ -133,7 +135,7 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 					)}
 					<TouchableOpacity style={styles.forgot_button}>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Forgot Password?
+							Forgot Password?&nbsp;
 							<Text
 								name="ResetPasswordPage"
 								onPress={() => navigation.navigate("ResetPasswordPage")}
@@ -144,7 +146,7 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.forgot_button}>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Don't have an account?
+							Don't have an account?&nbsp;
 							<Text
 								name="SignUpPage"
 								onPress={() => navigation.navigate("SignUpPage")}
