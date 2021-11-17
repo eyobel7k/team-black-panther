@@ -40,6 +40,10 @@ function Post(props) {
     return members?.find((member) => member.id === id);
   };
 
+  const postById = (id) => {
+    return props.postsArr?.find((post) => post.id === id);
+  };
+
   function addToComments() {
     setComments([...comments, reply]);
     setReply("");
@@ -81,7 +85,7 @@ function Post(props) {
                     : "https://www.gravatar.com/avatar/?d=identicon",
                 }}
               />
-              at {postTime} on {postDate}
+              {" "}at {postTime} on {postDate}
             </Text>
             <View style={styles.button}>
               <TouchableOpacity
@@ -157,7 +161,7 @@ function Post(props) {
                     : "https://www.gravatar.com/avatar/?d=identicon",
                 }}
               />
-              at {postTime} on {postDate}
+              {" "}at {postTime} on {postDate}
             </Text>
             <View style={styles.likesAndDislikes}>
               <View style={styles.button}>

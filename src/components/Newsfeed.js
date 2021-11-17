@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
-import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import { WPAPI_PATHS, wpApiFetch, posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import PostModal from "./PostModal";
@@ -26,6 +26,8 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
   const pruneTags = (text) => {
     return text.replace(/<[^>]+>/g, "").replace("\n", "");
   };
+
+  console.log(posts());
 
   useEffect(() => {
     if (loading) {
@@ -59,7 +61,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
     // .reverse()
     .map((post, i) => {
       const content = pruneTags(post.excerpt.rendered || post.title); //commented out post.title and changed content to excerpt
-      return <Post key={i} content={content} id={i} associatedContent={post} />;
+      return <Post key={i} content={content} id={i} associatedContent={post} postsArr={postsArr}/>;
     });
 
   let styles;
