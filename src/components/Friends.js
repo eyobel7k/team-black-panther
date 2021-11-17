@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Linking} from "react-native";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import { Text, ListItem, Avatar } from "react-native-elements";
@@ -30,6 +30,7 @@ function Friends({ navigation }) {
 				<View style={styles.body}>
 					{members.map((member, index) => (
 						<ListItem
+							Component={TouchableOpacity}
 							label={member.name}
 							key={index}
 							value={member.name}
@@ -38,10 +39,13 @@ function Friends({ navigation }) {
 							<Avatar source={{ uri: member.avatar_urls.full }} />
 
 							<ListItem.Content>
-								<ListItem.Title>
-									{member.name}
-									{member.thumb}
-								</ListItem.Title>
+								
+									<ListItem.Title>
+										{member.name}
+										{member.thumb}
+										
+									</ListItem.Title>
+							
 							</ListItem.Content>
 							<ListItem.Chevron color="white" />
 						</ListItem>

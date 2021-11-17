@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Text } from "react-native-elements";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
+import {
+	StyleSheet,
+	View,
+	TouchableOpacity,
+	Linking,
+} from "react-native";
 
 import ThemeLoggedOut from "./ThemeLoggedOut";
 
@@ -23,51 +28,24 @@ function ResetPasswordPage({ navigation }) {
 
 	return (
 		<ThemeLoggedOut navigation={navigation}>
-			<View style={styles.body} navigation={navigation}>
+			<View style={styles.body}>
 				<View style={styles.LogInBorder}>
-					<Text h4 style={styles.bodyText}>
+					<Text h3 style={styles.bodyText}>
 						Password Reset
 					</Text>
-					<Text style={styles.bodyText}>Create your new password:</Text>
 					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="UserName"
-							placeholderTextColor="#000000"
-							value={username}
-							onChangeText={onChangeUsername}
-						/>
+						<TouchableOpacity
+							onPress={() =>
+								Linking.openURL(
+									"https://jualuc1.dreamhosters.com/wp-login.php?action=lostpassword "
+								)
+							}
+						>
+							<Text>Click here to Reset Password</Text>
+						</TouchableOpacity>
 					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="New Password"
-							placeholderTextColor="#000000"
-							secureTextEntry={true}
-							value={newPassword}
-							onChangeText={onChangeNewPassword}
-							// onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Confirm New Password"
-							placeholderTextColor="#000000"
-							secureTextEntry={true}
-							value={confirmNewPassword}
-							onChangeText={onChangeConfirmNewPassword}
-							onSubmitEditing={checkValidity}
-							// onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText} onPress={checkValidity}>
-							Submit
-						</Text>
-					</TouchableOpacity>
 				</View>
+
 				<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
 			</View>
 		</ThemeLoggedOut>
@@ -77,33 +55,37 @@ function ResetPasswordPage({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#efd595",
+		backgroundColor: "#c5834c",
+
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	body: {
-		flex: 1,
 		backgroundColor: "#efd595",
+		height: "80%",
 		width: "100%",
 		textAlign: "center",
-		justifyContent: "space-around",
-		flexDirection: "column",
+		justifyContent: "center",
+		flexDirection: "row",
+		margin: 20,
+		padding: 40,
 	},
 	bodyText: {
 		color: "#000000",
-		alignSelf: "center",
 	},
 	LogInBorder: {
+		borderStyle: "solid",
+		borderRadius: 50,
 		backgroundColor: "#efd595",
-
-		width: "100%",
+		width: "60%",
+		height: "90%",
 		color: "#efd595",
 		alignItems: "center",
-		justifyContent: "space-around",
+		justifyContent: "space-evenly",
+		marginHorizontal: 10,
 		paddingTop: 20,
-		paddingBottom: 10,
-		marginTop: 20,
 	},
+
 	header: {
 		width: "100%",
 		borderRadius: 10,
@@ -129,28 +111,12 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 		backgroundColor: "#c5834c",
 	},
-	header: {
-		width: "100%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-	},
-	footer: {
-		width: "100%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-	},
+
 	TextInput: {
 		height: 50,
 		flex: 1,
 		padding: 10,
-		// marginLeft: 20,
-		textAlign: "center",
+		marginLeft: 20,
 	},
 	loginBtn: {
 		width: "20%",

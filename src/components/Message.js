@@ -7,71 +7,70 @@ import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import { Text } from "react-native-elements";
 
 function Messages({ navigation }) {
-  const [members, setMembers] = useState([]);
-  const [selectedMember, setSelectedMember] = useState({});
-  const onPress = (selectedMemberId) => {
-    setSelectedMember(members[selectedMemberId]);
-  };
+	const [members, setMembers] = useState([]);
+	const [selectedMember, setSelectedMember] = useState({});
+	const onPress = (selectedMemberId) => {
+		setSelectedMember(members[selectedMemberId]);
+	};
 
-  useEffect(() => {
-    wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
-      .then((data) => {
-        setMembers(data);
-        console.log(data);
-      })
+	useEffect(() => {
+		wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
+			.then((data) => {
+				setMembers(data);
+				console.log(data);
+			})
 
-      .catch((error) => console.log(error));
-  }, []);
+			.catch((error) => console.log(error));
+	}, []);
 
-  const newMembers = members?.map((member, index) => (
-    <Picker.Item label={member.name} key={index} value={member.name} />
-  ));
+	const newMembers = members?.map((member, index) => (
+		<Picker.Item label={member.name} key={index} value={member.name} />
+	));
 
-  return (
+	return (
 		<ThemeLoggedIn navigation={navigation}>
 			<View style={styles.container}>
 				<View style={styles.title}>
-          <Text h4> Space Chat</Text>
-          </View>
-					<View style={styles.body}>
-						<Text style={styles.text}>
-							<Picker
-								selectedValue={
-									selectedMember.name ? selectedMember.name : "Select"
-								}
-								style={{
-									height: 50,
-									width: 170,
-									backgroundColor: "#d2d2d6",
-									color: "#6c72d9",
-									borderRadius: 35,
-								}}
-								onValueChange={(member, itemIndex) => {
-									setSelectedMember(members[itemIndex]);
-								}}
-							>
-								{newMembers}
-							</Picker>
-							{Object.keys(selectedMember).length !== 0 && (
-								<View style={styles.img}>
-									{console.log(selectedMember)}
-									<View styles={styles.pick}>
-										<Image
-											source={{ uri: selectedMember.avatar_urls?.thumb }}
-											style={styles.image}
-										></Image>
-
-										<Text>{selectedMember.name}</Text>
-									</View>
-								</View>
-							)}
-
-							<Chat />
-						</Text>
-					</View>
-					{/* {listMembers} */}
+					<Text h4> Space Chat</Text>
 				</View>
-			
+				<View style={styles.body}>
+					<Text style={styles.text}>
+						<Picker
+							selectedValue={
+								selectedMember.name ? selectedMember.name : "Select"
+							}
+							style={{
+								height: 50,
+								width: 170,
+								backgroundColor: "#d2d2d6",
+								color: "#6c72d9",
+								borderRadius: 35,
+							}}
+							onValueChange={(member, itemIndex) => {
+								setSelectedMember(members[itemIndex]);
+							}}
+						>
+							{newMembers}
+						</Picker>
+						{Object.keys(selectedMember).length !== 0 && (
+							<View style={styles.img}>
+								{console.log(selectedMember)}
+								<View styles={styles.pick}>
+									<Image
+										source={{ uri: selectedMember.avatar_urls?.thumb }}
+										style={styles.image}
+									></Image>
+
+									<Text>{selectedMember.name}</Text>
+								</View>
+							</View>
+						)}
+
+						<Chat />
+					</Text>
+				</View>
+				{/* {listMembers} */}
+			</View>
 		</ThemeLoggedIn>
 	);
 }
