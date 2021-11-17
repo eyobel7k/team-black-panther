@@ -5,7 +5,7 @@ import {
 	View,
 	TextInput,
 	TouchableOpacity,
-	Linking
+	Linking,
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
@@ -36,13 +36,6 @@ function SignUpPage({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#c5834c",
-
-		alignItems: "center",
-		justifyContent: "center",
-	},
 	body: {
 		backgroundColor: "#efd595",
 		height: "80%",
@@ -100,15 +93,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 10,
 		marginLeft: 20,
-	},
-	loginBtn: {
-		width: "20%",
-		borderRadius: 25,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-		backgroundColor: "#87cefa",
 	},
 });
 export default SignUpPage;

@@ -17,6 +17,7 @@ import { Text } from "react-native-elements";
 
 function Newsfeed({ route, navigation, loggedInUserData }) {
   const [postsArr, setPostsArr] = useState([]);
+  const [commentsArr, setCommentsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -29,10 +30,15 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
   useEffect(() => {
     if (loading) {
-      wpApiFetch({ path: WPAPI_PATHS.buddypress.activity }).then((data) => {
-        setPostsArr(data);
+      Promise.all([
+        wpApiFetch({ path: WPAPI_PATHS.wp.posts }),
+        wpApiFetch({ path: WPAPI_PATHS.wp.comments })
+      ])
+      .then(([ posts, comments ]) => {
+        setPostsArr(posts);
+        setCommentsArr(comments);
         setLoading(false);
-      });
+      })
     }
   }, [loading]);
 
@@ -41,8 +47,10 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
     // .slice(0)
     // .reverse()
     .map((post, i) => {
-      const content = pruneTags(post.content.rendered || post.title);
-      return <Post key={i} content={content} id={i} associatedContent={post} />;
+      const content = pruneTags(post.content?.rendered);
+      const associatedComments = commentsArr.filter(comment => comment.post === post.id);
+      // console.log(`associatedComments for ${post.id}: `, associatedComments);
+      return <Post key={i} content={content} id={i} associatedContent={post} associatedComments={associatedComments} loggedInUserData={loggedInUserData} />;
     });
 
   let styles;
@@ -59,7 +67,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             )}
             <View style={styles.body}>
               <Text h3 style={styles.heading}>
-                Newsfeed
+                {loading ? 'Loading Newsfeed...' : 'Newsfeed'}
               </Text>
               <View style={styles.buttonWrapper}>
                 <Pressable
@@ -107,7 +115,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           </View>
           <View style={styles.body}>
             <Text h3 style={styles.heading}>
-              Newsfeed
+              {loading ? 'Loading Newsfeed...' : 'Newsfeed'}
             </Text>
 
             <ScrollView style={styles.postsContainer}>

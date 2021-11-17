@@ -54,7 +54,7 @@ const buildQueryUrl = ( path, params = {} ) => {
 export const wpApiFetch = async ({ path, queryParams = {}, data, method = 'GET', token }) => {
   
   const buildHeaders = () => {
-    if (method === 'POST'&& token)  {
+    if (method === 'POST' && token) {
       return {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
