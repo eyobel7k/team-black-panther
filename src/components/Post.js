@@ -13,8 +13,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function Post(props) {
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+  // const [likes, setLikes] = useState(0);
+  // const [dislikes, setDislikes] = useState(0);
   const [reply, setReply] = useState("");
   const [comments, setComments] = useState([]);
   const [commentTimes, setCommentTimes] = useState([]);
@@ -84,10 +84,10 @@ function Post(props) {
                     ? memberById(postAuthor).avatar_urls?.full
                     : "https://www.gravatar.com/avatar/?d=identicon",
                 }}
-              />
-              {" "}at {postTime} on {postDate}
+              />{" "}
+              at {postTime} on {postDate}
             </Text>
-            <View style={styles.button}>
+            {/* <View style={styles.button}>
               <TouchableOpacity
                 style={styles.likeButton}
                 title="👍"
@@ -113,12 +113,12 @@ function Post(props) {
             </View>
             <View style={styles.button}>
               <Text>{dislikes}</Text>
-            </View>
+            </View> */}
           </View>
         </View>
-        <ScrollView style={styles.commentsWindow}>
+        <View style={styles.commentsWindow}>
           <Text>{showComments}</Text>
-        </ScrollView>
+        </View>
 
         <TextInput
           style={styles.textInput}
@@ -160,10 +160,10 @@ function Post(props) {
                     ? memberById(postAuthor).avatar_urls?.full
                     : "https://www.gravatar.com/avatar/?d=identicon",
                 }}
-              />
-              {" "}at {postTime} on {postDate}
+              />{" "}
+              at {postTime} on {postDate}
             </Text>
-            <View style={styles.likesAndDislikes}>
+            {/* <View style={styles.likesAndDislikes}>
               <View style={styles.button}>
                 <TouchableOpacity
                   style={styles.likeButton}
@@ -176,9 +176,9 @@ function Post(props) {
               </View>
               <View style={styles.button}>
                 <Text style={styles.thumb}>{likes}</Text>
-              </View>
+              </View> */}
 
-              <View style={styles.button}>
+            {/* <View style={styles.button}>
                 <TouchableOpacity
                   style={styles.likeButton}
                   title="👎"
@@ -190,8 +190,8 @@ function Post(props) {
               </View>
               <View style={styles.button}>
                 <Text style={styles.thumb}>{dislikes}</Text>
-              </View>
-            </View>
+              </View> */}
+            {/* </View> */}
           </View>
         </View>
         <View style={{ flexGrow: 1 }}>
@@ -279,7 +279,7 @@ const stylesMobile = StyleSheet.create({
   },
   postSubscript: {
     fontSize: 11,
-    textAlign: "right",
+    textAlign: "center",
     // display: "inline-block",
     // justifyContent: "space-between",
   },
@@ -292,7 +292,6 @@ const stylesMobile = StyleSheet.create({
     borderColor: "#c5834c",
     borderWidth: 2,
     borderRadius: 12,
-    height: 80,
     marginTop: 8,
     width: 300,
     // alignContent: "center",
@@ -303,7 +302,7 @@ const stylesMobile = StyleSheet.create({
     // display: "inline-block",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "center",
     alignContent: "flex-start",
     paddingTop: 1.6,
     paddingLeft: 32,
@@ -387,9 +386,11 @@ const stylesWeb = StyleSheet.create({
   },
   postSubscript: {
     fontSize: 14,
-    textAlign: "right",
-    // display: "inline-block",
-    // justifyContent: "space-between",
+    // textAlign: "center",
+    // // display: "inline-block",
+    // justifyContent: "center",
+    // alignContent: "center",
+    // alignItems: "center",
   },
   likeButton: {
     fontSize: 6,
@@ -408,10 +409,13 @@ const stylesWeb = StyleSheet.create({
   belowPost: {
     flex: 1,
     // display: "inline-block",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    // flexDirection: "row",
+    // justifyContent: "space-between",
+    // alignContent: "center",
+    // alignItems: "center",
+    textAlign: "center",
     paddingTop: 1.6,
-    paddingLeft: 32,
+    // paddingLeft: 32,
     width: 500,
   },
   postWrapper: {
@@ -424,13 +428,13 @@ const stylesWeb = StyleSheet.create({
     alignSelf: "center",
     width: 100,
   },
-  thumb: {
-    fontSize: 14,
-    // marginLeft: 4,
-    // marginRight: 4,
-  },
-  likesAndDislikes: {
-    flexDirection: "row",
-    textAlign: "right",
-  },
+  // thumb: {
+  //   fontSize: 14,
+  //   // marginLeft: 4,
+  //   // marginRight: 4,
+  // },
+  // likesAndDislikes: {
+  //   flexDirection: "row",
+  //   textAlign: "right",
+  // },
 });

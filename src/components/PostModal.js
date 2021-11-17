@@ -107,9 +107,9 @@ function PostModal(props) {
           }}
           onSubmitEditing={() => addNewPost()}
         ></TextInput>
-        <Pressable style={styles.imgSubmitButton}>
+        {/* <Pressable style={styles.imgSubmitButton}>
           <Text style={styles.submitButtonText}>Upload Image</Text>
-        </Pressable>
+        </Pressable> */}
         <Pressable style={styles.submitButton} onPress={addNewPost}>
           <Text style={styles.submitButtonText}>
             {loading ? "Loading..." : "Submit"}
