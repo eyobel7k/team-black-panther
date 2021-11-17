@@ -16,10 +16,9 @@ function Post(props) {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [reply, setReply] = useState("");
-  const [comments, setComments] = useState([]);
-  const [commentTimes, setCommentTimes] = useState([]);
-  const [commentYears, setCommentYears] = useState([]);
+  const [newComments, setNewComments] = useState([]);
   const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
@@ -34,17 +33,38 @@ function Post(props) {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members }).then((data) => {
       setMembers(data);
     });
+    wpApiFetch({ path: WPAPI_PATHS.wp.comments }).then(data => {
+
+    })
   }, []);
+
+  useEffect(() => {
+    if (loading) {
+      const commentData = {
+        content: reply,
+        date: new Date().toISOString().replace(/\..+/, ""),
+        post: props.associatedContent.id,
+      }
+      wpApiFetch({ path: WPAPI_PATHS.wp.comments, method: "POST", data: commentData, token: props.loggedInUserData.token })
+        .then((comment) => {
+          setReply("");
+          setNewComments([ ...newComments, comment ]);
+        }).catch(response => {
+          console.error(response.message);
+        }).finally(() => {
+          setLoading(false);
+        })
+    }
+  }, [loading])
+
+  const pruneTags = (text) => text.replace(/<[^>]+>/g, "").replace("\n", "");
 
   const memberById = (id) => {
     return members?.find((member) => member.id === id);
   };
 
   function addToComments() {
-    setComments([...comments, reply]);
-    setReply("");
-    setCommentTimes([...commentTimes, new Date().toLocaleTimeString()]);
-    setCommentYears([...commentYears, new Date().toLocaleDateString()]);
+    setLoading(true);
   }
 
   let styles;
@@ -52,12 +72,16 @@ function Post(props) {
   // ***  Code and Render for Mobile  ***
   if (width < widthBreakpoint) {
     styles = stylesMobile;
-    const showComments = comments.map((comment, i) => {
+    const joinedComments = [ ...props.associatedComments, ...newComments ];
+    const showComments = joinedComments.map((comment, i) => {
+      const date = new Date(comment.date);
+      const content = pruneTags(comment.content.rendered);
+  
       return (
         <View key={i} style={styles.comment}>
-          <Text style={styles.commentText}>{comment}</Text>
+          <Text style={styles.commentText}>{content}</Text>
           <Text style={styles.commentSubscript}>
-            posted by user at {commentTimes[i]} on {commentYears[i]}
+            posted by user at {date.toLocaleTimeString()} on {date.toLocaleDateString()}
           </Text>
         </View>
       );
@@ -122,18 +146,22 @@ function Post(props) {
           onChangeText={setReply}
           onSubmitEditing={addToComments}
         />
-        <Button title="comment" onPress={addToComments} />
+        <Button title={loading ? 'loading...' : 'comment'} onPress={addToComments} />
       </View>
     );
   } else {
     // ***  Code and Render for Web  ***
     styles = stylesWeb;
-    const showComments = comments.map((comment, i) => {
+    const joinedComments = [ ...props.associatedComments, ...newComments ];
+    const showComments = joinedComments.map((comment, i) => {
+      const date = new Date(comment.date);
+      const content = pruneTags(comment.content.rendered);
+  
       return (
         <View key={i} style={styles.comment}>
-          <Text style={styles.commentText}>{comment}</Text>
+          <Text style={styles.commentText}>{content}</Text>
           <Text style={styles.commentSubscript}>
-            posted by user at {commentTimes[i]} on {commentYears[i]}
+            posted by user at {date.toLocaleTimeString()} on {date.toLocaleDateString()}
           </Text>
         </View>
       );
