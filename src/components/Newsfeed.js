@@ -113,6 +113,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             <ScrollView style={styles.postsContainer}>
               <Text>{generatePosts}</Text>
             </ScrollView>
+           
           </View>
 
           {showPostModal && (

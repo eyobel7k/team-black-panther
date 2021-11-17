@@ -41,7 +41,6 @@ export default function Chat() {
     setTaskItems(itemsCopy);
   };
   const handleKeypress = (e) => {
-    //it triggers by pressing the enter key
     if (e.keyCode === 13) {
       handleAddTask();
 
@@ -51,19 +50,8 @@ export default function Chat() {
 
   return (
     <View style={styles.container}>
-      {/* Added this scroll view to enable scrolling when list gets longer than the page */}
-      <View
-        contentContainerStyle={
-          {
-            // flexGrow: 1,
-          }
-        }
-        keyboardShouldPersistTaps="handled"
-      >
-        {/* Today's Tasks */}
+      <View contentContainerStyle={{}} keyboardShouldPersistTaps="handled">
         <View style={styles.tasksWrapper}>
-          {/* <Text style={styles.sectionTitle}> Space Chat</Text> */}
-
           <View style={styles.inputContainer}>
             <TextInput
               underlineColorAndroid="transparent"
@@ -76,6 +64,7 @@ export default function Chat() {
               onSubmitEditing={handleAddTask}
               spellCheck={false}
               autoCorrect={false}
+              maxLength = {140}
             />
             <TouchableOpacity
               style={styles.button}
@@ -87,33 +76,36 @@ export default function Chat() {
             </TouchableOpacity>
           </View>
 
-          {/* <ScrollView style={{ height: 60, width: "100%" }}> */}
           <View style={styles.items}>
-            {/* This is where the message will go! */}
             {taskItems.map((item, index) => {
               return (
                 <TouchableOpacity
                   key={index}
                   onPress={() => completeTask(index)}
                 >
-                  {/* <Task text={item} /> */}
-                  <View style={{display:'flex', flexDirection:'row', alignItems:'flex-end', justifyContent:"space-between"}}>
-                  <View style={styles.item}>
-                    <View style={styles.itemLeft}>
-                      <View style={styles.square}></View>
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <View style={styles.item}>
+                      <View style={styles.itemLeft}>
+                        <View style={styles.square}></View>
 
-                      <Text style={styles.itemText}>{item}</Text>
+                        <Text style={styles.itemText}>{item}</Text>
+                      </View>
                     </View>
-                  </View>
-                  <View>
-                    <AntDesign name="delete" size={12} color="red" />
-                  </View>
+                    <View>
+                      <AntDesign name="delete" size={12} color="black" />
+                    </View>
                   </View>
                 </TouchableOpacity>
               );
             })}
           </View>
-          {/* </ScrollView> */}
         </View>
       </View>
     </View>
