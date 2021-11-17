@@ -14,26 +14,30 @@ const Profile = ({ navigation }) => {
 	const [profileInfo, setProfileInfo] = useState({});
 	const { height, width } = useWindowDimensions();
 	useEffect(() => {
+		// use buddypress.members/id and get id from jsonwebtoken
 		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
 			setProfileInfo(response[0]);
 		});
 	}, []); // runs onMount only
 
-  return (
-    <ThemeLoggedIn navigation={navigation}>
-      <View style={styles.profileContainer}>
-				<Image 
-					source={{ uri: profileInfo.avatar_urls?.["96"] }} 
-					style={[styles.profileImage, {
-						maxWidth: width > 300 ? 150 : 250,
-						maxHeight: width > 300 ? 150: 250,
-					}]}
+	return (
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.profileContainer}>
+				<Image
+					source={{ uri: profileInfo.avatar_urls?.["96"] }}
+					style={[
+						styles.profileImage,
+						{
+							maxWidth: width > 300 ? 150 : 250,
+							maxHeight: width > 300 ? 150 : 250,
+						},
+					]}
 				/>
 				<View style={styles.profileInfo}>
 					<Text style={styles.h2}>{profileInfo.name}</Text>
 					<Text style={styles.h3}>Avengers Tower, New York City</Text>
 				</View>
-				
+
 				<TouchableOpacity
 					style={styles.pillButton}
 					name="EditProfile"
@@ -48,11 +52,10 @@ const Profile = ({ navigation }) => {
 						<Text>{profileInfo.description}</Text>
 					</View>
 				</View>
-
-      </View>
-    </ThemeLoggedIn>
-  )
-}
+			</View>
+		</ThemeLoggedIn>
+	);
+};
 
 const styles = StyleSheet.create({
 	profileContainer: {
@@ -62,8 +65,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	profileImage: {
-		height: '100%',
-		width: '100%',
+		height: "100%",
+		width: "100%",
 		borderRadius: 100,
 	},
 	profileInfo: {
@@ -86,26 +89,26 @@ const styles = StyleSheet.create({
 		margin: 20,
 		width: "100%",
 		height: "100%",
-		borderColor: "gray",
-		backgroundColor: "whitesmoke",
+		borderColor: "#c5834c",
+		backgroundColor: "#efd595",
 	},
 	pillButton: {
 		borderRadius: 10,
-		backgroundColor: "lightgray",
+		backgroundColor: "#87cefa",
 		paddingHorizontal: 20,
 		paddingVertical: 4,
 	},
 	h2: {
 		fontSize: 36, // was 'xx-large'
 		fontWeight: "bold",
-		color: "blue",
+		color: "#000000",
 		paddingTop: 20,
 		paddingHorizontal: "10%",
 	},
 	h3: {
 		fontSize: 26, // was 'large'
 		fontWeight: "bold",
-		color: "gray",
+		color: "#c5834c",
 		// padding: 10,
 	},
 });

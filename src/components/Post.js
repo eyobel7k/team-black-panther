@@ -181,9 +181,9 @@ export default Post;
 const stylesMobile = StyleSheet.create({
   post: {
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
-    backgroundColor: "#f0f8ff",
+    backgroundColor: "#c5834c",
     margin: 16,
     marginBottom: 0,
     padding: 16,
@@ -211,7 +211,7 @@ const stylesMobile = StyleSheet.create({
     textAlign: "center",
     margin: 8,
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     padding: 4.8,
     backgroundColor: "#f0f8ff",
@@ -222,7 +222,7 @@ const stylesMobile = StyleSheet.create({
   comment: {
     // display: "block",
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     margin: 3.2,
     padding: 1.6,
@@ -250,7 +250,7 @@ const stylesMobile = StyleSheet.create({
   commentsWindow: {
     flexGrow: 1,
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     borderRadius: 12,
     height: 80,

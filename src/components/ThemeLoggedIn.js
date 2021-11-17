@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
 	},
 	scrollContentContainer: {
 		justifyContent: "space-between",
-		paddingTop: '5%',
-		paddingBottom: '50%',
+		paddingTop: "5%",
+		paddingBottom: "50%",
 	},
 	container: {
 		flex: 1,
-		justifyContent: 'space-between',
-		backgroundColor: "#fff",
+		justifyContent: "space-between",
+		backgroundColor: "#efd595",
 	},
 	text: {
 		margin: 5,

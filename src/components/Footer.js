@@ -81,36 +81,35 @@ const styles = StyleSheet.create({
 	footer: {
 		flex: 1,
 		flexDirection: "row",
-		backgroundColor: "#d2d2d6",
+		backgroundColor: "#1a1a1a",
 		width: "100%",
 		height: 64,
 		justifyContent: "space-around",
 		alignItems: "center",
 
 		bottom: 0,
-		backgroundColor: "#d2d2d6",
+		backgroundColor: "#1a1a1a",
 	},
 	footerMobile: {
 		flexDirection: "column",
 		padding: 20,
 		margin: 20,
-		backgroundColor: "#d2d2d6",
+		backgroundColor: "#1a1a1a",
 		borderRadius: 10,
-		
 	},
 
-  footerText: {
-    color: "#6c72d9",
-    fontWeight: "bold",
-    alignItems: "center",
-    fontSize: 14,
-    padding: 10,
-  },
-  footerTextSelect: {
-    color: "#6d6f91",
-    fontWeight: "bold",
-    alignItems: "center",
-    fontSize: 10,
-  },
+	footerText: {
+		color: "#efd595",
+		fontWeight: "bold",
+		alignItems: "center",
+		fontSize: 14,
+		padding: 10,
+	},
+	footerTextSelect: {
+		color: "#efd595",
+		fontWeight: "bold",
+		alignItems: "center",
+		fontSize: 10,
+	},
 });
 export default Footer;
