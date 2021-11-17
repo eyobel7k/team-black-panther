@@ -14,6 +14,7 @@ const Profile = ({ navigation }) => {
 	const [profileInfo, setProfileInfo] = useState({});
 	const { height, width } = useWindowDimensions();
 	useEffect(() => {
+		// Promise.all()
 		// use buddypress.members/id and get id from jsonwebtoken
 		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
 			setProfileInfo(response[0]);
@@ -35,7 +36,7 @@ const Profile = ({ navigation }) => {
 				/>
 				<View style={styles.profileInfo}>
 					<Text style={styles.h2}>{profileInfo.name}</Text>
-					<Text style={styles.h3}>Avengers Tower, New York City</Text>
+					<Text style={styles.h3}>New York City</Text>
 				</View>
 
 				<TouchableOpacity
