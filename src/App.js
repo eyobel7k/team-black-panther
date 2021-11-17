@@ -19,7 +19,7 @@ import Terms from "./components/Terms";
 import Rule from "./components/Rule";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Find from "./components/Find"
+import Find from "./components/Find";
 
 const Stack = createNativeStackNavigator();
 
@@ -72,10 +72,10 @@ export default function App() {
 	);
 }
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-	},
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
 });
 
 /**

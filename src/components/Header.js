@@ -61,7 +61,7 @@ function Header({ navigation }) {
 						name="Friends"
 						onPress={() => navigation.navigate("Friends")}
 					>
-						Friends
+						Members
 					</Text>
 
 					<Text
