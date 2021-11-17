@@ -9,39 +9,44 @@ import {
 } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
-import { posts } from "../services/WPAPI";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import PostModal from "./PostModal";
 import { Text } from "react-native-elements";
 
-function Newsfeed({ route, navigation }) {
+function Newsfeed({ route, navigation, loggedInUserData }) {
   const [postsArr, setPostsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
+	const [loading, setLoading] = useState(true);
+
+	const pruneTags = (text) => {
+		return text.replace(/<[^>]+>/g, "")
+			.replace("\n", "")
+	}
 
   useEffect(() => {
-    posts()
-      .then((data) => setPostsArr(data))
-      .catch((error) => console.log("in newsfeed.js ", error));
-  }, []);
+		if (loading) {
+			wpApiFetch({ path: WPAPI_PATHS.buddypress.activity })
+				.then(data => {
+					setPostsArr(data);
+					setLoading(false);
+				})
+		}
+
+  }, [loading]);
 
   const generatePosts = postsArr
     //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
     // .slice(0)
     // .reverse()
     .map((post, i) => {
-      if (post.excerpt?.rendered) {
-        let content = post.excerpt.rendered;
-        content = content.replace("<p>", "");
-        content = content.replace("</p>", "");
-        content = content.replace("\n", "");
-
-        return (
-          <Post key={i} content={content} id={i} associatedContent={post} />
-        );
-      }
+      const content = pruneTags(post.content.rendered || post.title);
+			return (
+				<Post key={i} content={content} id={i} associatedContent={post} />
+			);
     });
 
   let styles;
@@ -53,10 +58,7 @@ function Newsfeed({ route, navigation }) {
       <ThemeLoggedIn navigation={navigation}>
         <View style={styles.container} navigation={navigation}>
           <ScrollView>
-            {/* for demo purposes, will delete afterwards */}
-            {route.params?.user_display_name && (
-              <Text>{`Howdy ${route.params.user_display_name}!`}</Text>
-            )}
+          { route.params?.loginSuccess && <Text h3>{`Successfully logged in!`}</Text> }
             <View style={styles.body}>
               <Text h3 style={styles.heading}>
                 Newsfeed
@@ -92,10 +94,7 @@ function Newsfeed({ route, navigation }) {
     return (
       <ThemeLoggedIn navigation={navigation}>
         <View style={styles.container} navigation={navigation}>
-          {/* for demo purposes, will delete afterwards */}
-          {route.params?.user_display_name && (
-            <Text>{`Howdy ${route.params.user_display_name}!`}</Text>
-          )}
+        { route.params?.loginSuccess && <Text h3>{`Successfully logged in!`}</Text> }
           <View style={styles.buttonWrapper}>
             <Pressable
               style={styles.newPostButton}
@@ -131,14 +130,14 @@ function Newsfeed({ route, navigation }) {
 const stylesMobile = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "##efd595",
     height: "80%",
     // flexBasis: "100%"
   },
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "##efd595",
     height: "80%",
     width: "100%",
     textAlign: "center",
@@ -152,7 +151,7 @@ const stylesMobile = StyleSheet.create({
   },
   heading: {
     fontSize: 16,
-    color: "#1722e8",
+    color: "#000000",
     letterSpacing: 2.4,
   },
   text: {
@@ -165,7 +164,7 @@ const stylesMobile = StyleSheet.create({
     position: "absolute",
     left: 10,
     top: -10,
-    backgroundColor: "#0000ff",
+    backgroundColor: "#c5834c",
     paddingTop: 12,
     paddingLeft: 15,
     paddingBottom: 12,
@@ -174,7 +173,7 @@ const stylesMobile = StyleSheet.create({
     width: 64,
   },
   postButtonText: {
-    color: "#87ceeb",
+    color: "#87cefa",
     fontWeight: "bold",
     fontSize: 16,
   },
@@ -197,7 +196,7 @@ const stylesMobile = StyleSheet.create({
 const stylesWeb = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "##efd595",
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
@@ -208,7 +207,7 @@ const stylesWeb = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "##efd595",
     height: "80%",
     width: "100%",
     textAlign: "center",
@@ -224,7 +223,7 @@ const stylesWeb = StyleSheet.create({
   },
   heading: {
     fontSize: 16,
-    color: "#1722e8",
+    color: "#000000",
     letterSpacing: 2.4,
   },
   text: {
@@ -237,7 +236,7 @@ const stylesWeb = StyleSheet.create({
     position: "absolute",
     top: 80,
     left: 180,
-    backgroundColor: "blue",
+    backgroundColor: "#c5834c",
     paddingTop: 32,
     paddingLeft: 34,
     paddingBottom: 32,
@@ -245,7 +244,7 @@ const stylesWeb = StyleSheet.create({
     borderRadius: 80,
   },
   postButtonText: {
-    color: "#87ceeb",
+    color: "#87cefa",
     fontWeight: "bold",
     fontSize: 22,
   },

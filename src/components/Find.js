@@ -14,18 +14,13 @@ const Find = ({ navigation }) => {
       .then((data) => {
         setFilteredDataSource(data);
         setMasterDataSource(data);
-        // console.log(data);
       })
 
       .catch((error) => console.log(error));
   }, []);
-  // console.log(MasterDataSource);
+
   const searchFilterFunction = (text) => {
-    // Check if searched text is not blank
     if (text) {
-      // Inserted text is not blank
-      // Filter the masterDataSource
-      // Update FilteredDataSource
       const newData = masterDataSource.filter((item) => {
         const itemData = item.name ? item.name.toLowerCase() : "".toLowerCase();
         const textData = text.toLowerCase();
@@ -34,8 +29,6 @@ const Find = ({ navigation }) => {
       setFilteredDataSource(newData);
       setSearch(text);
     } else {
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
       setFilteredDataSource(masterDataSource);
       setSearch(text);
     }
@@ -43,10 +36,7 @@ const Find = ({ navigation }) => {
 
   const ItemView = ({ item }) => {
     return (
-      // Flat List Item
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {/* {item.id}
-          {"."}   */}
         {item.name.toLowerCase()}
       </Text>
     );
@@ -54,7 +44,6 @@ const Find = ({ navigation }) => {
 
   const ItemSeparatorView = () => {
     return (
-      // Flat List Item Separator
       <View
         style={{
           height: 0.5,
@@ -65,23 +54,22 @@ const Find = ({ navigation }) => {
     );
   };
 
-  const getItem = (item) => {
-    // Function for click on an item
-    alert("Id : " + item.id + "   Name: " + item.name);
-  };
-
   return (
     <ThemeLoggedIn navigation={navigation}>
-      <View style={{ flex: 1 }}>
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <View>
           <SearchBar
+            style={styles.searchBar}
             round
             searchIcon={{ size: 24 }}
+            padding={10}
             onChangeText={(text) => searchFilterFunction(text)}
             onClear={(text) => searchFilterFunction("")}
-            placeholder="Search members here..."
+            placeholder="Search super friends..."
             value={search}
           />
+        </View>
+        <View>
           <FlatList
             data={filteredDataSource}
             keyExtractor={(item, index) => index.toString()}
@@ -96,10 +84,20 @@ const Find = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "blue",
+    flex: 1,
+    width: "80%",
+    backgroundColor: "#c5834c",
+    textAlign: "center",
+    paddingTop: 20,
+    paddingBottom: 10,
+    justifyContent: "center",
+    marginHorizontal: 45,
   },
   itemStyle: {
     padding: 10,
+  },
+  searchBar: {
+    backgroundColor: "#efd595",
   },
 });
 

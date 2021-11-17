@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Pressable,
-  useWindowDimensions,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, StyleSheet, Pressable, useWindowDimensions } from "react-native";
+import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
 
 function PostModal(props) {
-  const [text, onChangeText] = useState("");
+	const [text, onChangeText] = useState("");
+  const [post, setNewPost] = useState("");
+	const [loading, setLoading] = useState(false);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
-  const addNewPost = () => {
+  const addNewPost = (newText) => {
     let year = new Date().getFullYear();
     let month = new Date().getMonth() + 1;
     let date = new Date().getDate();
@@ -49,13 +45,29 @@ function PostModal(props) {
       ":" +
       seconds;
     let newPost = {
-      excerpt: { rendered: text },
-      author: "me",
-      date: now,
+			content: newText,
+      author: props.loggedInUserData.id,
+      status: 'publish',
+      title: now,
+      slug: now,
     };
-    props.setPostsArr([...props.postsArr, newPost]);
-    props.setShowPostModal(false);
+    // props.setPostsArr([...props.postsArr, newPost]);
+		// props.setShowPostModal(false);
+		setNewPost(newPost);
+		setLoading(true);
   };
+
+	useEffect(() => {
+		console.log('in PostModal effect: ', loading)
+		if (loading) {
+			wpApiFetch({ path: WPAPI_PATHS.wp.posts, method: "POST", data: post, token: props.loggedInUserData.token})
+				.then(response => {
+					console.log('in PostModal: ', response);
+					setLoading(false);
+					props.setShowPostModal(false);
+				})
+		}
+	}, [loading])
 
   let styles;
   if (width < widthBreakpoint) {
@@ -77,14 +89,16 @@ function PostModal(props) {
         <TextInput
           style={styles.textInput}
           value={text}
-          onChangeText={onChangeText}
-          onSubmitEditing={addNewPost}
+          onSubmitEditing={newText => {
+						onChangeText(newText);
+						addNewPost(newText);
+					}}
         ></TextInput>
         <Pressable style={styles.imgSubmitButton}>
           <Text>Upload Image</Text>
         </Pressable>
         <Pressable style={styles.submitButton} onPress={addNewPost}>
-          <Text>Submit</Text>
+          <Text>{loading ? 'Loading...' : 'Submit'}</Text>
         </Pressable>
       </View>
     </View>
@@ -108,27 +122,26 @@ const stylesMobile = StyleSheet.create({
   modal: {
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#000",
     margin: 0,
     borderRadius: 5,
     padding: 30,
-    backgroundColor: "#FFF",
+    backgroundColor: "#efd595",
     width: "80%",
     height: 400,
     alignItems: "center",
     justifyContent: "center",
     borderStyle: "solid",
     borderWidth: 2,
-    borderColor: "cadetblue",
+    borderColor: "#c5834c",
     borderRadius: 20,
   },
   textInput: {
     marginTop: 32,
-    backgroundColor: "aliceblue",
+    backgroundColor: "#c5834c",
     width: "90%",
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "cadetblue",
+    borderColor: "#c5834c",
     padding: 16,
     borderRadius: 20,
     textAlign: "center",
@@ -148,8 +161,8 @@ const stylesMobile = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "lightskyblue",
-    color: "blue",
+    backgroundColor: "#87cefa",
+    color: "#c5834c",
   },
   imgSubmitButton: {
     width: 122,
@@ -158,13 +171,13 @@ const stylesMobile = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "lightskyblue",
+    backgroundColor: "#87cefa",
     color: "blue",
   },
   modalText: {
     textAlign: "center",
   },
-});
+})
 
 // ***  Styles for Web  ***
 const stylesWeb = StyleSheet.create({
@@ -182,28 +195,27 @@ const stylesWeb = StyleSheet.create({
   modal: {
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#000",
     top: 40,
     margin: 0,
     borderRadius: 5,
     padding: 30,
-    backgroundColor: "#FFF",
+    backgroundColor: "#efd595",
     width: 600,
     height: 300,
     alignItems: "center",
     justifyContent: "center",
     borderStyle: "solid",
     borderWidth: 2,
-    borderColor: "cadetblue",
+    borderColor: "#c5834c",
     borderRadius: 20,
   },
   textInput: {
     marginTop: 32,
-    backgroundColor: "aliceblue",
+    backgroundColor: "#c5834c",
     width: 320,
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "cadetblue",
+    borderColor: "#c5834c",
     padding: 16,
     borderRadius: 20,
     textAlign: "center",
@@ -223,8 +235,8 @@ const stylesWeb = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "lightskyblue",
-    color: "blue",
+    backgroundColor: "#87cefa",
+    color: "#c5834c",
   },
   imgSubmitButton: {
     width: 128,
@@ -233,8 +245,8 @@ const stylesWeb = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "lightskyblue",
-    color: "blue",
+    backgroundColor: "#87cefa",
+    color: "#c5834c",
   },
 });
 

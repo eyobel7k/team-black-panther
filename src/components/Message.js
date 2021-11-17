@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import ThemeLoggedIn  from "./ThemeLoggedIn";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import ThemeLoggedIn from "./ThemeLoggedIn";
 import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import { Text } from "react-native-elements";
 
 function Messages({ navigation }) {
   const [members, setMembers] = useState([]);
@@ -15,83 +17,107 @@ function Messages({ navigation }) {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => {
         setMembers(data);
-        // console.log(data);
+        console.log(data);
       })
 
       .catch((error) => console.log(error));
   }, []);
 
-  console.log("Members", members);
-
-  const listMembers = members?.map((member, index) => (
-    <View key={index} style={styles.inlineProfile}>
-      <TouchableOpacity onPress={() => onPress(index)}>
-        <Image style={styles.image} source={{uri:member.avatar_urls.thumb}} />
-      </TouchableOpacity>
-      <Text>{member.name}</Text>
-    </View>
+  const newMembers = members?.map((member, index) => (
+    <Picker.Item label={member.name} key={index} value={member.name} />
   ));
 
   return (
-    <ThemeLoggedIn navigation={navigation}>
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <Text style={styles.text}>
-            {Object.keys(selectedMember).length !== 0 && (
-              <View style={styles.img}>
-                {console.log(selectedMember)}
-                <Image
-                  source={{uri:selectedMember.avatar_urls?.thumb}}
-                  style={styles.image}
-                ></Image>
-                <Text>{selectedMember.name}</Text>
-              </View>
-            )}
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.container}>
+				<View style={styles.title}>
+          <Text h4> Space Chat</Text>
+          </View>
+					<View style={styles.body}>
+						<Text style={styles.text}>
+							<Picker
+								selectedValue={
+									selectedMember.name ? selectedMember.name : "Select"
+								}
+								style={{
+									height: 50,
+									width: 170,
+									backgroundColor: "#d2d2d6",
+									color: "#6c72d9",
+									borderRadius: 35,
+								}}
+								onValueChange={(member, itemIndex) => {
+									setSelectedMember(members[itemIndex]);
+								}}
+							>
+								{newMembers}
+							</Picker>
+							{Object.keys(selectedMember).length !== 0 && (
+								<View style={styles.img}>
+									{console.log(selectedMember)}
+									<View styles={styles.pick}>
+										<Image
+											source={{ uri: selectedMember.avatar_urls?.thumb }}
+											style={styles.image}
+										></Image>
 
-            <Chat />
-          </Text>
-        </View>
-        {listMembers}
-      </View>
-    </ThemeLoggedIn>
-  );
+										<Text>{selectedMember.name}</Text>
+									</View>
+								</View>
+							)}
+
+							<Chat />
+						</Text>
+					</View>
+					{/* {listMembers} */}
+				</View>
+			
+		</ThemeLoggedIn>
+	);
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  body: {
-    backgroundColor: "#fff",
-    // height: "10%",
-    width: "100%",
-    textAlign: "center",
-    justifyContent: "center",
-  },
-  text: {
-    margin: 5,
-    fontSize: 14,
-    fontWeight: "bold",
-    // fontFamily: "Serif",
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#efd595",
+	},
+	body: {
+		backgroundColor: "#efd595",
+		// height: "10%",
+		width: "100%",
+		textAlign: "center",
+		justifyContent: "center",
+	},
+	text: {
+		margin: 5,
+		fontSize: 14,
+		fontWeight: "bold",
+		// fontFamily: "Serif",
+	},
 
-  image: {
-    width: 10,
-    height: 10,
-    marginRight: 10,
-    alignItems: "baseline",
-    
-  },
-  img: {
-    justifyContent: "center",
-  },
-  inlineProfile: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 5,
-  },
+	image: {
+		width: 50,
+		height: 50,
+		marginRight: 2,
+		alignItems: "baseline",
+	},
+	img: {
+		justifyContent: "center",
+	},
+	inlineProfile: {
+		flex: 1,
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		marginBottom: 5,
+	},
+	pick: {
+		paddingTop: 5,
+		alignItems: "center",
+	},
+	title: {
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });
 
 export default Messages;

@@ -44,42 +44,41 @@ const EditProfile = ({ navigation }) => {
 							<TextInput
 								style={styles.TextInput}
 								placeholder=""
-								placeholderTextColor="#1722e8"
+								placeholderTextColor="#000000"
 							/>
 						</View>
-
-            <View style={styles.inputView}>
-              <Text style={styles.bodyText}>Edit City</Text>
-              <TextInput
-                style={styles.TextInput}
-                placeholder=""
-                placeholderTextColor="#1722e8"
-              />
-            </View>
-            <View style={styles.inputView}>
-              <Text style={styles.bodyText}>Edit About</Text>
-              <TextInput
-                style={styles.TextInput}
-                placeholder=""
-                placeholderTextColor="#1722e8"
-              />
-            </View>
-            <TouchableOpacity style={styles.loginBtn}>
-              <Text style={styles.bodyText}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View />
-      </View>
-    </ThemeLoggedIn>
-  );
+						<View style={styles.inputView}>
+							<Text style={styles.bodyText}>Edit City</Text>
+							<TextInput
+								style={styles.TextInput}
+								placeholder=""
+								placeholderTextColor="#000000"
+							/>
+						</View>
+						<View style={styles.inputView}>
+							<Text style={styles.bodyText}>Edit About</Text>
+							<TextInput
+								style={styles.TextInput}
+								placeholder=""
+								placeholderTextColor="#000000"
+							/>
+						</View>
+						<TouchableOpacity style={styles.loginBtn}>
+							<Text style={styles.bodyText}>Submit</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
+				<View />
+			</View>
+		</ThemeLoggedIn>
+	);
 };
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
 	body: {
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 		height: "100%",
 		width: "100%",
 		textAlign: "center",
@@ -87,15 +86,14 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	bodyText: {
-		color: "#1722e8",
+		color: "#000000",
 	},
 	LogInBorder: {
-		
 		borderRadius: 50,
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 		width: "50%",
 		height: "80%",
-		color: "#e9e9f5",
+		color: "#efd595",
 		alignItems: "center",
 		justifyContent: "space-evenly",
 		marginHorizontal: 10,
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
 	ImageBorder: {
 		borderStyle: "solid",
 		borderRadius: 50,
-		backgroundColor: "#fff",
+		backgroundColor: "#efd595",
 		width: "40%",
 		height: "80%",
 		alignItems: "center",
@@ -134,15 +132,15 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 40,
-		backgroundColor: "#e9e9f5",
+		backgroundColor: "#c5834c",
 	},
 
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 20,
-  },
+	TextInput: {
+		height: 50,
+		flex: 1,
+		padding: 10,
+		marginLeft: 20,
+	},
 
 	forgot_button: {
 		alignItems: "center",

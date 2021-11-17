@@ -1,23 +1,33 @@
 import React from "react";
-import { StyleSheet, View, TouchableHighlight } from "react-native";
+import {
+	StyleSheet,
+	View,
+	Image,
+	TouchableHighlight,
+} from "react-native";
 
 import { Text, SearchBar } from "react-native-elements";
-
+import welcomeImg from "../../assets/BlackPanther.png";
 function Header({ navigation }) {
-	
 
 	return (
 		<View style={styles.Header} navigation={navigation}>
 			<TouchableHighlight navigation={navigation}>
 				<View style={styles.HeaderWarp} navigation={navigation}>
-					{/* <View style={styles.HeaderTitle}> */}
-						<Text h3 style={styles.HeaderSearch}>
-							MarvelSpace
-						</Text>
-						<Text h4 style={styles.headerText}>
-							A space for super friends
-						</Text>
-					{/* </View> */}
+					<Image
+						source={welcomeImg}
+						style={{ height: "90%", width: 150, paddingTop: 120, marginEnd: 0 }}
+					/>
+					
+					<View style={styles.HeaderTitle}>
+							<Text h3 style={styles.headerText}>
+						marvelspace
+					</Text>
+					<Text h4 style={styles.headerText}>
+						a space for super friends
+					</Text>
+					</View>
+
 					{/* <View style={styles.HeaderSearch}>
 						<SearchBar
 							lightTheme={true}
@@ -36,16 +46,14 @@ function Header({ navigation }) {
 			</TouchableHighlight>
 			<TouchableHighlight>
 				<View style={styles.HeaderBar} navigation={navigation}>
-					
-						<Text
-							navigation={navigation}
-							style={styles.headerText}
-							name="Newsfeed"
-							onPress={() => navigation.navigate("Newsfeed")}
-						>
-							Newsfeed
-						</Text>
-				
+					<Text
+						navigation={navigation}
+						style={styles.headerText}
+						name="Newsfeed"
+						onPress={() => navigation.navigate("Newsfeed")}
+					>
+						Newsfeed
+					</Text>
 
 					<Text
 						navigation={navigation}
@@ -101,44 +109,53 @@ const styles = StyleSheet.create({
 	Header: {
 		flex: 1,
 		flexDirection: "column",
-		justifyContent: "space-between",
-		backgroundColor: "#0000FF",
-		height: 100,
-		width: "100%",
+		justifyContent: "space-around",
+		backgroundColor: "#1a1a1a",
+		// height: 100,
+		// width: "100%",
 	},
 	HeaderTitle: {
 		flexDirection: "column",
 		justifyContent: "flex-start",
 		alignItems: "flex-start",
-		padding: 30,
-		// width: "50%",
+		// padding: 30,
+		width: "50%",
 	},
 	HeaderBar: {
 		flexDirection: "row",
-		backgroundColor: "#87cefa",
+		backgroundColor: "#c5834c",
 		width: "100%",
 		padding: 5,
 		justifyContent: "space-around",
+		marginBottom: 0,
 	},
 	headerText: {
-		color: "#fff",
+		color: "#efd595",
 		fontWeight: "bold",
 		alignItems: "center",
 		fontSize: 14,
 	},
-	HeaderSearch: {
-		marginVertical: 30,
-	},
+	// HeaderSearch: {
+	// 	marginVertical: 30,
+
 	HeaderWarp: {
 		flexDirection: "row",
 		flexWrap: "wrap",
 		justifyContent: "space-around",
 		alignItems: "flex-end",
 		width: "100%",
-		// paddingBottom:20,
+		paddingTop: 10,
+		// paddingBottom: 20,
 	},
 	bodyText: {
-		color: "#1722e8",
+		color: "#efd595",
+	},
+	profileImage: {
+		height: "10%",
+		width: "10%",
+		borderRadius: 5,
+		justifyContent: "flex-end",
+		alignItems: "flex-end",
 	},
 });
 export default Header;
