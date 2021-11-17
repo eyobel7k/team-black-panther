@@ -66,8 +66,8 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           <PostModal
             setShowPostModal={setShowPostModal}
             postsArr={postsArr}
-            setPostsArr={setPostsArr}
 						loggedInUserData={loggedInUserData}
+						refreshNewsfeed={setLoading}
           />
         )}
       </View>
