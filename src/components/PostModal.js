@@ -176,11 +176,8 @@ const stylesMobile = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#c5834c",
-    color: "#efd595",
-  },
-  submitButtonText: {
-    color: "#efd595",
+    backgroundColor: "#87cefa",
+    color: "#c5834c",
   },
   imgSubmitButton: {
     width: 122,
@@ -189,8 +186,8 @@ const stylesMobile = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "#c5834c",
-    color: "#efd595",
+    backgroundColor: "#87cefa",
+    color: "blue",
   },
   modalText: {
     textAlign: "center",
@@ -253,11 +250,8 @@ const stylesWeb = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#c5834c",
-    color: "#efd595",
-  },
-  submitButtonText: {
-    color: "#efd595",
+    backgroundColor: "#87cefa",
+    color: "#c5834c",
   },
   imgSubmitButton: {
     width: 128,
@@ -266,8 +260,8 @@ const stylesWeb = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "#c5834c",
-    color: "#efd595",
+    backgroundColor: "#87cefa",
+    color: "#c5834c",
   },
 });
 

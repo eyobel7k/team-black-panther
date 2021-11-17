@@ -203,7 +203,7 @@ function Post(props) {
           onSubmitEditing={addToComments}
         />
         <View style={styles.commentButtonWrapper}>
-          <Button title="comment" color="#c5834c" onPress={addToComments} />
+          <Button title="comment" onPress={addToComments} />
         </View>
       </View>
     );
