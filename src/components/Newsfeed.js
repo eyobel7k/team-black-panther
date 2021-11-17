@@ -29,19 +29,36 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
   useEffect(() => {
     if (loading) {
-      wpApiFetch({ path: WPAPI_PATHS.buddypress.activity }).then((data) => {
+      wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((data) => {
         setPostsArr(data);
         setLoading(false);
       });
     }
   }, [loading]);
 
+  // const generatePosts = postsArr
+  //   //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
+  //   // .slice(0)
+  //   // .reverse()
+  //   .map((post, i) => {
+  //     if (post.excerpt?.rendered) {
+  //       let content = post.excerpt.rendered;
+  //       content = content.replace("<p>", "");
+  //       content = content.replace("</p>", "");
+  //       content = content.replace("\n", "");
+
+  //       return (
+  //         <Post key={i} content={content} id={i} associatedContent={post} />
+  //       );
+  //     }
+  //   });
+
   const generatePosts = postsArr
     //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
     // .slice(0)
     // .reverse()
     .map((post, i) => {
-      const content = pruneTags(post.content.rendered || post.title);
+      const content = pruneTags(post.excerpt.rendered || post.title); //commented out post.title and changed content to excerpt
       return <Post key={i} content={content} id={i} associatedContent={post} />;
     });
 
@@ -75,17 +92,17 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             </View>
           </ScrollView>
 
-        {showPostModal && (
-          <PostModal
-            setShowPostModal={setShowPostModal}
-            postsArr={postsArr}
-            // setPostsArr={setPostsArr}
-						loggedInUserData={loggedInUserData}
-						refreshNewsfeed={setLoading}
-          />
-        )}
-      </View>
-    </ThemeLoggedIn>
+          {showPostModal && (
+            <PostModal
+              setShowPostModal={setShowPostModal}
+              postsArr={postsArr}
+              // setPostsArr={setPostsArr}
+              loggedInUserData={loggedInUserData}
+              refreshNewsfeed={setLoading}
+            />
+          )}
+        </View>
+      </ThemeLoggedIn>
     );
   } else {
     styles = stylesWeb;
@@ -116,16 +133,16 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           </View>
 
           {showPostModal && (
-          <PostModal
-            setShowPostModal={setShowPostModal}
-            postsArr={postsArr}
-            // setPostsArr={setPostsArr}
-						loggedInUserData={loggedInUserData}
-						refreshNewsfeed={setLoading}
-          />
-        )}
-      </View>
-    </ThemeLoggedIn>
+            <PostModal
+              setShowPostModal={setShowPostModal}
+              postsArr={postsArr}
+              // setPostsArr={setPostsArr}
+              loggedInUserData={loggedInUserData}
+              refreshNewsfeed={setLoading}
+            />
+          )}
+        </View>
+      </ThemeLoggedIn>
     );
   }
 }
