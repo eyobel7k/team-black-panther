@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,8 +7,10 @@ import {
   useWindowDimensions,
   TextInput,
   ScrollView,
+  Image,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function Post(props) {
   const [likes, setLikes] = useState(0);
@@ -17,6 +19,7 @@ function Post(props) {
   const [comments, setComments] = useState([]);
   const [commentTimes, setCommentTimes] = useState([]);
   const [commentYears, setCommentYears] = useState([]);
+  const [members, setMembers] = useState([]);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
@@ -26,6 +29,16 @@ function Post(props) {
     props.associatedContent.date.substring(5, 10) +
     "-" +
     props.associatedContent.date.substring(0, 4);
+
+  useEffect(() => {
+    wpApiFetch({ path: WPAPI_PATHS.buddypress.members }).then((data) => {
+      setMembers(data);
+    });
+  }, []);
+
+  const memberById = (id) => {
+    return members?.find((member) => member.id === id);
+  };
 
   function addToComments() {
     setComments([...comments, reply]);
@@ -57,7 +70,18 @@ function Post(props) {
         <View>
           <View style={styles.belowPost}>
             <Text style={styles.postSubscript}>
-              Posted by {postAuthor} at {postTime} on {postDate}
+              Posted by by {memberById(postAuthor)?.name}{" "}
+              <Image
+                style={{ width: 18, height: 18 }}
+                source={{
+                  uri: memberById(postAuthor)?.avatar_urls.full.startsWith(
+                    "https:"
+                  )
+                    ? memberById(postAuthor).avatar_urls?.full
+                    : "https://www.gravatar.com/avatar/?d=identicon",
+                }}
+              />
+              at {postTime} on {postDate}
             </Text>
             <View style={styles.button}>
               <TouchableOpacity
@@ -122,7 +146,18 @@ function Post(props) {
         <View>
           <View style={styles.belowPost}>
             <Text style={styles.postSubscript}>
-              Posted by {postAuthor} at {postTime} on {postDate}
+              by {memberById(postAuthor)?.name}{" "}
+              <Image
+                style={{ width: 18, height: 18 }}
+                source={{
+                  uri: memberById(postAuthor)?.avatar_urls.full.startsWith(
+                    "https:"
+                  )
+                    ? memberById(postAuthor).avatar_urls?.full
+                    : "https://www.gravatar.com/avatar/?d=identicon",
+                }}
+              />
+              at {postTime} on {postDate}
             </Text>
             <View style={styles.likesAndDislikes}>
               <View style={styles.button}>
@@ -286,9 +321,9 @@ const stylesMobile = StyleSheet.create({
 const stylesWeb = StyleSheet.create({
   post: {
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
-    backgroundColor: "#f0f8ff",
+    backgroundColor: "#c5834c",
     margin: 16,
     marginBottom: 0,
     padding: 16,
@@ -318,7 +353,7 @@ const stylesWeb = StyleSheet.create({
     textAlign: "center",
     margin: 8,
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     padding: 4.8,
     backgroundColor: "#f0f8ff",
@@ -329,7 +364,7 @@ const stylesWeb = StyleSheet.create({
   comment: {
     // display: "block",
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     margin: 3.2,
     padding: 1.6,
@@ -357,7 +392,7 @@ const stylesWeb = StyleSheet.create({
   },
   commentsWindow: {
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     borderRadius: 12,
     height: 120,
