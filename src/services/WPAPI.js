@@ -51,12 +51,31 @@ const buildQueryUrl = ( path, params = {} ) => {
  * @return {Promise} response
  * example use: wpApiFetch({ path: WPAPI_PATHS.posts }) returns Promise for wordpress posts array
  */
-export const wpApiFetch = async ({ path, queryParams = {}, headers = {}, body, method = 'GET' }) => {
+export const wpApiFetch = async ({ path, queryParams = {}, data, method = 'GET', token }) => {
+  
+  const buildHeaders = () => {
+    if (method === 'POST') {
+      return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+      }
+    }
+    return {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const options = {
+    method,
+    headers: buildHeaders(),
+    body: JSON.stringify(data)
+  }
   const url = isNotEmptyObject(queryParams)
     ? buildQueryUrl(path, queryParams)
     : `${BASE_URL}/${path}`
+
   try {
-    const response = await fetch(url, { method, headers, body: JSON.stringify(body) });
+    const response = await fetch(url, options);
     return response.json();
   } catch(error) {
     // any error handling code goes here

@@ -28,88 +28,96 @@ function Messages({ navigation }) {
   ));
 
   return (
-    <ThemeLoggedIn navigation={navigation}>
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <Text style={styles.text}>
-            <Picker
-              selectedValue={
-                selectedMember.name ? selectedMember.name : "Select"
-              }
-              style={{
-                height: 50,
-                width: 170,
-                backgroundColor: "#d2d2d6",
-                color: "#6c72d9",
-                borderRadius: 35,
-              }}
-              onValueChange={(member, itemIndex) => {
-                setSelectedMember(members[itemIndex]);
-              }}
-            >
-              {newMembers}
-            </Picker>
-            {Object.keys(selectedMember).length !== 0 && (
-              <View style={styles.img}>
-                {console.log(selectedMember)}
-                <View styles={styles.pick}>
-                  <Image
-                    source={{ uri: selectedMember.avatar_urls?.thumb }}
-                    style={styles.image}
-                  ></Image>
+		<ThemeLoggedIn navigation={navigation}>
+			<View style={styles.container}>
+				<View style={styles.title}>
+          <Text h4> Space Chat</Text>
+          </View>
+					<View style={styles.body}>
+						<Text style={styles.text}>
+							<Picker
+								selectedValue={
+									selectedMember.name ? selectedMember.name : "Select"
+								}
+								style={{
+									height: 50,
+									width: 170,
+									backgroundColor: "#d2d2d6",
+									color: "#6c72d9",
+									borderRadius: 35,
+								}}
+								onValueChange={(member, itemIndex) => {
+									setSelectedMember(members[itemIndex]);
+								}}
+							>
+								{newMembers}
+							</Picker>
+							{Object.keys(selectedMember).length !== 0 && (
+								<View style={styles.img}>
+									{console.log(selectedMember)}
+									<View styles={styles.pick}>
+										<Image
+											source={{ uri: selectedMember.avatar_urls?.thumb }}
+											style={styles.image}
+										></Image>
 
-                  <Text>{selectedMember.name}</Text>
-                </View>
-              </View>
-            )}
+										<Text>{selectedMember.name}</Text>
+									</View>
+								</View>
+							)}
 
-            <Chat />
-          </Text>
-        </View>
-        {/* {listMembers} */}
-      </View>
-    </ThemeLoggedIn>
-  );
+							<Chat />
+						</Text>
+					</View>
+					{/* {listMembers} */}
+				</View>
+			
+		</ThemeLoggedIn>
+	);
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#efd595",
-  },
-  body: {
-    backgroundColor: "#efd595",
-    // height: "10%",
-    width: "100%",
-    textAlign: "center",
-    justifyContent: "center",
-  },
-  text: {
-    margin: 5,
-    fontSize: 14,
-    fontWeight: "bold",
-    // fontFamily: "Serif",
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#efd595",
+	},
+	body: {
+		backgroundColor: "#efd595",
+		// height: "10%",
+		width: "100%",
+		textAlign: "center",
+		justifyContent: "center",
+	},
+	text: {
+		margin: 5,
+		fontSize: 14,
+		fontWeight: "bold",
+		// fontFamily: "Serif",
+	},
 
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 2,
-    alignItems: "baseline",
-  },
-  img: {
-    justifyContent: "center",
-  },
-  inlineProfile: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 5,
-  },
-  pick: {
-    paddingTop: 5,
-    alignItems: "center",
-  },
+	image: {
+		width: 50,
+		height: 50,
+		marginRight: 2,
+		alignItems: "baseline",
+	},
+	img: {
+		justifyContent: "center",
+	},
+	inlineProfile: {
+		flex: 1,
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		marginBottom: 5,
+	},
+	pick: {
+		paddingTop: 5,
+		alignItems: "center",
+	},
+	title: {
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });
 
 export default Messages;

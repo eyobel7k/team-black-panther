@@ -62,7 +62,7 @@ export default function Chat() {
       >
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}> Space Chat</Text>
+          {/* <Text style={styles.sectionTitle}> Space Chat</Text> */}
 
           <View style={styles.inputContainer}>
             <TextInput
