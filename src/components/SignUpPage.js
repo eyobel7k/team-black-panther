@@ -1,16 +1,17 @@
 import React from "react";
 import {
-  StyleSheet,
-  Button,
-  View,
-  TextInput,
-  TouchableOpacity,
+	StyleSheet,
+	Button,
+	View,
+	TextInput,
+	TouchableOpacity,
+	Linking
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 
 function SignUpPage({ navigation }) {
-  return (
+	return (
 		<ThemeLoggedOut navigation={navigation}>
 			<View style={styles.body}>
 				<View style={styles.LogInBorder}>
@@ -18,41 +19,14 @@ function SignUpPage({ navigation }) {
 						Sign Up
 					</Text>
 					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Email."
-							placeholderTextColor="#000000"
-							onChangeText={(email) => setEmail(email)}
-						/>
+						<TouchableOpacity
+							onPress={() =>
+								Linking.openURL("https://jualuc1.dreamhosters.com/register/")
+							}
+						>
+							<Text>Click here to register</Text>
+						</TouchableOpacity>
 					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Full Name"
-							placeholderTextColor="#000000"
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="UserName"
-							placeholderTextColor="#000000"
-						/>
-					</View>
-
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder="Password."
-							placeholderTextColor="#000000"
-							secureTextEntry={true}
-							onChangeText={(password) => setPassword(password)}
-						/>
-					</View>
-
-					<TouchableOpacity style={styles.loginBtn}>
-						<Text style={styles.bodyText}>Submit</Text>
-					</TouchableOpacity>
 				</View>
 
 				<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
