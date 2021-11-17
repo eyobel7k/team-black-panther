@@ -10,13 +10,13 @@ import {
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function PostModal(props) {
-  const [text, onChangeText] = useState("");
+  const [text, setText] = useState("");
   const [post, setNewPost] = useState("");
   const [loading, setLoading] = useState(false);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
-  const addNewPost = (newText) => {
+  const addNewPost = () => {
     let year = new Date().getFullYear();
     let month = new Date().getMonth() + 1;
     let date = new Date().getDate();
@@ -52,12 +52,12 @@ function PostModal(props) {
       ":" +
       seconds;
     let newPost = {
-      content: newText,
-      author: props.loggedInUserData.id,
+      content: text,
       status: "publish",
       title: now,
       slug: now,
     };
+    console.log("newPost ", newPost);
     // props.setPostsArr([...props.postsArr, newPost]);
     // props.setShowPostModal(false);
     setNewPost(newPost);
@@ -75,17 +75,11 @@ function PostModal(props) {
       }).then((response) => {
         console.log("in PostModal: ", response);
         setLoading(false);
+        props.refreshNewsfeed(true);
         props.setShowPostModal(false);
       });
     }
   }, [loading]);
-
-  let styles;
-  if (width < widthBreakpoint) {
-    styles = stylesMobile;
-  } else {
-    styles = stylesWeb;
-  }
 
   return (
     <View style={styles.modalContainer}>
@@ -100,10 +94,11 @@ function PostModal(props) {
         <TextInput
           style={styles.textInput}
           value={text}
-          onSubmitEditing={(newText) => {
-            onChangeText(newText);
-            addNewPost(newText);
+          onChangeText={(text) => {
+            console.log("onChangeText ", text);
+            setText(text);
           }}
+          onSubmitEditing={() => addNewPost()}
         ></TextInput>
         <Pressable style={styles.imgSubmitButton}>
           <Text style={styles.submitButtonText}>Upload Image</Text>

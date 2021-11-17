@@ -75,15 +75,17 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             </View>
           </ScrollView>
 
-          {showPostModal && (
-            <PostModal
-              setShowPostModal={setShowPostModal}
-              postsArr={postsArr}
-              setPostsArr={setPostsArr}
-            />
-          )}
-        </View>
-      </ThemeLoggedIn>
+        {showPostModal && (
+          <PostModal
+            setShowPostModal={setShowPostModal}
+            postsArr={postsArr}
+            // setPostsArr={setPostsArr}
+						loggedInUserData={loggedInUserData}
+						refreshNewsfeed={setLoading}
+          />
+        )}
+      </View>
+    </ThemeLoggedIn>
     );
   } else {
     styles = stylesWeb;
@@ -114,14 +116,16 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           </View>
 
           {showPostModal && (
-            <PostModal
-              setShowPostModal={setShowPostModal}
-              postsArr={postsArr}
-              setPostsArr={setPostsArr}
-            />
-          )}
-        </View>
-      </ThemeLoggedIn>
+          <PostModal
+            setShowPostModal={setShowPostModal}
+            postsArr={postsArr}
+            // setPostsArr={setPostsArr}
+						loggedInUserData={loggedInUserData}
+						refreshNewsfeed={setLoading}
+          />
+        )}
+      </View>
+    </ThemeLoggedIn>
     );
   }
 }
