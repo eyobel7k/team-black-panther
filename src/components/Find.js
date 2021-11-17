@@ -17,7 +17,7 @@ const Find = ({ navigation }) => {
       })
 
       .catch((error) => console.log(error));
-  }, []);
+  },[]);
 
   const searchFilterFunction = (text) => {
     if (text) {
@@ -53,6 +53,11 @@ const Find = ({ navigation }) => {
       />
     );
   };
+  const getItem = (item) => {
+    // Function for click on an item
+    alert("   Name: " + item.name + " Id : " + item.id  );
+  };
+
 
   return (
     <ThemeLoggedIn navigation={navigation}>

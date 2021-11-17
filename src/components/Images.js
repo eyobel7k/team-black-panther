@@ -50,12 +50,17 @@ export default function Images({ navigation }) {
         </View>
         <View style={styles.deleteButton}>
           <Button
-icon={<MaterialCommunityIcons name="delete-circle" size={24} color="black" />}
+      Icon={<MaterialCommunityIcons 
+        name="delete-circle" 
+        size={24} 
+        color="black" 
+        />}
 
             color="#5569FE"
             key={index}
             onPress={() => deleteImage(index)}
-            title="delete"
+            title="Delete"
+            
           />
           <View></View>
         </View>
@@ -75,8 +80,8 @@ icon={<MaterialCommunityIcons name="delete-circle" size={24} color="black" />}
         </View>
 
         <View style={styles.imageContainer}>{generateGallery}</View>
-        <Button color="#5569FE" onPress={uploadImage} title="Upload" />
-        <Button color="#5569FE" onPress={sendImage} title="Send" />
+        {/* <Button color="#5569FE" onPress={uploadImage} title="Upload" />
+        <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
       </ScrollView>
     </ThemeLoggedIn>
   );
