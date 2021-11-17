@@ -18,24 +18,22 @@ import { Text } from "react-native-elements";
 function Newsfeed({ route, navigation, loggedInUserData }) {
   const [postsArr, setPostsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
-	const [loading, setLoading] = useState(true);
 
-	const pruneTags = (text) => {
-		return text.replace(/<[^>]+>/g, "")
-			.replace("\n", "")
-	}
+  const pruneTags = (text) => {
+    return text.replace(/<[^>]+>/g, "").replace("\n", "");
+  };
 
   useEffect(() => {
-		if (loading) {
-			wpApiFetch({ path: WPAPI_PATHS.buddypress.activity })
-				.then(data => {
-					setPostsArr(data);
-					setLoading(false);
-				})
-		}
-
+    if (loading) {
+      wpApiFetch({ path: WPAPI_PATHS.buddypress.activity }).then((data) => {
+        setPostsArr(data);
+        setLoading(false);
+      });
+    }
   }, [loading]);
 
   const generatePosts = postsArr
@@ -44,9 +42,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
     // .reverse()
     .map((post, i) => {
       const content = pruneTags(post.content.rendered || post.title);
-			return (
-				<Post key={i} content={content} id={i} associatedContent={post} />
-			);
+      return <Post key={i} content={content} id={i} associatedContent={post} />;
     });
 
   let styles;
@@ -58,7 +54,9 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
       <ThemeLoggedIn navigation={navigation}>
         <View style={styles.container} navigation={navigation}>
           <ScrollView>
-          { route.params?.loginSuccess && <Text h3>{`Successfully logged in!`}</Text> }
+            {route.params?.loginSuccess && (
+              <Text h3>{`Successfully logged in!`}</Text>
+            )}
             <View style={styles.body}>
               <Text h3 style={styles.heading}>
                 Newsfeed
@@ -94,7 +92,9 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
     return (
       <ThemeLoggedIn navigation={navigation}>
         <View style={styles.container} navigation={navigation}>
-        { route.params?.loginSuccess && <Text h3>{`Successfully logged in!`}</Text> }
+          {route.params?.loginSuccess && (
+            <Text h3>{`Successfully logged in!`}</Text>
+          )}
           <View style={styles.buttonWrapper}>
             <Pressable
               style={styles.newPostButton}
@@ -130,14 +130,14 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 const stylesMobile = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "##efd595",
+    backgroundColor: "#efd595",
     height: "80%",
     // flexBasis: "100%"
   },
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "##efd595",
+    backgroundColor: "#efd595",
     height: "80%",
     width: "100%",
     textAlign: "center",
@@ -173,7 +173,7 @@ const stylesMobile = StyleSheet.create({
     width: 64,
   },
   postButtonText: {
-    color: "#87cefa",
+    color: "#efd595",
     fontWeight: "bold",
     fontSize: 16,
   },
@@ -196,7 +196,7 @@ const stylesMobile = StyleSheet.create({
 const stylesWeb = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "##efd595",
+    backgroundColor: "#efd595",
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
@@ -207,7 +207,7 @@ const stylesWeb = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "##efd595",
+    backgroundColor: "#efd595",
     height: "80%",
     width: "100%",
     textAlign: "center",
@@ -244,7 +244,7 @@ const stylesWeb = StyleSheet.create({
     borderRadius: 80,
   },
   postButtonText: {
-    color: "#87cefa",
+    color: "#efd595",
     fontWeight: "bold",
     fontSize: 22,
   },

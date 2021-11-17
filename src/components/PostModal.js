@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable, useWindowDimensions } from "react-native";
-import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  useWindowDimensions,
+} from "react-native";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function PostModal(props) {
-	const [text, onChangeText] = useState("");
+  const [text, onChangeText] = useState("");
   const [post, setNewPost] = useState("");
-	const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
@@ -45,29 +52,33 @@ function PostModal(props) {
       ":" +
       seconds;
     let newPost = {
-			content: newText,
+      content: newText,
       author: props.loggedInUserData.id,
-      status: 'publish',
+      status: "publish",
       title: now,
       slug: now,
     };
     // props.setPostsArr([...props.postsArr, newPost]);
-		// props.setShowPostModal(false);
-		setNewPost(newPost);
-		setLoading(true);
+    // props.setShowPostModal(false);
+    setNewPost(newPost);
+    setLoading(true);
   };
 
-	useEffect(() => {
-		console.log('in PostModal effect: ', loading)
-		if (loading) {
-			wpApiFetch({ path: WPAPI_PATHS.wp.posts, method: "POST", data: post, token: props.loggedInUserData.token})
-				.then(response => {
-					console.log('in PostModal: ', response);
-					setLoading(false);
-					props.setShowPostModal(false);
-				})
-		}
-	}, [loading])
+  useEffect(() => {
+    console.log("in PostModal effect: ", loading);
+    if (loading) {
+      wpApiFetch({
+        path: WPAPI_PATHS.wp.posts,
+        method: "POST",
+        data: post,
+        token: props.loggedInUserData.token,
+      }).then((response) => {
+        console.log("in PostModal: ", response);
+        setLoading(false);
+        props.setShowPostModal(false);
+      });
+    }
+  }, [loading]);
 
   let styles;
   if (width < widthBreakpoint) {
@@ -89,16 +100,18 @@ function PostModal(props) {
         <TextInput
           style={styles.textInput}
           value={text}
-          onSubmitEditing={newText => {
-						onChangeText(newText);
-						addNewPost(newText);
-					}}
+          onSubmitEditing={(newText) => {
+            onChangeText(newText);
+            addNewPost(newText);
+          }}
         ></TextInput>
         <Pressable style={styles.imgSubmitButton}>
-          <Text>Upload Image</Text>
+          <Text style={styles.submitButtonText}>Upload Image</Text>
         </Pressable>
         <Pressable style={styles.submitButton} onPress={addNewPost}>
-          <Text>{loading ? 'Loading...' : 'Submit'}</Text>
+          <Text style={styles.submitButtonText}>
+            {loading ? "Loading..." : "Submit"}
+          </Text>
         </Pressable>
       </View>
     </View>
@@ -161,8 +174,11 @@ const stylesMobile = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#87cefa",
-    color: "#c5834c",
+    backgroundColor: "#c5834c",
+    color: "#efd595",
+  },
+  submitButtonText: {
+    color: "#efd595",
   },
   imgSubmitButton: {
     width: 122,
@@ -171,13 +187,13 @@ const stylesMobile = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "#87cefa",
-    color: "blue",
+    backgroundColor: "#c5834c",
+    color: "#efd595",
   },
   modalText: {
     textAlign: "center",
   },
-})
+});
 
 // ***  Styles for Web  ***
 const stylesWeb = StyleSheet.create({
@@ -235,8 +251,11 @@ const stylesWeb = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#87cefa",
-    color: "#c5834c",
+    backgroundColor: "#c5834c",
+    color: "#efd595",
+  },
+  submitButtonText: {
+    color: "#efd595",
   },
   imgSubmitButton: {
     width: 128,
@@ -245,8 +264,8 @@ const stylesWeb = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "#87cefa",
-    color: "#c5834c",
+    backgroundColor: "#c5834c",
+    color: "#efd595",
   },
 });
 

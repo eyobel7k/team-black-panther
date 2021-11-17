@@ -37,7 +37,7 @@ function Post(props) {
   }, []);
 
   const memberById = (id) => {
-    return members.find((member) => member.id === id);
+    return members?.find((member) => member.id === id);
   };
 
   function addToComments() {
@@ -203,7 +203,7 @@ function Post(props) {
           onSubmitEditing={addToComments}
         />
         <View style={styles.commentButtonWrapper}>
-          <Button title="comment" onPress={addToComments} />
+          <Button title="comment" color="#c5834c" onPress={addToComments} />
         </View>
       </View>
     );
@@ -321,9 +321,9 @@ const stylesMobile = StyleSheet.create({
 const stylesWeb = StyleSheet.create({
   post: {
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
-    backgroundColor: "#f0f8ff",
+    backgroundColor: "#c5834c",
     margin: 16,
     marginBottom: 0,
     padding: 16,
@@ -353,7 +353,7 @@ const stylesWeb = StyleSheet.create({
     textAlign: "center",
     margin: 8,
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     padding: 4.8,
     backgroundColor: "#f0f8ff",
@@ -364,7 +364,7 @@ const stylesWeb = StyleSheet.create({
   comment: {
     // display: "block",
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     margin: 3.2,
     padding: 1.6,
@@ -392,7 +392,7 @@ const stylesWeb = StyleSheet.create({
   },
   commentsWindow: {
     borderStyle: "solid",
-    borderColor: "#5f9ea0",
+    borderColor: "#c5834c",
     borderWidth: 2,
     borderRadius: 12,
     height: 120,
