@@ -10,6 +10,7 @@ function Messages({ navigation, loggedInUserData }) {
   const [members, setMembers] = useState([]);
   const [myMessages, setMyMessages] = useState([]);
   const [selectedMember, setSelectedMember] = useState({});
+  
   const onPress = (selectedMemberId) => {
     setSelectedMember(members[selectedMemberId]);
   };

@@ -12,7 +12,6 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
-import Messages from "./Message";
 
 export default function Chat({
   myMessages,
@@ -23,6 +22,7 @@ export default function Chat({
   const [task, setTask] = useState("");
   const [taskItems, setTaskItems] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+
   useEffect(() => {
     setTaskItems(myMessages);
   }, []);
@@ -100,7 +100,7 @@ export default function Chat({
           }}
         >
           {message?.excerpt?.rendered} sent by:
-          {memberById(message?.last_sender_id)?.name} {console.log(message)}
+          {memberById(message?.last_sender_id)?.name}
         </Text>
       </View>
     </View>
@@ -117,9 +117,9 @@ export default function Chat({
               placeholder={"Type message ..."}
               value={task}
               onChangeText={(text) => setTask(text)}
-              onKeyPress={handleKeypress}
+              onKeyPress={() => handleKeypress}
               autoFocus={true}
-              onSubmitEditing={handleAddTask}
+              onSubmitEditing={() => handleAddTask}
               spellCheck={false}
               autoCorrect={false}
               maxLength={140}
