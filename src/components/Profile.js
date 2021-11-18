@@ -19,22 +19,28 @@ const Profile = ({ navigation, loggedInUserData }) => {
 		// use buddypress.members/id and get id from jsonwebtoken
 		Promise.all([
 			wpApiFetch({ path: `${WPAPI_PATHS.wp.users}/${loggedInUserData.id}` }),
-			wpApiFetch({ path: `${WPAPI_PATHS.buddypress.members}/${loggedInUserData.id}` })
-		])
-		.then(([wpUser, buddyPressMember]) => {
-			setProfileInfo({ ...buddyPressMember, name: wpUser.name, description: wpUser.description });
+			wpApiFetch({
+				path: `${WPAPI_PATHS.buddypress.members}/${loggedInUserData.id}`,
+			}),
+		]).then(([wpUser, buddyPressMember]) => {
+			setProfileInfo({
+				...buddyPressMember,
+				name: wpUser.name,
+				description: wpUser.description,
+			});
 			setLoading(false);
-		})
+		});
 	}, []); // runs onMount only
 
 	return (
 		<ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.profileContainer}>
-				{
-					loading
-					? <Text style={styles.h2}>{`${loggedInUserData.user_display_name} is thinking...`}</Text>
-					: (
-						<>
+				{loading ? (
+					<Text
+						style={styles.h2}
+					>{`${loggedInUserData.user_display_name} is thinking...`}</Text>
+				) : (
+					<>
 						<Image
 							source={{ uri: profileInfo.avatar_urls.full }}
 							style={[
@@ -49,24 +55,29 @@ const Profile = ({ navigation, loggedInUserData }) => {
 							<Text style={styles.h2}>{profileInfo.name}</Text>
 							<Text style={styles.h3}>New York City</Text>
 						</View>
+						<View>
+							<TouchableOpacity
+								style={styles.pillButton}
+								name="EditProfile"
+								onPress={() =>
+									navigation.navigate("EditProfile", {
+										name: profileInfo.name,
+										description: profileInfo.description,
+									})
+								}
+							>
+								<Text>edit profile</Text>
+							</TouchableOpacity>
 
-						<TouchableOpacity
-							style={styles.pillButton}
-							name="EditProfile"
-							onPress={() => navigation.navigate("EditProfile", { name: profileInfo.name, description: profileInfo.description })}
-						>
-							<Text>edit profile</Text>
-						</TouchableOpacity>
-
-						<View style={styles.profileAboutContainer}>
-							<Text style={styles.h3}>About</Text>
-							<View style={styles.profileAbout}>
-								<Text>{profileInfo.description}</Text>
+							<View style={styles.profileAboutContainer}>
+								<Text style={styles.h3}>About</Text>
+								<View style={styles.profileAbout}>
+									<Text>{profileInfo.description}</Text>
+								</View>
 							</View>
 						</View>
-						</>
-					)
-				}
+					</>
+				)}
 			</View>
 		</ThemeLoggedIn>
 	);
@@ -88,7 +99,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		margin: 10,
+		margin: 100,
 		minWidth: 300,
 	},
 	profileAboutContainer: {
