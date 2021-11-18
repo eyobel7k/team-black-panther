@@ -5,7 +5,6 @@ import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "./components/Home";
 import Newsfeed from "./components/Newsfeed";
 import SignUpPage from "./components/SignUpPage";
 import LogInPage from "./components/LogInPage";
@@ -33,7 +32,7 @@ const Stack = createNativeStackNavigator();
 // }
 
 export default function App() {
-	const [loggedInUserData, setLoggedInUserData] = useState("");
+	const [loggedInUserData, setLoggedInUserData] = useState({});
 
 	return (
 		<View style={styles.container}>
@@ -66,10 +65,18 @@ export default function App() {
 					<Stack.Screen name="EditProfile">
 						{ props => <EditProfile {...props} loggedInUserData={loggedInUserData} /> }
 					</Stack.Screen>
-					<Stack.Screen name="Terms" component={Terms} />
-					<Stack.Screen name="Contact" component={Contact} />
-					<Stack.Screen name="About" component={About} />
-					<Stack.Screen name="Rule" component={Rule} />
+					<Stack.Screen name="Terms">
+						{ props => <Terms {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
+					<Stack.Screen name="Contact">
+						{ props => <Contact {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
+					<Stack.Screen name="About">
+						{ props => <About {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
+					<Stack.Screen name="Rule">
+						{ props => <Rule {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
 				</Stack.Navigator>
 			</NavigationContainer>
 			<StatusBar style="auto" />
