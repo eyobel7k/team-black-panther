@@ -34,7 +34,7 @@ export default function Chat({
       data: {
         context: "edit",
         message: newMessage,
-        recipients: selectedMember?.id,
+        recipients: selectedMember.id,
       },
       token: loggedInUserData.token,
     }).then((response) => {
