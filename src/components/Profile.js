@@ -10,49 +10,63 @@ import {
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, loggedInUserData }) => {
 	const [profileInfo, setProfileInfo] = useState({});
-	const { height, width } = useWindowDimensions();
+	const [loading, setLoading] = useState(true);
+	const { width } = useWindowDimensions();
 	useEffect(() => {
 		// Promise.all()
 		// use buddypress.members/id and get id from jsonwebtoken
-		wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((response) => {
-			setProfileInfo(response[0]);
-		});
+		Promise.all([
+			wpApiFetch({ path: `${WPAPI_PATHS.wp.users}/${loggedInUserData.id}` }),
+			wpApiFetch({ path: `${WPAPI_PATHS.buddypress.members}/${loggedInUserData.id}` })
+		])
+		.then(([wpUser, buddyPressMember]) => {
+			setProfileInfo({ ...buddyPressMember, name: wpUser.name, description: wpUser.description });
+			setLoading(false);
+		})
 	}, []); // runs onMount only
 
 	return (
 		<ThemeLoggedIn navigation={navigation}>
 			<View style={styles.profileContainer}>
-				<Image
-					source={{ uri: profileInfo.avatar_urls?.["96"] }}
-					style={[
-						styles.profileImage,
-						{
-							maxWidth: width > 300 ? 150 : 250,
-							maxHeight: width > 300 ? 150 : 250,
-						},
-					]}
-				/>
-				<View style={styles.profileInfo}>
-					<Text style={styles.h2}>{profileInfo.name}</Text>
-					<Text style={styles.h3}>New York City</Text>
-				</View>
+				{
+					loading
+					? <Text style={styles.h2}>{`${loggedInUserData.user_display_name} is thinking...`}</Text>
+					: (
+						<>
+						<Image
+							source={{ uri: profileInfo.avatar_urls.full }}
+							style={[
+								styles.profileImage,
+								{
+									maxWidth: width > 300 ? 150 : 250,
+									maxHeight: width > 300 ? 150 : 250,
+								},
+							]}
+						/>
+						<View style={styles.profileInfo}>
+							<Text style={styles.h2}>{profileInfo.name}</Text>
+							<Text style={styles.h3}>New York City</Text>
+						</View>
 
-				<TouchableOpacity
-					style={styles.pillButton}
-					name="EditProfile"
-					onPress={() => navigation.navigate("EditProfile")}
-				>
-					<Text>edit profile</Text>
-				</TouchableOpacity>
+						<TouchableOpacity
+							style={styles.pillButton}
+							name="EditProfile"
+							onPress={() => navigation.navigate("EditProfile", { name: profileInfo.name, description: profileInfo.description })}
+						>
+							<Text>edit profile</Text>
+						</TouchableOpacity>
 
-				<View style={styles.profileAboutContainer}>
-					<Text style={styles.h3}>About</Text>
-					<View style={styles.profileAbout}>
-						<Text>{profileInfo.description}</Text>
-					</View>
-				</View>
+						<View style={styles.profileAboutContainer}>
+							<Text style={styles.h3}>About</Text>
+							<View style={styles.profileAbout}>
+								<Text>{profileInfo.description}</Text>
+							</View>
+						</View>
+						</>
+					)
+				}
 			</View>
 		</ThemeLoggedIn>
 	);
