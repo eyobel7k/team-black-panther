@@ -4,11 +4,8 @@ import {
   View,
   ScrollView,
   useWindowDimensions,
-  Button,
   Pressable,
 } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
 import { WPAPI_PATHS, wpApiFetch, posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
@@ -19,6 +16,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
   const [postsArr, setPostsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [scrollToTop, setScrollToTop] = useState(false);
 
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -26,8 +24,6 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
   const pruneTags = (text) => {
     return text.replace(/<[^>]+>/g, "").replace("\n", "");
   };
-
-  console.log(posts());
 
   useEffect(() => {
     if (loading) {
@@ -38,39 +34,10 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
     }
   }, [loading]);
 
-  // const generatePosts = postsArr
-  //   //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
-  //   // .slice(0)
-  //   // .reverse()
-  //   .map((post, i) => {
-  //     if (post.excerpt?.rendered) {
-  //       let content = post.excerpt.rendered;
-  //       content = content.replace("<p>", "");
-  //       content = content.replace("</p>", "");
-  //       content = content.replace("\n", "");
-
-  //       return (
-  //         <Post key={i} content={content} id={i} associatedContent={post} />
-  //       );
-  //     }
-  //   });
-
-  const generatePosts = postsArr
-    //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
-    // .slice(0)
-    // .reverse()
-    .map((post, i) => {
-      const content = pruneTags(post.excerpt.rendered || post.title); //commented out post.title and changed content to excerpt
-      return (
-        <Post
-          key={i}
-          content={content}
-          id={i}
-          associatedContent={post}
-          postsArr={postsArr}
-        />
-      );
-    });
+  const generatePosts = postsArr.map((post, i) => {
+    const content = pruneTags(post.excerpt.rendered || post.title);
+    return <Post key={i} content={content} id={i} associatedContent={post} />;
+  });
 
   let styles;
   if (width < widthBreakpoint) {
@@ -106,7 +73,6 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             <PostModal
               setShowPostModal={setShowPostModal}
               postsArr={postsArr}
-              // setPostsArr={setPostsArr}
               loggedInUserData={loggedInUserData}
               refreshNewsfeed={setLoading}
             />
@@ -119,7 +85,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
     // ***  Render for Web  ***
     return (
-      <ThemeLoggedIn navigation={navigation}>
+      <ThemeLoggedIn navigation={navigation} scrollToTop={scrollToTop}>
         <View style={styles.container} navigation={navigation}>
           {route.params?.loginSuccess && (
             <Text h3>{`Successfully logged in!`}</Text>
@@ -127,7 +93,10 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           <View style={styles.buttonWrapper}>
             <Pressable
               style={styles.newPostButton}
-              onPress={() => setShowPostModal(true)}
+              onPress={() => {
+                setShowPostModal(true);
+                setScrollToTop(true);
+              }}
             >
               <Text style={styles.postButtonText}>New Post</Text>
             </Pressable>
@@ -146,7 +115,6 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             <PostModal
               setShowPostModal={setShowPostModal}
               postsArr={postsArr}
-              // setPostsArr={setPostsArr}
               loggedInUserData={loggedInUserData}
               refreshNewsfeed={setLoading}
             />
@@ -163,7 +131,6 @@ const stylesMobile = StyleSheet.create({
     flex: 1,
     backgroundColor: "#efd595",
     height: "80%",
-    // flexBasis: "100%"
   },
   body: {
     flex: 1,
@@ -189,7 +156,6 @@ const stylesMobile = StyleSheet.create({
     margin: 5,
     fontSize: 24,
     fontWeight: "100",
-    // fontFamily: "Serif",
   },
   newPostButton: {
     position: "absolute",
@@ -218,9 +184,6 @@ const stylesMobile = StyleSheet.create({
     padding: 20,
     flexWrap: "nowrap",
   },
-  footerWrapper: {
-    // bottom: -500,
-  },
 });
 
 // ***  Styles for Web  ***
@@ -232,8 +195,6 @@ const stylesWeb = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignContent: "center",
-    // height: "80%",
-    // flexBasis: "100%"
   },
   body: {
     flex: 1,
@@ -243,7 +204,6 @@ const stylesWeb = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     justifyContent: "center",
-    // marginTop: 16,
     flexBasis: "100%",
     flexShrink: 0,
     flexGrow: 0,
@@ -261,7 +221,6 @@ const stylesWeb = StyleSheet.create({
     margin: 5,
     fontSize: 24,
     fontWeight: "100",
-    // fontFamily: "Serif",
   },
   newPostButton: {
     position: "absolute",
@@ -290,9 +249,6 @@ const stylesWeb = StyleSheet.create({
     width: "100%",
     padding: 20,
     flexWrap: "nowrap",
-  },
-  footerWrapper: {
-    // bottom: -500,
   },
 });
 

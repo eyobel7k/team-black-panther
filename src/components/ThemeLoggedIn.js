@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -8,9 +8,20 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 
-function ThemeLoggedIn({ children, navigation }) {
+function ThemeLoggedIn({
+  children,
+  navigation,
+  scrollToTop,
+  scrollToTopFromNewsfeed,
+}) {
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
+
+  const scroll = useRef(null);
+
+  if (scrollToTop || scrollToTopFromNewsfeed) {
+    scroll.current.scrollTo({ x: 0, y: 0, animated: true });
+  }
 
   return (
     <View style={styles.container} navigation={navigation}>
@@ -21,6 +32,7 @@ function ThemeLoggedIn({ children, navigation }) {
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContentContainer}
+        ref={scroll}
       >
         {children}
 

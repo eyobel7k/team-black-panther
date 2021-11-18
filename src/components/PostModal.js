@@ -51,15 +51,16 @@ function PostModal(props) {
       minutes +
       ":" +
       seconds;
+      
     let newPost = {
       content: text,
       status: "publish",
       title: now,
       slug: now,
+      likes: 0,  // *** added
+      dislikes: 0,  // *** added
     };
-    console.log("newPost ", newPost);
-    // props.setPostsArr([...props.postsArr, newPost]);
-    // props.setShowPostModal(false);
+
     setNewPost(newPost);
     setLoading(true);
   };
@@ -102,14 +103,10 @@ function PostModal(props) {
           style={styles.textInput}
           value={text}
           onChangeText={(text) => {
-            console.log("onChangeText ", text);
             setText(text);
           }}
           onSubmitEditing={() => addNewPost()}
         ></TextInput>
-        {/* <Pressable style={styles.imgSubmitButton}>
-          <Text style={styles.submitButtonText}>Upload Image</Text>
-        </Pressable> */}
         <Pressable style={styles.submitButton} onPress={addNewPost}>
           <Text style={styles.submitButtonText}>
             {loading ? "Loading..." : "Submit"}
@@ -131,7 +128,6 @@ const stylesMobile = StyleSheet.create({
     left: -7,
     backgroundColor: "rgba(0,0,0,0.5)",
     alignItems: "center",
-    // justifyContent: "center",
     zIndex: 100,
   },
   modal: {
@@ -204,7 +200,6 @@ const stylesWeb = StyleSheet.create({
     left: 0,
     backgroundColor: "rgba(0,0,0,0.5)",
     alignItems: "center",
-    // justifyContent: "center",
     zIndex: 100,
   },
   modal: {

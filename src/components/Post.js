@@ -8,13 +8,11 @@ import {
   TextInput,
   ScrollView,
   Image,
+  Pressable,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
 function Post(props) {
-  // const [likes, setLikes] = useState(0);
-  // const [dislikes, setDislikes] = useState(0);
   const [reply, setReply] = useState("");
   const [comments, setComments] = useState([]);
   const [commentTimes, setCommentTimes] = useState([]);
@@ -38,10 +36,6 @@ function Post(props) {
 
   const memberById = (id) => {
     return members?.find((member) => member.id === id);
-  };
-
-  const postById = (id) => {
-    return props.postsArr?.find((post) => post.id === id);
   };
 
   function addToComments() {
@@ -74,7 +68,7 @@ function Post(props) {
         <View>
           <View style={styles.belowPost}>
             <Text style={styles.postSubscript}>
-              Posted by by {memberById(postAuthor)?.name}{" "}
+              Posted by {memberById(postAuthor)?.name}{" "}
               <Image
                 style={{ width: 18, height: 18 }}
                 source={{
@@ -87,33 +81,6 @@ function Post(props) {
               />{" "}
               at {postTime} on {postDate}
             </Text>
-            {/* <View style={styles.button}>
-              <TouchableOpacity
-                style={styles.likeButton}
-                title="👍"
-                color="#f0f8ff"
-                onPress={() => setLikes(likes + 1)}
-              >
-                <Text>👍</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.button}>
-              <Text>{likes}</Text>
-            </View>
-
-            <View style={styles.button}>
-              <TouchableOpacity
-                style={styles.likeButton}
-                title="👎"
-                color="#f0f8ff"
-                onPress={() => setDislikes(dislikes + 1)}
-              >
-                <Text>👎</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.button}>
-              <Text>{dislikes}</Text>
-            </View> */}
           </View>
         </View>
         <View style={styles.commentsWindow}>
@@ -163,35 +130,7 @@ function Post(props) {
               />{" "}
               at {postTime} on {postDate}
             </Text>
-            {/* <View style={styles.likesAndDislikes}>
-              <View style={styles.button}>
-                <TouchableOpacity
-                  style={styles.likeButton}
-                  title="👍"
-                  color="#f0f8ff"
-                  onPress={() => setLikes(likes + 1)}
-                >
-                  <Text style={styles.thumb}>👍</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.button}>
-                <Text style={styles.thumb}>{likes}</Text>
-              </View> */}
-
-            {/* <View style={styles.button}>
-                <TouchableOpacity
-                  style={styles.likeButton}
-                  title="👎"
-                  color="#f0f8ff"
-                  onPress={() => setDislikes(dislikes + 1)}
-                >
-                  <Text style={styles.thumb}>👎</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.button}>
-                <Text style={styles.thumb}>{dislikes}</Text>
-              </View> */}
-            {/* </View> */}
+            {/* <Pressable onPress={}>Like</Pressable> */}
           </View>
         </View>
         <View style={{ flexGrow: 1 }}>
@@ -199,7 +138,6 @@ function Post(props) {
             <Text>{showComments}</Text>
           </ScrollView>
         </View>
-
         <TextInput
           style={styles.textInput}
           value={reply}
@@ -229,16 +167,11 @@ const stylesMobile = StyleSheet.create({
     borderRadius: 10,
     width: 300,
     height: 300,
-    // height: "40%",
-    // float: "left",
-    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
   },
   button: {
-    // float: "left",
-    // display: "inline",
     fontSize: 16,
     flex: 1,
     alignItems: "flex-end",
@@ -259,7 +192,6 @@ const stylesMobile = StyleSheet.create({
     alignSelf: "center",
   },
   comment: {
-    // display: "block",
     borderStyle: "solid",
     borderColor: "#c5834c",
     borderWidth: 2,
@@ -280,8 +212,6 @@ const stylesMobile = StyleSheet.create({
   postSubscript: {
     fontSize: 11,
     textAlign: "center",
-    // display: "inline-block",
-    // justifyContent: "space-between",
   },
   likeButton: {
     fontSize: 6,
@@ -294,12 +224,10 @@ const stylesMobile = StyleSheet.create({
     borderRadius: 12,
     marginTop: 8,
     width: 300,
-    // alignContent: "center",
     alignSelf: "center",
   },
   belowPost: {
     flex: 1,
-    // display: "inline-block",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -333,16 +261,11 @@ const stylesWeb = StyleSheet.create({
     borderRadius: 10,
     width: 500,
     height: 300,
-    // height: "40%",
-    // float: "left",
-    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
   },
   button: {
-    // float: "left",
-    // display: "inline",
     fontSize: 16,
     flex: 1,
     alignItems: "flex-end",
@@ -365,7 +288,6 @@ const stylesWeb = StyleSheet.create({
     alignSelf: "center",
   },
   comment: {
-    // display: "block",
     borderStyle: "solid",
     borderColor: "#c5834c",
     borderWidth: 2,
@@ -386,11 +308,6 @@ const stylesWeb = StyleSheet.create({
   },
   postSubscript: {
     fontSize: 14,
-    // textAlign: "center",
-    // // display: "inline-block",
-    // justifyContent: "center",
-    // alignContent: "center",
-    // alignItems: "center",
   },
   likeButton: {
     fontSize: 6,
@@ -403,19 +320,12 @@ const stylesWeb = StyleSheet.create({
     height: 120,
     marginTop: 8,
     width: 460,
-    // alignContent: "center",
     alignSelf: "center",
   },
   belowPost: {
     flex: 1,
-    // display: "inline-block",
-    // flexDirection: "row",
-    // justifyContent: "space-between",
-    // alignContent: "center",
-    // alignItems: "center",
     textAlign: "center",
     paddingTop: 1.6,
-    // paddingLeft: 32,
     width: 500,
   },
   postWrapper: {
@@ -428,13 +338,4 @@ const stylesWeb = StyleSheet.create({
     alignSelf: "center",
     width: 100,
   },
-  // thumb: {
-  //   fontSize: 14,
-  //   // marginLeft: 4,
-  //   // marginRight: 4,
-  // },
-  // likesAndDislikes: {
-  //   flexDirection: "row",
-  //   textAlign: "right",
-  // },
 });
