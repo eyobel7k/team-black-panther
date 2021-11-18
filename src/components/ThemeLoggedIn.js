@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   Header: {
     height: "20%",
     top: 0,
+    marginBottom:30,
   },
   Footer: {
     height: "20%",

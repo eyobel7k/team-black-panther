@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,16 +11,43 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import Messages from "./Message";
 
-export default function Chat() {
+export default function Chat({
+  myMessages,
+  loggedInUserData,
+  members,
+  selectedMember,
+}) {
   const [task, setTask] = useState("");
   const [taskItems, setTaskItems] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  useEffect(() => {
+    setTaskItems(myMessages);
+  }, []);
+
+  useEffect(() => {
+    wpApiFetch({
+      path: WPAPI_PATHS.buddypress.messages,
+      method: "POST",
+      data: {
+        context: "edit",
+        message: newMessage,
+        recipients: selectedMember.id,
+      },
+      token: loggedInUserData.token,
+    }).then((response) => {
+      console.log("in chat: ", response);
+    });
+  }, [newMessage]);
 
   const handleAddTask = () => {
     if (task === "") {
       Alert.alert("Error", "Please enter message ...");
     } else {
       Keyboard.dismiss();
+      setNewMessage(task);
       setTaskItems([...taskItems, task]);
       setTask();
     }
@@ -41,29 +68,48 @@ export default function Chat() {
     setTaskItems(itemsCopy);
   };
   const handleKeypress = (e) => {
-    //it triggers by pressing the enter key
     if (e.keyCode === 13) {
       handleAddTask();
 
       setTask();
     }
   };
+  const memberById = (id) => {
+    const member = members.find((member) => member.id === id);
+    return member;
+  };
+
+  const messageList = myMessages?.map((message, index) => (
+    <View key={index}>
+      <View
+        styles={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignSelf: "center",
+          maxWidth: 50,
+        }}
+      >
+        <Text
+          style={{
+            borderStyle: "solid",
+            borderWidth: 3,
+            borderColor: "#c5834c",
+            padding: 5,
+            borderRadius: 10,
+          }}
+        >
+          {message?.excerpt?.rendered} sent by:
+          {memberById(message?.last_sender_id)?.name} {console.log(message)}
+        </Text>
+      </View>
+    </View>
+  ));
 
   return (
     <View style={styles.container}>
-      {/* Added this scroll view to enable scrolling when list gets longer than the page */}
-      <View
-        contentContainerStyle={
-          {
-            // flexGrow: 1,
-          }
-        }
-        keyboardShouldPersistTaps="handled"
-      >
-        {/* Today's Tasks */}
+      <View contentContainerStyle={{}} keyboardShouldPersistTaps="handled">
         <View style={styles.tasksWrapper}>
-          {/* <Text style={styles.sectionTitle}> Space Chat</Text> */}
-
           <View style={styles.inputContainer}>
             <TextInput
               underlineColorAndroid="transparent"
@@ -76,6 +122,7 @@ export default function Chat() {
               onSubmitEditing={handleAddTask}
               spellCheck={false}
               autoCorrect={false}
+              maxLength={140}
             />
             <TouchableOpacity
               style={styles.button}
@@ -86,33 +133,53 @@ export default function Chat() {
               </Text>
             </TouchableOpacity>
           </View>
-
-          {/* <ScrollView style={{ height: 60, width: "100%" }}> */}
+          <View
+            styles={{
+              flex: 1,
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              flexWrap: "nowrap",
+              display: "flex",
+              maxWidth: 50,
+            }}
+          >
+            <Text style={{ margin: 10, fontSize: 25, fontWeight: "bold" }}>
+              My Messages
+            </Text>
+            <Text>{messageList}</Text>
+          </View>
           <View style={styles.items}>
-            {/* This is where the message will go! */}
             {taskItems.map((item, index) => {
               return (
                 <TouchableOpacity
                   key={index}
                   onPress={() => completeTask(index)}
                 >
-                  {/* <Task text={item} /> */}
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <View style={styles.item}>
+                      <View style={styles.itemLeft}>
+                        <View style={styles.square}></View>
 
-                  <View style={styles.item}>
-                    <View style={styles.itemLeft}>
-                      <View style={styles.square}></View>
-
-                      <Text style={styles.itemText}>{item}</Text>
+                        <Text style={styles.itemText}>{item}</Text>
+                      </View>
                     </View>
                     <View>
-                      <AntDesign name="delete" size={12} color="red" />
+                      <AntDesign name="delete" size={12} color="black" />
                     </View>
                   </View>
                 </TouchableOpacity>
               );
             })}
           </View>
-          {/* </ScrollView> */}
         </View>
       </View>
     </View>
@@ -142,10 +209,10 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   writeTaskWrapper: {
-    position: "absolute",
-    bottom: 80,
-    // width: "70%",
-    flexDirection: "row",
+    // position: "absolute",
+    // bottom: 80,
+    width: "90%",
+    // flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
   },
@@ -189,7 +256,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 2,
     flexWrap: "wrap",
-    maxWidth: 350,
+    maxWidth: 250,
     flex: 1,
   },
   itemLeft: {

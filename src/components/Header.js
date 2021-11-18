@@ -14,9 +14,10 @@ function Header({ navigation }) {
 		<View style={styles.Header} navigation={navigation}>
 			<TouchableHighlight navigation={navigation}>
 				<View style={styles.HeaderWarp} navigation={navigation}>
+					
 					<Image
 						source={welcomeImg}
-						style={{ height: "90%", width: 150, paddingTop: 120, marginEnd: 0 }}
+						style={{ height: "70%", width: 150,paddingTop: 130, marginEnd: 0 }}
 					/>
 					
 					<View style={styles.HeaderTitle}>
@@ -113,6 +114,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "#1a1a1a",
 		// height: 100,
 		// width: "100%",
+		paddingBottom:20,
+		zIndex:-2,
 	},
 	HeaderTitle: {
 		flexDirection: "column",
@@ -134,6 +137,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		alignItems: "center",
 		fontSize: 14,
+
 	},
 	// HeaderSearch: {
 	// 	marginVertical: 30,
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
 		alignItems: "flex-end",
 		width: "100%",
 		paddingTop: 10,
-		// paddingBottom: 20,
+		paddingBottom: 20,
 	},
 	bodyText: {
 		color: "#efd595",

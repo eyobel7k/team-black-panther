@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, StyleSheet, View, FlatList } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
 import ThemeLoggedIn from "./ThemeLoggedIn";
@@ -8,6 +15,7 @@ const Find = ({ navigation }) => {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [selectedMember, setSelectedMember] = useState({});
 
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
@@ -53,6 +61,10 @@ const Find = ({ navigation }) => {
       />
     );
   };
+  const getItem = (item) => {
+    // Function for click on an item
+    alert("   Profile Name: " + item.name + " Id : " + item.id);
+  };
 
   return (
     <ThemeLoggedIn navigation={navigation}>
@@ -70,6 +82,10 @@ const Find = ({ navigation }) => {
           />
         </View>
         <View>
+          <Image
+            source={{ uri: selectedMember.avatar_urls?.thumb }}
+            style={styles.image}
+          ></Image>
           <FlatList
             data={filteredDataSource}
             keyExtractor={(item, index) => index.toString()}

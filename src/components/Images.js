@@ -7,9 +7,12 @@ import {
   Button,
   Image,
   ScrollView,
+  TouchableOpacity
 } from "react-native";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function Images({ navigation }) {
   const [imageArr, setImageArr] = useState([]);
@@ -49,12 +52,32 @@ export default function Images({ navigation }) {
           />
         </View>
         <View style={styles.deleteButton}>
-          <Button
+          {/* <Button
+            Icon={
+              <MaterialCommunityIcons
+                name="delete-circle"
+                size={24}
+                color="black"
+              />
+            }
             color="#5569FE"
             key={index}
             onPress={() => deleteImage(index)}
-            title="delete"
-          />
+            title="Delete"
+          /> */}
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => deleteImage(index)}
+          >
+            <Text style={styles.buttonText}>
+            <AntDesign name="delete" size={22} color="black" />
+            </Text>
+          </TouchableOpacity>
+
+
+
+
           <View></View>
         </View>
       </View>
@@ -73,8 +96,8 @@ export default function Images({ navigation }) {
         </View>
 
         <View style={styles.imageContainer}>{generateGallery}</View>
-        <Button color="#5569FE" onPress={uploadImage} title="Upload" />
-        <Button color="#5569FE" onPress={sendImage} title="Send" />
+        {/* <Button color="#5569FE" onPress={uploadImage} title="Upload" />
+        <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
       </ScrollView>
     </ThemeLoggedIn>
   );
@@ -82,7 +105,7 @@ export default function Images({ navigation }) {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "#fff",
+    backgroundColor: "#efd595",
   },
   topContainer: {
     flex: 1,
@@ -94,7 +117,7 @@ const styles = StyleSheet.create({
     minWidth: "100%",
   },
   imageContainer: {
-    backgroundColor: "#8291CE",
+    backgroundColor: "#efd595",
     display: "flex",
     // flexWrap: 'wrap',
     // flexDirection: 'row',
@@ -109,13 +132,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   deleteButton: {
-    width: "20%",
+    width: "15%",
     alignSelf: "center",
-    margin: 5,
+    // margin: 5,
+    // backgroundColor:''
   },
   spacing: {
     width: 5,
   },
+  buttonText:{
+    width: "20%",
+    alignSelf: "center",
+    margin: 5,
+  }
 });
 
 // const styles = StyleSheet.create({

@@ -29,10 +29,11 @@ const Stack = createNativeStackNavigator();
 // 	"user_display_name": "Iron Man",
 // 	"user_email": "me@marvelspace.com",
 // 	"user_nickname": "ironmann",
+//  "id": "5"
 // }
 
 export default function App() {
-	const [loggedInUserData, setLoggedInUserData] = useState("");
+  const [loggedInUserData, setLoggedInUserData] = useState("");
 
 	return (
 		<View style={styles.container}>
@@ -52,15 +53,23 @@ export default function App() {
 					</Stack.Screen>
 					<Stack.Screen name="SignUpPage" component={SignUpPage} />
 					<Stack.Screen name="Friends" component={Friends} />
-					<Stack.Screen name="Profile" component={Profile} />
+					<Stack.Screen name="Profile">
+						{ props => <Profile {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
 					<Stack.Screen name="Images" component={Images} />
-					<Stack.Screen name="Message" component={Message} />
+          <Stack.Screen name="Message">
+            {(props) => (
+              <Message {...props} loggedInUserData={loggedInUserData} />
+            )}
+          </Stack.Screen>
 					<Stack.Screen name="Find" component={Find} />
 					<Stack.Screen
 						name="ResetPasswordPage"
 						component={ResetPasswordPage}
 					/>
-					<Stack.Screen name="EditProfile" component={EditProfile} />
+					<Stack.Screen name="EditProfile">
+						{ props => <EditProfile {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
 					<Stack.Screen name="Terms" component={Terms} />
 					<Stack.Screen name="Contact" component={Contact} />
 					<Stack.Screen name="About" component={About} />

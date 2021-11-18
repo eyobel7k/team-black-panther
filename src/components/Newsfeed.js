@@ -14,6 +14,7 @@ import { Text } from "react-native-elements";
 
 function Newsfeed({ route, navigation, loggedInUserData }) {
   const [postsArr, setPostsArr] = useState([]);
+  const [commentsArr, setCommentsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [scrollToTopFromNewsfeed, setScrollToTopFromNewsfeed] = useState(false);
@@ -27,17 +28,25 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
   useEffect(() => {
     if (loading) {
-      wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((data) => {
-        setPostsArr(data);
+      Promise.all([
+        wpApiFetch({ path: WPAPI_PATHS.wp.posts }),
+        wpApiFetch({ path: WPAPI_PATHS.wp.comments })
+      ])
+      .then(([ posts, comments ]) => {
+        setPostsArr(posts);
+        setCommentsArr(comments);
         setLoading(false);
-      });
+      })
     }
   }, [loading]);
 
-  const generatePosts = postsArr.map((post, i) => {
-    const content = pruneTags(post.excerpt.rendered || post.title);
-    return <Post key={i} content={content} id={i} associatedContent={post} />;
-  });
+  const generatePosts = postsArr
+    .map((post, i) => {
+      const content = pruneTags(post.excerpt?.rendered);
+      const associatedComments = commentsArr.filter(comment => comment.post === post.id);
+      // console.log(`associatedComments for ${post.id}: `, associatedComments);
+      return <Post key={i} content={content} id={i} associatedContent={post} associatedComments={associatedComments} loggedInUserData={loggedInUserData} />;
+    });
 
   let styles;
   if (width < widthBreakpoint) {
@@ -53,7 +62,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             )}
             <View style={styles.body}>
               <Text h3 style={styles.heading}>
-                Newsfeed
+                {loading ? 'Loading Newsfeed...' : 'Newsfeed'}
               </Text>
               <View style={styles.buttonWrapper}>
                 <Pressable
@@ -106,12 +115,13 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           </View>
           <View style={styles.body}>
             <Text h3 style={styles.heading}>
-              Newsfeed
+              {loading ? 'Loading Newsfeed...' : 'Newsfeed'}
             </Text>
 
             <ScrollView style={styles.postsContainer}>
               <Text>{generatePosts}</Text>
             </ScrollView>
+           
           </View>
 
           {showPostModal && (

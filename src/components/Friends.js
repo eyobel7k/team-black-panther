@@ -4,7 +4,7 @@ import {
   View,
   TouchableOpacity,
   useWindowDimensions,
-  Image,
+  Image
 } from "react-native";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
@@ -19,10 +19,6 @@ function Friends({ navigation }) {
   const { height, width } = useWindowDimensions();
   const [description, setDescription] = useState("");
   const [scrollToTop, setScrollToTop] = useState(false);
-
-  //   const onPress = (selectedMemberId) => {
-  //     setSelectedMember(members[selectedMemberId]);
-  //   };
 
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
@@ -43,18 +39,6 @@ function Friends({ navigation }) {
     setDescription(chosenMember.description);
     console.log("name is" + name);
     setScrollToTop(true);
-
-    // if (selectedWPMember.name) {
-    //   setDescription(selectedWPMember.description);
-    //   console.log(
-    //     "name is" +
-    //       name +
-    //       "the description is" +
-    //       description +
-    //       "the selectedWPMember is" +
-    //       selectedWPMember?.name
-    //   );
-    // }
   };
 
   return (
