@@ -13,6 +13,7 @@ export const WPAPI_PATHS = {
     search: `${WP_PATH}/search`,
     blockTypes: `${WP_PATH}/block-types`,
     blocks: `${WP_PATH}/blocks`,
+    pages: `${WP_PATH}/pages`,
   },
   buddypress: {
     members: `${BUDDYPRESS_PATH}/members`,
