@@ -1,19 +1,32 @@
-import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
+import ThemeLoggedIn from "./ThemeLoggedIn";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
-function Rule({ navigation }) {
+function Rule({ navigation, loggedInUserData }) {
+	const [pageData, setPageData] = useState({});
+	const [loading, setLoading] = useState(true);
+	const Theme = loggedInUserData?.token ? ThemeLoggedIn : ThemeLoggedOut;
+	const pruneTags = text => text.replace(/<[^>]+>/g, "").replace("\n", "").replace("&rsquo;", "'");
+
+	useEffect(() => {
+		if (loading) {
+			wpApiFetch({ path: WPAPI_PATHS.wp.pages, queryParams: {search: 'about'}})
+			.then(([ page ]) => {
+				setPageData(page);
+				setLoading(false);
+			})
+		}
+	},[loading]);
+	
 	return (
-		<ThemeLoggedOut navigation={navigation}>
-			<View>
-				<View style={styles.body} navigation={navigation}>
-					<Text style={styles.text}>Rule!</Text>
-				</View>
-
-				<Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
+		<Theme navigation={navigation}>
+			<View style={styles.body} navigation={navigation}>
+			<Text style={styles.text}>Rules</Text>
+				<Text style={styles.textParagraph}>{loading ? 'loading...' : pruneTags(pageData.content.rendered)}</Text>
 			</View>
-		</ThemeLoggedOut>
+		</Theme>
 	);
 }
 const styles = StyleSheet.create({
@@ -30,9 +43,12 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 5,
-		fontSize: 24,
+		fontSize: 30,
 		fontWeight: "100",
-		// fontFamily: "Serif",
+	},
+	textParagraph: {
+		margin: 5,
+		fontSize: 24,
 	},
 });
 
