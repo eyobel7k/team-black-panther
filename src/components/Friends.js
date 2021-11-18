@@ -151,9 +151,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "black",
   },
   profileImage: {
     height: "100%",

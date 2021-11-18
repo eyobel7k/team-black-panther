@@ -16,7 +16,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
   const [postsArr, setPostsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [scrollToTop, setScrollToTop] = useState(false);
+  const [scrollToTopFromNewsfeed, setScrollToTopFromNewsfeed] = useState(false);
 
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -85,7 +85,10 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
     // ***  Render for Web  ***
     return (
-      <ThemeLoggedIn navigation={navigation} scrollToTop={scrollToTop}>
+      <ThemeLoggedIn
+        navigation={navigation}
+        scrollToTopFromNewsfeed={scrollToTopFromNewsfeed}
+      >
         <View style={styles.container} navigation={navigation}>
           {route.params?.loginSuccess && (
             <Text h3>{`Successfully logged in!`}</Text>
@@ -95,7 +98,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
               style={styles.newPostButton}
               onPress={() => {
                 setShowPostModal(true);
-                setScrollToTop(true);
+                setScrollToTopFromNewsfeed(true);
               }}
             >
               <Text style={styles.postButtonText}>New Post</Text>
