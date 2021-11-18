@@ -4,7 +4,8 @@ import {
   View,
   TouchableOpacity,
   useWindowDimensions,
-  Image
+  Image,
+  Pressable,
 } from "react-native";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
@@ -19,25 +20,24 @@ function Friends({ navigation }) {
   const { height, width } = useWindowDimensions();
   const [description, setDescription] = useState("");
   const [scrollToTop, setScrollToTop] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
       .then((data) => {
         setMembers(data);
-        console.log(data);
+        setLoading(false);
       })
 
       .catch((error) => console.log(error));
     wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((data) => {
       setWPMembers(data);
-      console.log(data);
     });
   }, []);
 
   const fetchDescription = (name) => {
     let chosenMember = wpMembers?.find((member) => member.name === name);
-    setDescription(chosenMember.description);
-    console.log("name is" + name);
+    setDescription(chosenMember?.description);
     setScrollToTop(true);
   };
 
@@ -46,6 +46,7 @@ function Friends({ navigation }) {
       {!viewFriend && (
         <View style={styles.container}>
           <View style={styles.title}>
+            {loading && <Text style={styles.loadingText}>Loading . . .</Text>}
             <Text h4>Members</Text>
           </View>
           <View style={styles.body}>
@@ -54,7 +55,6 @@ function Friends({ navigation }) {
                 Component={TouchableOpacity}
                 onPress={() => {
                   setSelectedMember(member);
-                  console.log(member.name);
                   setViewFriend(true);
                   fetchDescription(member.name);
                 }}
@@ -93,14 +93,16 @@ function Friends({ navigation }) {
             <Text style={styles.h2}>{selectedMember.name}</Text>
           </View>
           <View style={styles.profileAboutContainer}>
-            {/* <Text style={styles.h3}>About</Text> */}
             <View style={styles.profileAbout}>
-              <Text>
-                {description}
-                {console.log(description)}
-              </Text>
+              <Text>{description}</Text>
             </View>
           </View>
+          <Pressable
+            style={styles.refreshButton}
+            onPress={() => setViewFriend(false)}
+          >
+            <Text>Refresh Page</Text>
+          </Pressable>
         </View>
       )}
     </ThemeLoggedIn>
@@ -188,6 +190,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#c5834c",
     padding: 10,
+  },
+  refreshButton: {
+    padding: 10,
+    marginTop: 160,
+    marginBottom: 40,
+    borderRadius: 40,
+    backgroundColor: "#c5834c",
+  },
+  loadingText: {
+    fontSize: 40,
+    fontWeight: "bold",
   },
 });
 

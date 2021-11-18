@@ -31,9 +31,7 @@ function Post(props) {
     wpApiFetch({ path: WPAPI_PATHS.buddypress.members }).then((data) => {
       setMembers(data);
     });
-    wpApiFetch({ path: WPAPI_PATHS.wp.comments }).then(data => {
-
-    })
+    wpApiFetch({ path: WPAPI_PATHS.wp.comments }).then((data) => {});
   }, []);
 
   useEffect(() => {
@@ -42,18 +40,25 @@ function Post(props) {
         content: reply,
         date: new Date().toISOString().replace(/\..+/, ""),
         post: props.associatedContent.id,
-      }
-      wpApiFetch({ path: WPAPI_PATHS.wp.comments, method: "POST", data: commentData, token: props.loggedInUserData.token })
+      };
+      wpApiFetch({
+        path: WPAPI_PATHS.wp.comments,
+        method: "POST",
+        data: commentData,
+        token: props.loggedInUserData.token,
+      })
         .then((comment) => {
           setReply("");
-          setNewComments([ ...newComments, comment ]);
-        }).catch(response => {
-          console.error(response.message);
-        }).finally(() => {
-          setLoading(false);
+          setNewComments([...newComments, comment]);
         })
+        .catch((response) => {
+          console.error(response.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }, [loading])
+  }, [loading]);
 
   const pruneTags = (text) => text.replace(/<[^>]+>/g, "").replace("\n", "");
 
@@ -62,7 +67,9 @@ function Post(props) {
   };
 
   function addToComments() {
-    setLoading(true);
+    if (reply.length > 0) {
+      setLoading(true);
+    }
   }
 
   let styles;
@@ -70,16 +77,17 @@ function Post(props) {
   // ***  Code and Render for Mobile  ***
   if (width < widthBreakpoint) {
     styles = stylesMobile;
-    const joinedComments = [ ...props.associatedComments, ...newComments ];
+    const joinedComments = [...props.associatedComments, ...newComments];
     const showComments = joinedComments.map((comment, i) => {
       const date = new Date(comment.date);
       const content = pruneTags(comment.content.rendered);
-  
+
       return (
         <View key={i} style={styles.comment}>
           <Text style={styles.commentText}>{content}</Text>
           <Text style={styles.commentSubscript}>
-            posted by user at {date.toLocaleTimeString()} on {date.toLocaleDateString()}
+            posted by user at {date.toLocaleTimeString()} on{" "}
+            {date.toLocaleDateString()}
           </Text>
         </View>
       );
@@ -117,22 +125,26 @@ function Post(props) {
           onChangeText={setReply}
           onSubmitEditing={addToComments}
         />
-        <Button title={loading ? 'loading...' : 'comment'} onPress={addToComments} />
+        <Button
+          title={loading ? "loading..." : "comment"}
+          onPress={addToComments}
+        />
       </View>
     );
   } else {
     // ***  Code and Render for Web  ***
     styles = stylesWeb;
-    const joinedComments = [ ...props.associatedComments, ...newComments ];
+    const joinedComments = [...props.associatedComments, ...newComments];
     const showComments = joinedComments.map((comment, i) => {
       const date = new Date(comment.date);
       const content = pruneTags(comment.content.rendered);
-  
+
       return (
         <View key={i} style={styles.comment}>
           <Text style={styles.commentText}>{content}</Text>
           <Text style={styles.commentSubscript}>
-            posted by user at {date.toLocaleTimeString()} on {date.toLocaleDateString()}
+            posted by user at {date.toLocaleTimeString()} on{" "}
+            {date.toLocaleDateString()}
           </Text>
         </View>
       );

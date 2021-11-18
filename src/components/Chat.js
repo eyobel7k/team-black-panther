@@ -34,7 +34,7 @@ export default function Chat({
       data: {
         context: "edit",
         message: newMessage,
-        recipients: selectedMember.id,
+        recipients: selectedMember?.id,
       },
       token: loggedInUserData.token,
     }).then((response) => {
@@ -87,7 +87,6 @@ export default function Chat({
           flexDirection: "column",
           justifyContent: "flex-start",
           alignSelf: "center",
-          maxWidth: 50,
         }}
       >
         <Text
@@ -97,6 +96,7 @@ export default function Chat({
             borderColor: "#c5834c",
             padding: 5,
             borderRadius: 10,
+            margin: 10,
           }}
         >
           {message?.excerpt?.rendered} sent by:
@@ -145,10 +145,19 @@ export default function Chat({
               maxWidth: 50,
             }}
           >
-            <Text style={{ margin: 10, fontSize: 25, fontWeight: "bold" }}>
-              My Messages
-            </Text>
-            <Text>{messageList}</Text>
+            <View style={styles.messagesContainer}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 25,
+                  fontWeight: "bold",
+                  alignSelf: "center",
+                }}
+              >
+                My Messages
+              </Text>
+              <Text>{messageList}</Text>
+            </View>
           </View>
           <View style={styles.items}>
             {taskItems.map((item, index) => {
@@ -312,5 +321,13 @@ const styles = StyleSheet.create({
   },
   items: {
     flexShrink: 1,
+  },
+  messagesContainer: {
+    flex: 1,
+    width: 200,
+    marginTop: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    flexWrap: "nowrap",
   },
 });
