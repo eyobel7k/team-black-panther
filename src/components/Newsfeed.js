@@ -4,12 +4,9 @@ import {
   View,
   ScrollView,
   useWindowDimensions,
-  Button,
   Pressable,
 } from "react-native";
-import Header from "./Header";
-import Footer from "./Footer";
-import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import { WPAPI_PATHS, wpApiFetch, posts } from "../services/WPAPI";
 import Post from "./Post";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import PostModal from "./PostModal";
@@ -20,6 +17,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
   const [commentsArr, setCommentsArr] = useState([]);
   const [showPostModal, setShowPostModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [scrollToTopFromNewsfeed, setScrollToTopFromNewsfeed] = useState(false);
 
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -43,11 +41,8 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
   }, [loading]);
 
   const generatePosts = postsArr
-    //Can make the posts display in reverse order with these lines, but causes problems with likes/dislikes
-    // .slice(0)
-    // .reverse()
     .map((post, i) => {
-      const content = pruneTags(post.content?.rendered);
+      const content = pruneTags(post.excerpt?.rendered);
       const associatedComments = commentsArr.filter(comment => comment.post === post.id);
       // console.log(`associatedComments for ${post.id}: `, associatedComments);
       return <Post key={i} content={content} id={i} associatedContent={post} associatedComments={associatedComments} loggedInUserData={loggedInUserData} />;
@@ -83,24 +78,27 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             </View>
           </ScrollView>
 
-        {showPostModal && (
-          <PostModal
-            setShowPostModal={setShowPostModal}
-            postsArr={postsArr}
-            // setPostsArr={setPostsArr}
-						loggedInUserData={loggedInUserData}
-						refreshNewsfeed={setLoading}
-          />
-        )}
-      </View>
-    </ThemeLoggedIn>
+          {showPostModal && (
+            <PostModal
+              setShowPostModal={setShowPostModal}
+              postsArr={postsArr}
+              loggedInUserData={loggedInUserData}
+              refreshNewsfeed={setLoading}
+            />
+          )}
+        </View>
+      </ThemeLoggedIn>
     );
   } else {
     styles = stylesWeb;
 
     // ***  Render for Web  ***
     return (
-      <ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
+      <ThemeLoggedIn
+        navigation={navigation}
+        scrollToTopFromNewsfeed={scrollToTopFromNewsfeed}
+        loggedInUserData={loggedInUserData}
+      >
         <View style={styles.container} navigation={navigation}>
           {route.params?.loginSuccess && (
             <Text h3>{`Successfully logged in!`}</Text>
@@ -108,7 +106,10 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
           <View style={styles.buttonWrapper}>
             <Pressable
               style={styles.newPostButton}
-              onPress={() => setShowPostModal(true)}
+              onPress={() => {
+                setShowPostModal(true);
+                setScrollToTopFromNewsfeed(true);
+              }}
             >
               <Text style={styles.postButtonText}>New Post</Text>
             </Pressable>
@@ -121,19 +122,19 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
             <ScrollView style={styles.postsContainer}>
               <Text>{generatePosts}</Text>
             </ScrollView>
+           
           </View>
 
           {showPostModal && (
-          <PostModal
-            setShowPostModal={setShowPostModal}
-            postsArr={postsArr}
-            // setPostsArr={setPostsArr}
-						loggedInUserData={loggedInUserData}
-						refreshNewsfeed={setLoading}
-          />
-        )}
-      </View>
-    </ThemeLoggedIn>
+            <PostModal
+              setShowPostModal={setShowPostModal}
+              postsArr={postsArr}
+              loggedInUserData={loggedInUserData}
+              refreshNewsfeed={setLoading}
+            />
+          )}
+        </View>
+      </ThemeLoggedIn>
     );
   }
 }
@@ -144,7 +145,6 @@ const stylesMobile = StyleSheet.create({
     flex: 1,
     backgroundColor: "#efd595",
     height: "80%",
-    // flexBasis: "100%"
   },
   body: {
     flex: 1,
@@ -170,7 +170,6 @@ const stylesMobile = StyleSheet.create({
     margin: 5,
     fontSize: 24,
     fontWeight: "100",
-    // fontFamily: "Serif",
   },
   newPostButton: {
     position: "absolute",
@@ -183,7 +182,6 @@ const stylesMobile = StyleSheet.create({
     paddingRight: 6.4,
     borderRadius: 50,
     width: 64,
-    
   },
   postButtonText: {
     color: "#efd595",
@@ -200,82 +198,72 @@ const stylesMobile = StyleSheet.create({
     padding: 20,
     flexWrap: "nowrap",
   },
-  footerWrapper: {
-    // bottom: -500,
-  },
 });
 
 // ***  Styles for Web  ***
 const stylesWeb = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#efd595",
-		alignItems: "center",
-		flexDirection: "column",
-		justifyContent: "center",
-		alignContent: "center",
-		// height: "80%",
-		// flexBasis: "100%"
-	},
-	body: {
-		flex: 1,
-		alignItems: "center",
-		backgroundColor: "#efd595",
-		height: "80%",
-		width: "100%",
-		textAlign: "center",
-		justifyContent: "center",
-		// marginTop: 16,
-		flexBasis: "100%",
-		flexShrink: 0,
-		flexGrow: 0,
-		flexDirection: "column",
-		marginLeft: 7,
-		flexWrap: "nowrap",
-		maxWidth: 550,
-	},
-	heading: {
-		fontSize: 16,
-		color: "#000000",
-		letterSpacing: 2.4,
-	},
-	text: {
-		margin: 5,
-		fontSize: 24,
-		fontWeight: "100",
-		// fontFamily: "Serif",
-	},
-	newPostButton: {
-		position: "absolute",
-		top: 80,
-		left: "20%",
-		backgroundColor: "#c5834c",
-		paddingTop: 32,
-		paddingLeft: 30,
-		paddingBottom: 32,
-		paddingRight: 34,
-		borderRadius: 80,
-	
-	},
-	postButtonText: {
-		color: "#efd595",
-		fontWeight: "bold",
-		fontSize: 22,
-	},
-	buttonWrapper: {
-		position: "absolute",
-		top: 0,
-		left: 0,
-	},
-	postsContainer: {
-		flexDirection: "column",
-		width: "100%",
-		padding: 20,
-		flexWrap: "nowrap",
-	},
-	footerWrapper: {
-		// bottom: -500,
-	},
+  container: {
+    flex: 1,
+    backgroundColor: "#efd595",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  body: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#efd595",
+    height: "80%",
+    width: "100%",
+    textAlign: "center",
+    justifyContent: "center",
+    flexBasis: "100%",
+    flexShrink: 0,
+    flexGrow: 0,
+    flexDirection: "column",
+    marginLeft: 7,
+    flexWrap: "nowrap",
+    maxWidth: 550,
+  },
+  heading: {
+    fontSize: 16,
+    color: "#000000",
+    letterSpacing: 2.4,
+  },
+  text: {
+    margin: 5,
+    fontSize: 24,
+    fontWeight: "100",
+  },
+  newPostButton: {
+    position: "absolute",
+    top: 80,
+    left: "20%",
+    backgroundColor: "#c5834c",
+    paddingTop: 32,
+    paddingLeft: 30,
+    paddingBottom: 32,
+    paddingRight: 34,
+    borderRadius: 80,
+    marginLeft: 20,
+  },
+  postButtonText: {
+    color: "#efd595",
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+  buttonWrapper: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
+  postsContainer: {
+    flexDirection: "column",
+    width: "100%",
+    padding: 20,
+    flexWrap: "nowrap",
+  },
 });
 
 export default Newsfeed;
