@@ -1,24 +1,27 @@
 import ThemeLoggedIn from "./ThemeLoggedIn";
 import React, { useState, useEffect } from "react";
 import {
-	StyleSheet,
-	Text,
-	View,
-	Button,
-	Image,
-	ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Image,
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
-export default function Images({ navigation }) {
-	const [imageArr, setImageArr] = useState([]);
-	useEffect(() => {
-		wpApiFetch({ path: WPAPI_PATHS.wp.media }).then((data) =>
-			setImageArr(data)
-		);
-	}, []);
-	const [imageInput, setImageInput] = useState("");
+export default function Images({ navigation, loggedInUserData }) {
+  const [imageArr, setImageArr] = useState([]);
+  useEffect(() => {
+    wpApiFetch({ path: WPAPI_PATHS.wp.media }).then((data) =>
+      setImageArr(data)
+    );
+  }, []);
+  const [imageInput, setImageInput] = useState("");
 
 	const uploadImage = () => {
 		// wordpress API
@@ -40,82 +43,108 @@ export default function Images({ navigation }) {
 		const imgHeight =
 			(img.media_details.height / img.media_details.width) * imgWidth;
 
-		return (
-			<View key={index}>
-				<View style={styles.imageRow} key={index}>
-					<Image
-						style={{ width: imgWidth, height: imgHeight }}
-						source={{ uri: img.source_url }}
-					/>
-				</View>
-				<View style={styles.deleteButton}>
-					<Button
-						color="#87cefa"
-						key={index}
-						onPress={() => deleteImage(index)}
-						title="delete"
-					/>
-					<View></View>
-				</View>
-			</View>
-		);
-	});
+    return (
+      <View key={index}>
+        <View style={styles.imageRow} key={index}>
+          <Image
+            style={{ width: imgWidth, height: imgHeight }}
+            source={{ uri: img.source_url }}
+          />
+        </View>
+        <View style={styles.deleteButton}>
+          {/* <Button
+            Icon={
+              <MaterialCommunityIcons
+                name="delete-circle"
+                size={24}
+                color="black"
+              />
+            }
+            color="#5569FE"
+            key={index}
+            onPress={() => deleteImage(index)}
+            title="Delete"
+          /> */}
 
-	return (
-		<ThemeLoggedIn navigation={navigation}>
-			<ScrollView style={styles.background}>
-				<View style={styles.topContainer}>
-					<View style={styles.buttonContainer}>
-						{/* <Button color="#5569FE" onPress={uploadImage} title="Upload" /> */}
-						<View style={styles.spacing} />
-						{/* <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
-					</View>
-				</View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => deleteImage(index)}
+          >
+            <Text style={styles.buttonText}>
+            <AntDesign name="delete" size={22} color="black" />
+            </Text>
+          </TouchableOpacity>
 
-				<View style={styles.imageContainer}>{generateGallery}</View>
-				<Button color="#87cefa" onPress={uploadImage} title="Upload" />
-				<Button color="#87cefa" onPress={sendImage} title="Send" />
-			</ScrollView>
-		</ThemeLoggedIn>
-	);
+
+
+
+          <View></View>
+        </View>
+      </View>
+    );
+  });
+
+  return (
+    <ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
+      <ScrollView style={styles.background}>
+        <View style={styles.topContainer}>
+          <View style={styles.buttonContainer}>
+            {/* <Button color="#5569FE" onPress={uploadImage} title="Upload" /> */}
+            <View style={styles.spacing} />
+            {/* <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
+          </View>
+        </View>
+
+        <View style={styles.imageContainer}>{generateGallery}</View>
+        {/* <Button color="#5569FE" onPress={uploadImage} title="Upload" />
+        <Button color="#5569FE" onPress={sendImage} title="Send" /> */}
+      </ScrollView>
+    </ThemeLoggedIn>
+  );
 }
 
 const styles = StyleSheet.create({
-	background: {
-		backgroundColor: "#efd595",
-	},
-	topContainer: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	image: {
-		minHeight: "100%",
-		minWidth: "100%",
-	},
-	imageContainer: {
-		backgroundColor: "#c5834c",
-		display: "flex",
-		// flexWrap: 'wrap',
-		// flexDirection: 'row',
-		margin: 10,
-	},
-	imageRow: {
-		height: "auto",
-		flexGrow: 1,
-		alignItems: "center",
-	},
-	buttonContainer: {
-		flexDirection: "row",
-	},
-	deleteButton: {
-		width: "20%",
-		alignSelf: "center",
-		margin: 5,
-	},
-	spacing: {
-		width: 5,
-	},
+  background: {
+    backgroundColor: "#efd595",
+  },
+  topContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    minHeight: "100%",
+    minWidth: "100%",
+  },
+  imageContainer: {
+    backgroundColor: "#efd595",
+    display: "flex",
+    // flexWrap: 'wrap',
+    // flexDirection: 'row',
+    margin: 10,
+  },
+  imageRow: {
+    height: "auto",
+    flexGrow: 1,
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  deleteButton: {
+    width: "15%",
+    alignSelf: "center",
+    // margin: 5,
+    // backgroundColor:''
+  },
+  spacing: {
+    width: 5,
+  },
+  buttonText:{
+    width: "20%",
+    alignSelf: "center",
+    margin: 5,
+  }
 });
 
 // const styles = StyleSheet.create({

@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 	},
 	scrollContentContainer: {
 		justifyContent: "space-between",
-		paddingTop: "5%",
-		paddingBottom: "50%",
+		// paddingTop: "5%",
+		// paddingBottom: "20%",
 	},
 	container: {
 		flex: 1,
@@ -52,8 +52,11 @@ const styles = StyleSheet.create({
 		// fontFamily: "Serif",
 	},
 	Header: {
-		height: "20%",
+		height: "25%",
 		top: 0,
+		
+		
+		
 	},
 	Footer: {
 		height: "20%",
