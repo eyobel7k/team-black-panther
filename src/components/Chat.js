@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import {
   StyleSheet,
   Text,
@@ -11,16 +11,39 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
+import Messages from './Message';
 
-export default function Chat() {
+export default function Chat({myMessages,loggedInUserData,members, selectedMember}) {
   const [task, setTask] = useState("");
   const [taskItems, setTaskItems] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+ useEffect(()=>{ setTaskItems(myMessages)},[]);
+
+ 
+
+
+useEffect(() => {
+
+  wpApiFetch({
+    path: WPAPI_PATHS.buddypress.messages,
+    method: "POST",
+    data: {
+      context:"edit",
+      message:newMessage,
+      recipients:selectedMember.id,
+    },
+    token:loggedInUserData.token}).then((response) => {
+    console.log("in chat: ", response);
+  });
+}, [newMessage]);
 
   const handleAddTask = () => {
     if (task === "") {
       Alert.alert("Error", "Please enter message ...");
     } else {
       Keyboard.dismiss();
+      setNewMessage(task);
       setTaskItems([...taskItems, task]);
       setTask();
     }
@@ -47,7 +70,32 @@ export default function Chat() {
       setTask();
     }
   };
+  const memberById = (id) => {
+    const member = members.find(member => member.id === id);
+    return member;
+  }
 
+  // <View>
+  //         <Image
+  //           style={{width: 30, height: 30, marginRight: 5}}
+  //           source={{
+  //             uri: memberById(post.author)?.avatar_urls.full.startsWith('https:') 
+  //               ? memberById(post.author).avatar_urls?.full 
+  //               : 'https://www.gravatar.com/avatar/?d=identicon'
+  //           }}
+  //         />
+  //       </View>
+
+
+ const messageList = myMessages?.map((message, index) => (
+		<View key={index}>
+      <View styles={{flex:1,flexDirection:"column", justifyContent:'flex-start', alignSelf:'center', maxWidth:50}}>
+        <Text style={{borderStyle:"solid", borderWidth:3, borderColor:"#c5834c", padding:5, borderRadius:10}}>{message?.excerpt?.rendered}  sent by:{memberById(message?.last_sender_id)?.name} {console.log(message)}</Text>
+        </View>
+     </View>
+	));
+
+ 
   return (
     <View style={styles.container}>
       <View contentContainerStyle={{}} keyboardShouldPersistTaps="handled">
@@ -75,7 +123,10 @@ export default function Chat() {
               </Text>
             </TouchableOpacity>
           </View>
-
+          <View styles={{flex:1,flexDirection:"column", justifyContent:'center', alignItems:"center", textAlign:'center',flexWrap:'nowrap', display:"flex", maxWidth:50}}>
+          <Text style={{margin:10,fontSize:25, fontWeight:'bold'}}>My Messages</Text>
+        <Text>{messageList}</Text>
+       </View>
           <View style={styles.items}>
             {taskItems.map((item, index) => {
               return (
@@ -135,10 +186,10 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   writeTaskWrapper: {
-    position: "absolute",
+    // position: "absolute",
     // bottom: 80,
     width: "90%",
-    flexDirection: "row",
+    // flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
   },

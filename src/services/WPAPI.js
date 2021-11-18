@@ -13,10 +13,12 @@ export const WPAPI_PATHS = {
     search: `${WP_PATH}/search`,
     blockTypes: `${WP_PATH}/block-types`,
     blocks: `${WP_PATH}/blocks`,
+    pages: `${WP_PATH}/pages`,
   },
   buddypress: {
     members: `${BUDDYPRESS_PATH}/members`,
     activity: `${BUDDYPRESS_PATH}/activity`,
+    messages: `${BUDDYPRESS_PATH}/messages`,
   },
   jwtAuth: {
     token: `${JWT_AUTH_PATH}/token`,
@@ -54,7 +56,7 @@ const buildQueryUrl = ( path, params = {} ) => {
 export const wpApiFetch = async ({ path, queryParams = {}, data, method = 'GET', token }) => {
   
   const buildHeaders = () => {
-    if (method === 'POST' && token) {
+    if (token) {
       return {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -67,9 +69,9 @@ export const wpApiFetch = async ({ path, queryParams = {}, data, method = 'GET',
 
   const options = {
     method,
-    headers: buildHeaders(),
-    body: JSON.stringify(data)
+    headers: buildHeaders()
   }
+  options.body=data? JSON.stringify(data) : null;
   const url = isNotEmptyObject(queryParams)
     ? buildQueryUrl(path, queryParams)
     : `${BASE_URL}/${path}`

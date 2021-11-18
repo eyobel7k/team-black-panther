@@ -6,21 +6,26 @@ import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import { Text } from "react-native-elements";
 
-function Messages({ navigation }) {
+function Messages({ navigation,loggedInUserData }) {
 	const [members, setMembers] = useState([]);
+	const [myMessages, setMyMessages] = useState([]);
 	const [selectedMember, setSelectedMember] = useState({});
 	const onPress = (selectedMemberId) => {
-		setSelectedMember(members[selectedMemberId]);
+	setSelectedMember(members[selectedMemberId]);
 	};
 
 	useEffect(() => {
 		wpApiFetch({ path: WPAPI_PATHS.buddypress.members })
 			.then((data) => {
 				setMembers(data);
-				console.log(data);
-			})
-
-			.catch((error) => console.log(error));
+				console.log("Members",data);
+			});
+			wpApiFetch({ path: WPAPI_PATHS.buddypress.messages,token: loggedInUserData.token })
+			.then((data) => {
+				// setMembers(data);
+				setMyMessages(data);
+				console.log("Messages",data);
+			});
 	}, []);
 
 	const newMembers = members?.map((member, index) => (
@@ -65,8 +70,7 @@ function Messages({ navigation }) {
 								</View>
 							</View>
 						)}
-
-						<Chat />
+						<Chat  myMessages={myMessages} loggedInUserData={loggedInUserData} members={members} selectedMember={selectedMember}/>
 					</Text>
 				</View>
 				{/* {listMembers} */}
