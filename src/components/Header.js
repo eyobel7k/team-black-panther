@@ -8,11 +8,14 @@ import {
 
 import { Text, SearchBar } from "react-native-elements";
 import welcomeImg from "../../assets/BlackPanther.png";
-function Header({ navigation }) {
+function Header({ navigation, loggedInUserData }) {
+	const navigateHome = () => {
+		navigation.navigate(loggedInUserData?.token ? "Newsfeed" : "LogInPage");
+	}
 
 	return (
 		<View style={styles.Header} navigation={navigation}>
-			<TouchableHighlight navigation={navigation}>
+			<TouchableHighlight navigation={navigation} onPress={navigateHome}>
 				<View style={styles.HeaderWarp} navigation={navigation}>
 					<Image
 						source={welcomeImg}

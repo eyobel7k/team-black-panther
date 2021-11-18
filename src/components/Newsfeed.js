@@ -59,7 +59,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
     // ***  Render for Mobile  ***
     return (
-      <ThemeLoggedIn navigation={navigation}>
+      <ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
         <View style={styles.container} navigation={navigation}>
           <ScrollView>
             {route.params?.loginSuccess && (
@@ -100,7 +100,7 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
 
     // ***  Render for Web  ***
     return (
-      <ThemeLoggedIn navigation={navigation}>
+      <ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
         <View style={styles.container} navigation={navigation}>
           {route.params?.loginSuccess && (
             <Text h3>{`Successfully logged in!`}</Text>

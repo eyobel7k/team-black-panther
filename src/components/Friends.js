@@ -4,7 +4,7 @@ import ThemeLoggedIn from "./ThemeLoggedIn";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import { Text, ListItem, Avatar } from "react-native-elements";
 
-function Friends({ navigation }) {
+function Friends({ navigation, loggedInUserData }) {
 	const [members, setMembers] = useState([]);
 	const [selectedMember, setSelectedMember] = useState({});
 	const onPress = (selectedMemberId) => {
@@ -22,7 +22,7 @@ function Friends({ navigation }) {
 	}, []);
 
 	return (
-		<ThemeLoggedIn navigation={navigation}>
+		<ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.container}>
 				<View style={styles.title}>
 					<Text h4> Members</Text>

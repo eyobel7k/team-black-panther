@@ -11,7 +11,7 @@ import {
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function Images({ navigation }) {
+export default function Images({ navigation, loggedInUserData }) {
   const [imageArr, setImageArr] = useState([]);
   useEffect(() => {
     wpApiFetch({ path: WPAPI_PATHS.wp.media }).then((data) =>
@@ -62,7 +62,7 @@ export default function Images({ navigation }) {
   });
 
   return (
-    <ThemeLoggedIn navigation={navigation}>
+    <ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
       <ScrollView style={styles.background}>
         <View style={styles.topContainer}>
           <View style={styles.buttonContainer}>

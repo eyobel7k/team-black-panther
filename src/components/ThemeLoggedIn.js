@@ -8,14 +8,14 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 
-function ThemeLoggedIn({ children, navigation }) {
+function ThemeLoggedIn({ children, navigation, loggedInUserData }) {
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
   return (
     <View style={styles.container} navigation={navigation}>
       <View style={styles.Header}>
-        <Header navigation={navigation} />
+        <Header navigation={navigation} loggedInUserData={loggedInUserData} />
       </View>
 
       <ScrollView

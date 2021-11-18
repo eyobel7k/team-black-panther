@@ -21,7 +21,7 @@ function Contact({ navigation, loggedInUserData }) {
 	},[loading]);
 	
 	return (
-		<Theme navigation={navigation}>
+		<Theme navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.body} navigation={navigation}>
 			<Text style={styles.text}>Contact</Text>
 				<Text style={styles.textParagraph}>{loading ? 'loading...' : pruneTags(pageData.content.rendered)}</Text>

@@ -43,7 +43,7 @@ const EditProfile = ({ navigation, route, loggedInUserData }) => {
 		}
 	}, [loading]);
 	return (
-		<ThemeLoggedIn navigation={navigation}>
+		<ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.container}>
 				<View style={styles.body}>
 					<View style={styles.LogInBorder}>

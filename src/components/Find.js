@@ -4,7 +4,7 @@ import { SearchBar } from "react-native-elements";
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
 import ThemeLoggedIn from "./ThemeLoggedIn";
 
-const Find = ({ navigation }) => {
+const Find = ({ navigation, loggedInUserData }) => {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -55,7 +55,7 @@ const Find = ({ navigation }) => {
   };
 
   return (
-    <ThemeLoggedIn navigation={navigation}>
+    <ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
       <View style={styles.container}>
         <View>
           <SearchBar

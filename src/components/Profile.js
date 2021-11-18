@@ -28,7 +28,7 @@ const Profile = ({ navigation, loggedInUserData }) => {
 	}, []); // runs onMount only
 
 	return (
-		<ThemeLoggedIn navigation={navigation}>
+		<ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.profileContainer}>
 				{
 					loading

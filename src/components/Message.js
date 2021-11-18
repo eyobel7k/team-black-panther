@@ -6,7 +6,7 @@ import Chat from "./Chat";
 import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 import { Text } from "react-native-elements";
 
-function Messages({ navigation }) {
+function Messages({ navigation, loggedInUserData }) {
 	const [members, setMembers] = useState([]);
 	const [selectedMember, setSelectedMember] = useState({});
 	const onPress = (selectedMemberId) => {
@@ -28,7 +28,7 @@ function Messages({ navigation }) {
 	));
 
 	return (
-		<ThemeLoggedIn navigation={navigation}>
+		<ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.container}>
 				<View style={styles.title}>
 					<Text h4> Space Chat</Text>

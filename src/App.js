@@ -51,13 +51,21 @@ export default function App() {
 						{ props => <Newsfeed {...props} loggedInUserData={loggedInUserData} /> }
 					</Stack.Screen>
 					<Stack.Screen name="SignUpPage" component={SignUpPage} />
-					<Stack.Screen name="Friends" component={Friends} />
+					<Stack.Screen name="Friends">
+						{ props => <Friends {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
 					<Stack.Screen name="Profile">
 						{ props => <Profile {...props} loggedInUserData={loggedInUserData} /> }
 					</Stack.Screen>
-					<Stack.Screen name="Images" component={Images} />
-					<Stack.Screen name="Message" component={Message} />
-					<Stack.Screen name="Find" component={Find} />
+					<Stack.Screen name="Images">
+						{ props => <Images {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
+					<Stack.Screen name="Message">
+						{ props => <Message {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
+					<Stack.Screen name="Find">
+						{ props => <Find {...props} loggedInUserData={loggedInUserData} /> }
+					</Stack.Screen>
 					<Stack.Screen
 						name="ResetPasswordPage"
 						component={ResetPasswordPage}
