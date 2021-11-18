@@ -10,7 +10,8 @@ function Messages({ navigation, loggedInUserData }) {
   const [members, setMembers] = useState([]);
   const [myMessages, setMyMessages] = useState([]);
   const [selectedMember, setSelectedMember] = useState({});
-  
+  const [loading, setLoading] = useState(true);
+
   const onPress = (selectedMemberId) => {
     setSelectedMember(members[selectedMemberId]);
   };
@@ -30,6 +31,7 @@ function Messages({ navigation, loggedInUserData }) {
       // setMembers(data);
       setMyMessages(data);
       console.log("Messages", data);
+      setLoading(false);
     });
   }, []);
 
@@ -75,6 +77,7 @@ function Messages({ navigation, loggedInUserData }) {
                 </View>
               </View>
             )}
+
             <Chat
               myMessages={myMessages}
               loggedInUserData={loggedInUserData}
@@ -83,6 +86,7 @@ function Messages({ navigation, loggedInUserData }) {
             />
           </Text>
         </View>
+        {loading && <Text style={styles.loadingText}>Loading . . .</Text>}
         {/* {listMembers} */}
       </View>
     </ThemeLoggedIn>
@@ -130,6 +134,12 @@ const styles = StyleSheet.create({
   title: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  loadingText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+    alignSelf: "center",
   },
 });
 

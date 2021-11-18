@@ -148,8 +148,9 @@ export default function Chat({
             <View style={styles.messagesContainer}>
               <Text
                 style={{
-                  margin: 10,
-                  fontSize: 25,
+                  marginTop: 10,
+                  marginBottom: 10,
+                  fontSize: 22,
                   fontWeight: "bold",
                   alignSelf: "center",
                 }}
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
   },
   messagesContainer: {
     flex: 1,
-    width: 200,
+    width: 150,
     marginTop: 10,
     flexDirection: "column",
     alignItems: "center",
