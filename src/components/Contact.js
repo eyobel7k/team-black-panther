@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
+import ThemeLoggedIn from "./ThemeLoggedIn";
+import { WPAPI_PATHS, wpApiFetch } from "../services/WPAPI";
 
-function Contact({ navigation }) {
-  return (
-    <ThemeLoggedOut navigation={navigation}>
-      <View style={styles.body} navigation={navigation}>
-        <Text style={styles.text}>Contact!</Text>
-      </View>
+function Contact({ navigation, loggedInUserData }) {
+	const [pageData, setPageData] = useState({});
+	const [loading, setLoading] = useState(true);
+	const Theme = loggedInUserData?.token ? ThemeLoggedIn : ThemeLoggedOut;
+	const pruneTags = text => text.replace(/<[^>]+>/g, "").replace("\n", "").replace("&rsquo;", "'");
 
-      <Text onPress={() => navigation.goBack()}>Back to Logging Page</Text>
-    </ThemeLoggedOut>
-  );
+	useEffect(() => {
+		if (loading) {
+			wpApiFetch({ path: WPAPI_PATHS.wp.pages, queryParams: {search: 'contact'}})
+			.then(([ page ]) => {
+				setPageData(page);
+				setLoading(false);
+			})
+		}
+	},[loading]);
+	
+	return (
+		<Theme navigation={navigation} loggedInUserData={loggedInUserData}>
+			<View style={styles.body} navigation={navigation}>
+			<Text style={styles.text}>Contact</Text>
+				<Text style={styles.textParagraph}>{loading ? 'loading...' : pruneTags(pageData.content.rendered)}</Text>
+			</View>
+		</Theme>
+	);
 }
 const styles = StyleSheet.create({
 	container: {
@@ -29,7 +45,10 @@ const styles = StyleSheet.create({
 		margin: 5,
 		fontSize: 30,
 		fontWeight: "100",
-		// fontFamily: "Serif",
+	},
+	textParagraph: {
+		margin: 5,
+		fontSize: 24,
 	},
 });
 

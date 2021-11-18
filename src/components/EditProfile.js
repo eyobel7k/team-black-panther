@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native-elements";
+import { Text, Button } from "react-native-elements";
 import {
   StyleSheet,
   View,
@@ -10,30 +10,42 @@ import {
 import { wpApiFetch, WPAPI_PATHS } from "../services/WPAPI";
 import ThemeLoggedIn  from "./ThemeLoggedIn";
 
-const EditProfile = ({ navigation }) => {
-  const [profileInfo, setProfileInfo] = useState([]);
+const EditProfile = ({ navigation, route, loggedInUserData }) => {
+	const { name, description } = route.params;
+	const [newName, setNewName] = useState(name);
+	const [newDescription, setNewDescription] = useState(description);
+	const [loading, setLoading] = useState(false);
+	const [status, setStatus] = useState("");
 
 	useEffect(() => {
 		// https://developer.wordpress.org/rest-api/reference/users/#update-a-user
-		wpApiFetch({ path: WPAPI_PATHS.wp.posts }).then((response) => {
-			setProfileInfo(response[0].content.rendered);
-		});
-	});
+		if (loading) {
+			const newProfileInfo = {
+				id: loggedInUserData.id,
+				name: newName,
+				description: newDescription,
+			};
+			const options = {
+				path: `${WPAPI_PATHS.wp.users}/${loggedInUserData.id}`,
+				method: 'POST',
+				data: newProfileInfo,
+				token: loggedInUserData.token 
+			};
+			wpApiFetch(options).then(response => {
+				setStatus('Success!');
+			})
+			.catch(error => {
+				setStatus(error.message)
+			})
+			.finally(() => {
+				setLoading(false)
+			})
+		}
+	}, [loading]);
 	return (
-		<ThemeLoggedIn navigation={navigation}>
+		<ThemeLoggedIn navigation={navigation} loggedInUserData={loggedInUserData}>
 			<View style={styles.container}>
 				<View style={styles.body}>
-					<View style={styles.ImageBorder}>
-						<Image
-							source={{ uri: "https://i.pravatar.cc/300" }}
-							style={{ height: "60%", width: "50%", borderRadius: 10 }}
-						/>
-						<Text>MarvelSpace Tom!</Text>
-						<Text>Avengers Tower, New York City</Text>
-						<View style={styles.pillButton}>
-							<Text>edit profile</Text>
-						</View>
-					</View>
 					<View style={styles.LogInBorder}>
 						<View>
 							<Text h3 style={styles.bodyText}>
@@ -44,28 +56,25 @@ const EditProfile = ({ navigation }) => {
 							<Text style={styles.bodyText}>Edit Name</Text>
 							<TextInput
 								style={styles.TextInput}
-								placeholder=""
+								value={newName}
 								placeholderTextColor="#000000"
-							/>
-						</View>
-						<View style={styles.inputView}>
-							<Text style={styles.bodyText}>Edit City</Text>
-							<TextInput
-								style={styles.TextInput}
-								placeholder=""
-								placeholderTextColor="#000000"
+								onChangeText={text => setNewName(text)}
 							/>
 						</View>
 						<View style={styles.inputView}>
 							<Text style={styles.bodyText}>Edit About</Text>
 							<TextInput
 								style={styles.TextInput}
-								placeholder=""
+								value={description}
+								multiline={true}
+								numberOfLines={4}
 								placeholderTextColor="#000000"
+								onChangeText={text => setNewDescription(text)}
 							/>
 						</View>
-						<TouchableOpacity style={styles.loginBtn}>
-							<Text style={styles.bodyText}>Submit</Text>
+						<TouchableOpacity>
+							<Button onPress={() => setLoading(true)} title={loading ? 'Loading...' : 'Submit'} />
+							<Text styles={styles.TextInput}>{status && status}</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
@@ -110,59 +119,28 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		marginHorizontal: 20,
 	},
-	header: {
-		width: "100%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-	},
-	footer: {
-		width: "100%",
-		borderRadius: 10,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 40,
-	},
 	inputView: {
-		width: "70%",
+		width: '100%',
+		minWidth: "50%",
 		borderRadius: 10,
-		height: 20,
-		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 40,
+		paddingVertical: 20,
 		backgroundColor: "#c5834c",
 	},
-
 	TextInput: {
-		height: 50,
-		flex: 1,
-		padding: 10,
-		marginLeft: 20,
-	},
-
-	forgot_button: {
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 10,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
 	},
 	loginBtn: {
-		width: "20%",
+		minWidth: "20%",
 		borderRadius: 25,
 		height: 50,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 30,
 		backgroundColor: "#87cefa",
-	},
-	imageContainer: {
-		flex: 1,
-		justifyContent: "space-evenly",
-		alignItems: "center",
-		height: "100%",
-		margin: 10,
 	},
 });
 

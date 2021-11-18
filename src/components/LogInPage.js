@@ -23,22 +23,6 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 
 	useEffect(() => {
 		if (loading) {
-			// for demo purposes, will delete afterwards
-			if (username === "user" && password === "pass") {
-				new Promise((resolve) =>
-					setTimeout(
-						() =>
-							resolve({
-								token: "",
-								user_display_name: "Iron Man",
-								user_email: "me@marvelspace.com",
-								user_nickname: "ironmann",
-							}),
-						2000
-					)
-				).then(formSuccess);
-				return;
-			}
 			const options = {
 				path: WPAPI_PATHS.jwtAuth.token,
 				method: "POST",

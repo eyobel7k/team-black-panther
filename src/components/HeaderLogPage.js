@@ -2,11 +2,13 @@ import React from "react";
 import { StyleSheet, View, TouchableHighlight, Image } from "react-native";
 import { Text } from "react-native-elements";
 import welcomeImg from "../../assets/BlackPanther.png";
-function HeaderLogPage() {
-	// const [fontLoaded] = useFonts({ BebasNeue_400Regular });
+function HeaderLogPage({ navigation }) {
+	const navigateHome = () => {
+		navigation.navigate("LogInPage");
+	}
 	return (
 		<View style={styles.Header}>
-			<TouchableHighlight>
+			<TouchableHighlight onPress={navigateHome}>
 				<View style={styles.HeaderWarp}>
 					<Image
 						source={welcomeImg}
