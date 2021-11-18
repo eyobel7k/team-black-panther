@@ -6,12 +6,13 @@ import {
 	TextInput,
 	TouchableOpacity,
 	Button,
+	Linking,
 } from "react-native";
 import ThemeLoggedOut from "./ThemeLoggedOut";
 import { Text } from "react-native-elements";
 import welcomeImg from "../../assets/marvelspace_login.png";
 import { WPAPI_PATHS, wpApiFetch } from '../services/WPAPI';
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 function LogInPage({ navigation, setLoggedInUserData }) {
 	const [username, setUsername] = useState("");
@@ -24,14 +25,13 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 		if (loading) {
 			const options = {
 				path: WPAPI_PATHS.jwtAuth.token,
-				method: 'POST',
-				data: {username, password}
+				method: "POST",
+				data: { username, password },
 			};
 
-			wpApiFetch(options)
-				.then((data) => {
-					data.token ? formSuccess(data) : formError(data);
-				});
+			wpApiFetch(options).then((data) => {
+				data.token ? formSuccess(data) : formError(data);
+			});
 		}
 	}, [loading]);
 
@@ -91,7 +91,7 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 								Login
 							</Text>
 							<View style={styles.inputView}>
-								<Text>  Username  </Text>
+								<Text> Username </Text>
 								<TextInput
 									style={styles.input}
 									value={username}
@@ -119,25 +119,28 @@ function LogInPage({ navigation, setLoggedInUserData }) {
 					)}
 					<TouchableOpacity style={styles.forgot_button}>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Forgot Password?&nbsp;
-							<Text
-								name="ResetPasswordPage"
-								onPress={() => navigation.navigate("ResetPasswordPage")}
+							Forgot Password?
+							<TouchableOpacity
+								onPress={() =>
+									Linking.openURL(
+										"https://jualuc1.dreamhosters.com/wp-login.php?action=lostpassword "
+									)
+								}
 							>
-								Click here.
-							</Text>
+								<Text>Click here </Text>
+							</TouchableOpacity>
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.forgot_button}>
 						<Text style={styles.forgot_button} style={styles.bodyText}>
-							Don't have an account?&nbsp;
-							<Text
-								name="SignUpPage"
-								onPress={() => navigation.navigate("SignUpPage")}
+							Don't have an account?
+							<TouchableOpacity
+								onPress={() =>
+									Linking.openURL("https://jualuc1.dreamhosters.com/register/")
+								}
 							>
-								Sign Up
-							</Text>
-							here.
+								<Text>SignUp here</Text>
+							</TouchableOpacity>
 						</Text>
 					</TouchableOpacity>
 				</View>
