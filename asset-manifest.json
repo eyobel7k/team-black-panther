@@ -1,0 +1,40 @@
+{
+  "files": {
+    "app.js": "/team-black-panther/static/js/app.01679f73.chunk.js",
+    "app.js.map": "/team-black-panther/static/js/app.01679f73.chunk.js.map",
+    "runtime~app.js": "/team-black-panther/static/js/runtime~app.ced843c2.js",
+    "runtime~app.js.map": "/team-black-panther/static/js/runtime~app.ced843c2.js.map",
+    "static/js/2.44843e72.chunk.js": "/team-black-panther/static/js/2.44843e72.chunk.js",
+    "static/js/2.44843e72.chunk.js.map": "/team-black-panther/static/js/2.44843e72.chunk.js.map",
+    "fonts/AntDesign.ttf": "/team-black-panther/./fonts/AntDesign.ttf",
+    "fonts/Entypo.ttf": "/team-black-panther/./fonts/Entypo.ttf",
+    "fonts/Feather.ttf": "/team-black-panther/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/team-black-panther/./fonts/FontAwesome.ttf",
+    "fonts/FontAwesome5_Brands.ttf": "/team-black-panther/./fonts/FontAwesome5_Brands.ttf",
+    "fonts/FontAwesome5_Solid.ttf": "/team-black-panther/./fonts/FontAwesome5_Solid.ttf",
+    "fonts/Fontisto.ttf": "/team-black-panther/./fonts/Fontisto.ttf",
+    "fonts/Foundation.ttf": "/team-black-panther/./fonts/Foundation.ttf",
+    "fonts/Ionicons.ttf": "/team-black-panther/./fonts/Ionicons.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/team-black-panther/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/team-black-panther/./fonts/MaterialIcons.ttf",
+    "fonts/SimpleLineIcons.ttf": "/team-black-panther/./fonts/SimpleLineIcons.ttf",
+    "favicon-16.png": "/team-black-panther/favicon-16.png",
+    "favicon-32.png": "/team-black-panther/favicon-32.png",
+    "favicon.ico": "/team-black-panther/favicon.ico",
+    "index.html": "/team-black-panther/index.html",
+    "manifest.json": "/team-black-panther/manifest.json",
+    "serve.json": "/team-black-panther/serve.json",
+    "static/js/2.44843e72.chunk.js.LICENSE.txt": "/team-black-panther/static/js/2.44843e72.chunk.js.LICENSE.txt",
+    "static/media/BlackPanther.png": "/team-black-panther/static/media/BlackPanther.d0679b0f.png",
+    "static/media/bell.png": "/team-black-panther/static/media/bell.cf04af27.png",
+    "static/media/heart.png": "/team-black-panther/static/media/heart.23b5c2c0.png",
+    "static/media/marvelspace_login.png": "/team-black-panther/static/media/marvelspace_login.afa92f21.png",
+    "static/media/rocket.png": "/team-black-panther/static/media/rocket.d2f3bf41.png",
+    "static/media/star.png": "/team-black-panther/static/media/star.69c71386.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.ced843c2.js",
+    "static/js/2.44843e72.chunk.js",
+    "static/js/app.01679f73.chunk.js"
+  ]
+}
