@@ -29,7 +29,9 @@ function Friends({ navigation, loggedInUserData }) {
         setLoading(false);
       })
 
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     wpApiFetch({ path: WPAPI_PATHS.wp.users }).then((data) => {
       setWPMembers(data);
     });

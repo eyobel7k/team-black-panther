@@ -44,7 +44,6 @@ function Newsfeed({ route, navigation, loggedInUserData }) {
     .map((post, i) => {
       const content = pruneTags(post.excerpt?.rendered);
       const associatedComments = commentsArr.filter(comment => comment.post === post.id);
-      // console.log(`associatedComments for ${post.id}: `, associatedComments);
       return <Post key={i} content={content} id={i} associatedContent={post} associatedComments={associatedComments} loggedInUserData={loggedInUserData} />;
     });
 
