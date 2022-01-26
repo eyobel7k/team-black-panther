@@ -24,7 +24,9 @@ const Find = ({ navigation, loggedInUserData }) => {
         setMasterDataSource(data);
       })
 
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }, []);
 
   const searchFilterFunction = (text) => {

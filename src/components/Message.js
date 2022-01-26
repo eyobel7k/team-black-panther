@@ -22,7 +22,6 @@ function Messages({ navigation, loggedInUserData }) {
       token: loggedInUserData.token,
     }).then((data) => {
       setMembers(data);
-      console.log("Members", data);
     });
     wpApiFetch({
       path: WPAPI_PATHS.buddypress.messages,
@@ -30,7 +29,6 @@ function Messages({ navigation, loggedInUserData }) {
     }).then((data) => {
       // setMembers(data);
       setMyMessages(data);
-      console.log("Messages", data);
       setLoading(false);
     });
   }, []);
@@ -66,7 +64,6 @@ function Messages({ navigation, loggedInUserData }) {
             </Picker>
             {Object.keys(selectedMember).length !== 0 && (
               <View style={styles.img}>
-                {console.log(selectedMember)}
                 <View styles={styles.pick}>
                   <Image
                     source={{ uri: selectedMember.avatar_urls?.thumb }}

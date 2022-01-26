@@ -38,7 +38,7 @@ export default function Chat({
       },
       token: loggedInUserData.token,
     }).then((response) => {
-      console.log("in chat: ", response);
+      
     });
   }, [newMessage]);
 
@@ -58,7 +58,6 @@ export default function Chat({
       setTaskItems([...taskItems, task.trim()]);
       setTask("");
     } else {
-      console.log("Entry cannot be blank");
       setTask("");
     }
   };

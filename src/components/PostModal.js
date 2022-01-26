@@ -66,7 +66,6 @@ function PostModal(props) {
   };
 
   useEffect(() => {
-    console.log("in PostModal effect: ", loading);
     if (loading) {
       wpApiFetch({
         path: WPAPI_PATHS.wp.posts,
@@ -74,7 +73,6 @@ function PostModal(props) {
         data: post,
         token: props.loggedInUserData.token,
       }).then((response) => {
-        console.log("in PostModal: ", response);
         setLoading(false);
         props.refreshNewsfeed(true);
         props.setShowPostModal(false);

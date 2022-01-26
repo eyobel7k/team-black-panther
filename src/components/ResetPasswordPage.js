@@ -18,11 +18,8 @@ function ResetPasswordPage({ navigation }) {
 
 	function checkValidity() {
 		if (confirmNewPassword !== newPassword) {
-			console.log("Passwords do not match");
 		} else if (confirmNewPassword.length > 0) {
-			console.log("Password will be reset");
 		} else {
-			console.log("Invalid entry. Password cannot be blank");
 		}
 	}
 
